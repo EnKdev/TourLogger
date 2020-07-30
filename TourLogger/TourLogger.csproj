@@ -33,24 +33,68 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EnKdev.SessionPass, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\EnKPass\EnKdev.SessionPass\bin\Debug\EnKdev.SessionPass.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SessionValidator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SessionValidator.Designer.cs">
+      <DependentUpon>SessionValidator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SingleTourForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SingleTourForm.Designer.cs">
+      <DependentUpon>SingleTourForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TruckForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TruckForm.Designer.cs">
+      <DependentUpon>TruckForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CacheModel.cs" />
+    <Compile Include="Models\SingleTourModel.cs" />
     <Compile Include="Models\TourModel.cs" />
     <Compile Include="Models\TruckModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DataWriter.cs" />
     <Compile Include="Utils\PhpIntegration.cs" />
     <Compile Include="Utils\Versioning.cs" />
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SessionValidator.resx">
+      <DependentUpon>SessionValidator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SingleTourForm.resx">
+      <DependentUpon>SingleTourForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TruckForm.resx">
+      <DependentUpon>TruckForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -59,6 +103,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -74,12 +119,33 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Forms" />
-    <Folder Include="Icons\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
+    <Content Include="Icons\load.gif" />
+    <Content Include="Icons\truck.ico" />
+    <Content Include="Icons\truck.png" />
+    <None Include="Resources\Trucks\Custom.png" />
+    <Content Include="Resources\Help\TruckHelp.css" />
+    <Content Include="Resources\Help\TruckHelp.html" />
+    <Content Include="Resources\Trucks\DAF\XF105.png" />
+    <Content Include="Resources\Trucks\DAF\XFEuro6.png" />
+    <None Include="Resources\Trucks\Volvo\FH162012.png" />
+    <None Include="Resources\Trucks\Volvo\FH162009.png" />
+    <None Include="Resources\Trucks\Scania\Streamline.png" />
+    <None Include="Resources\Trucks\Scania\S.png" />
+    <None Include="Resources\Trucks\Scania\R2009.png" />
+    <None Include="Resources\Trucks\Scania\R.png" />
+    <None Include="Resources\Trucks\Renault\T.png" />
+    <None Include="Resources\Trucks\Renault\Premium.png" />
+    <None Include="Resources\Trucks\Renault\Magnum.png" />
+    <None Include="Resources\Trucks\Mercedes-Benz\NewActros.png" />
+    <None Include="Resources\Trucks\Mercedes-Benz\Actros.png" />
+    <None Include="Resources\Trucks\MAN\TGXEuro6.png" />
+    <None Include="Resources\Trucks\MAN\TGX.png" />
+    <None Include="Resources\Trucks\Iveco\StralisHiWay.png" />
+    <None Include="Resources\Trucks\Iveco\Stralis.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\available.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

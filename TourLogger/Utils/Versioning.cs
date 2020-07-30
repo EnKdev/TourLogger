@@ -2,9 +2,9 @@
 {
     public class Versioning
     {
-        public static string AppVersion = "6.0.0-test";
+        public static string AppVersion = "6.0.0-beta";
         private static string AppAbbreviation = "TL";
-        private static string AppVersionNumber = "600-test";
+        private static string AppVersionNumber = "600-beta";
         private static string BuildRevisionFull = "0606200233";
         private static string BuildRevisionAbbr = "060620";
 

@@ -3,3 +3,5 @@ TourLogger/obj/*
 .idea/*
 .vs/*
 packages/*
+*.DotSettings
+*.DotSettings.user
