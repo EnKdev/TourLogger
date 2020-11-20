@@ -57,8 +57,16 @@
             this.bSaveTour = new System.Windows.Forms.Button();
             this.bSaveProgress = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tBoxTourId = new System.Windows.Forms.TextBox();
+            this.lblTourId = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rtbStatus = new System.Windows.Forms.RichTextBox();
             this.TourID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Driver = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TruckUsed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.From = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.To = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Freight = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,12 +75,6 @@
             this.JobIncome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ODO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FuelUsed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tBoxTourId = new System.Windows.Forms.TextBox();
-            this.lblTourId = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -312,6 +314,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TourID,
             this.Driver,
+            this.TruckUsed,
             this.From,
             this.To,
             this.Freight,
@@ -322,87 +325,8 @@
             this.FuelUsed});
             this.dataGridView1.Location = new System.Drawing.Point(375, 34);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1234, 440);
+            this.dataGridView1.Size = new System.Drawing.Size(1234, 556);
             this.dataGridView1.TabIndex = 28;
-            // 
-            // TourID
-            // 
-            this.TourID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.TourID.HeaderText = "Tour-ID";
-            this.TourID.Name = "TourID";
-            this.TourID.ReadOnly = true;
-            this.TourID.Width = 88;
-            // 
-            // Driver
-            // 
-            this.Driver.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Driver.HeaderText = "Driver";
-            this.Driver.Name = "Driver";
-            this.Driver.ReadOnly = true;
-            this.Driver.Width = 80;
-            // 
-            // From
-            // 
-            this.From.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.From.HeaderText = "From";
-            this.From.Name = "From";
-            this.From.ReadOnly = true;
-            this.From.Width = 73;
-            // 
-            // To
-            // 
-            this.To.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.To.HeaderText = "To";
-            this.To.Name = "To";
-            this.To.Width = 50;
-            // 
-            // Freight
-            // 
-            this.Freight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Freight.HeaderText = "Freight";
-            this.Freight.Name = "Freight";
-            this.Freight.ReadOnly = true;
-            this.Freight.Width = 86;
-            // 
-            // TourDistance
-            // 
-            this.TourDistance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.TourDistance.HeaderText = "Tour Distance";
-            this.TourDistance.Name = "TourDistance";
-            this.TourDistance.ReadOnly = true;
-            this.TourDistance.Width = 122;
-            // 
-            // DistanceDriven
-            // 
-            this.DistanceDriven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DistanceDriven.HeaderText = "Distance Driven";
-            this.DistanceDriven.Name = "DistanceDriven";
-            this.DistanceDriven.ReadOnly = true;
-            this.DistanceDriven.Width = 136;
-            // 
-            // JobIncome
-            // 
-            this.JobIncome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.JobIncome.HeaderText = "Job Income";
-            this.JobIncome.Name = "JobIncome";
-            this.JobIncome.ReadOnly = true;
-            this.JobIncome.Width = 107;
-            // 
-            // ODO
-            // 
-            this.ODO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ODO.HeaderText = "ODO";
-            this.ODO.Name = "ODO";
-            this.ODO.ReadOnly = true;
-            this.ODO.Width = 65;
-            // 
-            // FuelUsed
-            // 
-            this.FuelUsed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FuelUsed.HeaderText = "Fuel Used";
-            this.FuelUsed.Name = "FuelUsed";
-            this.FuelUsed.ReadOnly = true;
-            this.FuelUsed.Width = 97;
             // 
             // button2
             // 
@@ -457,11 +381,107 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // rtbStatus
+            // 
+            this.rtbStatus.Location = new System.Drawing.Point(13, 481);
+            this.rtbStatus.Name = "rtbStatus";
+            this.rtbStatus.Size = new System.Drawing.Size(344, 109);
+            this.rtbStatus.TabIndex = 33;
+            this.rtbStatus.Text = "";
+            // 
+            // TourID
+            // 
+            this.TourID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.TourID.HeaderText = "Tour-ID";
+            this.TourID.Name = "TourID";
+            this.TourID.ReadOnly = true;
+            this.TourID.Width = 88;
+            // 
+            // Driver
+            // 
+            this.Driver.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Driver.HeaderText = "Driver";
+            this.Driver.Name = "Driver";
+            this.Driver.ReadOnly = true;
+            this.Driver.Width = 80;
+            // 
+            // TruckUsed
+            // 
+            this.TruckUsed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.TruckUsed.HeaderText = "Truck Used";
+            this.TruckUsed.Name = "TruckUsed";
+            this.TruckUsed.ReadOnly = true;
+            this.TruckUsed.Width = 113;
+            // 
+            // From
+            // 
+            this.From.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.From.HeaderText = "From";
+            this.From.Name = "From";
+            this.From.ReadOnly = true;
+            this.From.Width = 73;
+            // 
+            // To
+            // 
+            this.To.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.To.HeaderText = "To";
+            this.To.Name = "To";
+            this.To.Width = 50;
+            // 
+            // Freight
+            // 
+            this.Freight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Freight.HeaderText = "Freight";
+            this.Freight.Name = "Freight";
+            this.Freight.ReadOnly = true;
+            this.Freight.Width = 86;
+            // 
+            // TourDistance
+            // 
+            this.TourDistance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.TourDistance.HeaderText = "Tour Distance";
+            this.TourDistance.Name = "TourDistance";
+            this.TourDistance.ReadOnly = true;
+            this.TourDistance.Width = 133;
+            // 
+            // DistanceDriven
+            // 
+            this.DistanceDriven.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DistanceDriven.HeaderText = "Distance Driven";
+            this.DistanceDriven.Name = "DistanceDriven";
+            this.DistanceDriven.ReadOnly = true;
+            this.DistanceDriven.Width = 136;
+            // 
+            // JobIncome
+            // 
+            this.JobIncome.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.JobIncome.HeaderText = "Job Income";
+            this.JobIncome.Name = "JobIncome";
+            this.JobIncome.ReadOnly = true;
+            this.JobIncome.Width = 107;
+            // 
+            // ODO
+            // 
+            this.ODO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ODO.HeaderText = "ODO";
+            this.ODO.Name = "ODO";
+            this.ODO.ReadOnly = true;
+            this.ODO.Width = 65;
+            // 
+            // FuelUsed
+            // 
+            this.FuelUsed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FuelUsed.HeaderText = "Fuel Used";
+            this.FuelUsed.Name = "FuelUsed";
+            this.FuelUsed.ReadOnly = true;
+            this.FuelUsed.Width = 97;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1623, 486);
+            this.ClientSize = new System.Drawing.Size(1623, 602);
+            this.Controls.Add(this.rtbStatus);
             this.Controls.Add(this.lblTourId);
             this.Controls.Add(this.tBoxTourId);
             this.Controls.Add(this.button2);
@@ -510,38 +530,47 @@
 
         }
 
-        #endregion
-
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button bSaveProgress;
+        private System.Windows.Forms.Button bSaveTour;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lDriver;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tBoxFrom;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tBoxTo;
-        private System.Windows.Forms.TextBox tBoxFreight;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tBoxTourDistance;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tBoxDrivenDistance;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tBoxJobIncome;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tBoxOdo;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox tBoxFuel;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblTourId;
+        private System.Windows.Forms.Label lDriver;
         private System.Windows.Forms.Label lTruck;
-        private System.Windows.Forms.Button bSaveTour;
-        private System.Windows.Forms.Button bSaveProgress;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.TextBox tBoxDrivenDistance;
+        private System.Windows.Forms.TextBox tBoxFreight;
+        private System.Windows.Forms.TextBox tBoxFrom;
+        private System.Windows.Forms.TextBox tBoxFuel;
+        private System.Windows.Forms.TextBox tBoxJobIncome;
+        private System.Windows.Forms.TextBox tBoxOdo;
+        private System.Windows.Forms.TextBox tBoxTo;
+        private System.Windows.Forms.TextBox tBoxTourDistance;
+        private System.Windows.Forms.TextBox tBoxTourId;
+
+        #endregion
+
+        private System.Windows.Forms.RichTextBox rtbStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn TourID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Driver;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TruckUsed;
         private System.Windows.Forms.DataGridViewTextBoxColumn From;
         private System.Windows.Forms.DataGridViewTextBoxColumn To;
         private System.Windows.Forms.DataGridViewTextBoxColumn Freight;
@@ -550,11 +579,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn JobIncome;
         private System.Windows.Forms.DataGridViewTextBoxColumn ODO;
         private System.Windows.Forms.DataGridViewTextBoxColumn FuelUsed;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox tBoxTourId;
-        private System.Windows.Forms.Label lblTourId;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

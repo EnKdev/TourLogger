@@ -37,9 +37,13 @@ namespace TourLogger
             }
 
             if (!File.Exists($"./Userdata/truck.dat"))
-                Application.Run(new TruckForm());
+            {
+                MessageBox.Show("It seems that you have no profile yet.\nBefore using TourLogger, please create your profile file over at:\n https://enkdev.xyz/cdn/php/tourlogger/profile/gen.html, and once you downloaded the profile, save it in the Userdata folder of the app", "Error", MessageBoxButtons.OK);
+            }
             else
+            {
                 Application.Run(new MainForm());
+            }
         }
     }
 }

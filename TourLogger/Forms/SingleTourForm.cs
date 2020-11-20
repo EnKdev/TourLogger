@@ -15,6 +15,7 @@ namespace TourLogger.Forms
     {
         private string _tourId;
         private string _tourDriver;
+        private string _tourTruck;
         private string _tFrom;
         private string _tTo;
         private string _tFreight;
@@ -38,20 +39,22 @@ namespace TourLogger.Forms
         {
             _tourId = valueArray[0];
             _tourDriver = valueArray[1];
-            _tFrom = valueArray[2];
-            _tTo = valueArray[3];
-            _tFreight = valueArray[4];
-            _tTourDist = valueArray[5];
-            _tDrivenDist =valueArray[6];
-            _tJobIncome = valueArray[7];
-            _tOdo = valueArray[8];
-            _tFuelUsed = valueArray[9];
+            _tourTruck = valueArray[2];
+            _tFrom = valueArray[3];
+            _tTo = valueArray[4];
+            _tFreight = valueArray[5];
+            _tTourDist = valueArray[6];
+            _tDrivenDist =valueArray[7];
+            _tJobIncome = valueArray[8];
+            _tOdo = valueArray[9];
+            _tFuelUsed = valueArray[10];
         }
 
         private void UpdateForm()
         {
             lblTourId.Text = _tourId;
             lblTDriver.Text = _tourDriver;
+            lblTTruck.Text = _tourTruck;
             lblTFrom.Text = _tFrom;
             lblTTo.Text = _tTo;
             lblTFreight.Text = _tFreight;

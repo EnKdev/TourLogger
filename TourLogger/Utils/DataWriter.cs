@@ -8,27 +8,8 @@ namespace TourLogger.Utils
 {
     public class DataWriter
     {
-        private TruckModel _tm;
         private SingleTourModel _stm;
         private CacheModel _cm;
-
-        public void WriteTruckData(string truck, String driver)
-        {
-            _tm = new TruckModel
-            {
-                Truck = truck,
-                Driver = driver
-            };
-
-            using (StreamWriter sw = File.CreateText($"./Userdata/truck.dat"))
-            {
-                var fileText = JsonConvert.SerializeObject(_tm, Formatting.Indented);
-                sw.WriteAsync(fileText);
-                sw.Dispose();
-            }
-
-            FlushTruckModel();
-        }
 
         public void WriteCachedData(List<TourModel> tours)
         {
@@ -47,12 +28,13 @@ namespace TourLogger.Utils
             FlushCacheModel();
         }
 
-        public void WriteProgressingTourData(string driver, string from, string to, string freight, int tDistance, int jobIncome)
+        public void WriteProgressingTourData(string driver, string truck, string from, string to, string freight, int tDistance, int jobIncome)
         {
             _stm = new SingleTourModel
             {
                 TourId = -1,
                 TourDriver = driver,
+                TruckUsed = truck,
                 TourFrom = from,
                 TourTo = to,
                 TourFreight = freight,
@@ -71,11 +53,6 @@ namespace TourLogger.Utils
             }
 
             FlushSingleTourModel();
-        }
-
-        private void FlushTruckModel()
-        {
-            _tm = null;
         }
 
         private void FlushCacheModel()

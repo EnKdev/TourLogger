@@ -118,67 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Actros" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Mercedes-Benz\Actros.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Custom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Custom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FH162009" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Volvo\FH162009.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FH162012" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Volvo\FH162012.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="invalid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Icons\invalid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="load" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\load.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Magnum" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Renault\Magnum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NewActros" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Mercedes-Benz\NewActros.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Premium" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Renault\Premium.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="R" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Scania\R.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="R2009" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Scania\R2009.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="S" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Scania\S.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Stralis" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Iveco\Stralis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StralisHiWay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Iveco\StralisHiWay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Streamline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Scania\Streamline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="T" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\Renault\T.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TGX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\MAN\TGX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TGXEuro6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\MAN\TGXEuro6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="valid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\available.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="XF105" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\DAF\XF105.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="XFEuro6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Trucks\DAF\XFEuro6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\icons\valid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -50,11 +50,13 @@
             this.lblTOdo = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.lblTFuelUsed = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblTTruck = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 356);
+            this.button1.Location = new System.Drawing.Point(12, 392);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(78, 37);
             this.button1.TabIndex = 0;
@@ -101,7 +103,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 99);
+            this.label7.Location = new System.Drawing.Point(12, 125);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 19);
             this.label7.TabIndex = 7;
@@ -110,7 +112,7 @@
             // lblTFrom
             // 
             this.lblTFrom.AutoSize = true;
-            this.lblTFrom.Location = new System.Drawing.Point(146, 99);
+            this.lblTFrom.Location = new System.Drawing.Point(146, 125);
             this.lblTFrom.Name = "lblTFrom";
             this.lblTFrom.Size = new System.Drawing.Size(68, 19);
             this.lblTFrom.TabIndex = 8;
@@ -119,7 +121,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 129);
+            this.label6.Location = new System.Drawing.Point(12, 155);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 19);
             this.label6.TabIndex = 9;
@@ -128,7 +130,7 @@
             // lblTTo
             // 
             this.lblTTo.AutoSize = true;
-            this.lblTTo.Location = new System.Drawing.Point(146, 129);
+            this.lblTTo.Location = new System.Drawing.Point(146, 155);
             this.lblTTo.Name = "lblTTo";
             this.lblTTo.Size = new System.Drawing.Size(46, 19);
             this.lblTTo.TabIndex = 10;
@@ -137,7 +139,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 161);
+            this.label9.Location = new System.Drawing.Point(12, 187);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 19);
             this.label9.TabIndex = 11;
@@ -146,7 +148,7 @@
             // lblTFreight
             // 
             this.lblTFreight.AutoSize = true;
-            this.lblTFreight.Location = new System.Drawing.Point(146, 161);
+            this.lblTFreight.Location = new System.Drawing.Point(146, 187);
             this.lblTFreight.Name = "lblTFreight";
             this.lblTFreight.Size = new System.Drawing.Size(81, 19);
             this.lblTFreight.TabIndex = 12;
@@ -155,7 +157,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 191);
+            this.label11.Location = new System.Drawing.Point(12, 217);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(115, 19);
             this.label11.TabIndex = 13;
@@ -164,7 +166,7 @@
             // lblTTourDist
             // 
             this.lblTTourDist.AutoSize = true;
-            this.lblTTourDist.Location = new System.Drawing.Point(146, 191);
+            this.lblTTourDist.Location = new System.Drawing.Point(146, 217);
             this.lblTTourDist.Name = "lblTTourDist";
             this.lblTTourDist.Size = new System.Drawing.Size(90, 19);
             this.lblTTourDist.TabIndex = 14;
@@ -173,7 +175,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 222);
+            this.label13.Location = new System.Drawing.Point(12, 248);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(128, 19);
             this.label13.TabIndex = 15;
@@ -182,7 +184,7 @@
             // lblTDrivenDist
             // 
             this.lblTDrivenDist.AutoSize = true;
-            this.lblTDrivenDist.Location = new System.Drawing.Point(146, 222);
+            this.lblTDrivenDist.Location = new System.Drawing.Point(146, 248);
             this.lblTDrivenDist.Name = "lblTDrivenDist";
             this.lblTDrivenDist.Size = new System.Drawing.Size(105, 19);
             this.lblTDrivenDist.TabIndex = 16;
@@ -191,7 +193,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 252);
+            this.label15.Location = new System.Drawing.Point(12, 278);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(96, 19);
             this.label15.TabIndex = 17;
@@ -200,7 +202,7 @@
             // lblTJobIncome
             // 
             this.lblTJobIncome.AutoSize = true;
-            this.lblTJobIncome.Location = new System.Drawing.Point(146, 252);
+            this.lblTJobIncome.Location = new System.Drawing.Point(146, 278);
             this.lblTJobIncome.Name = "lblTJobIncome";
             this.lblTJobIncome.Size = new System.Drawing.Size(108, 19);
             this.lblTJobIncome.TabIndex = 18;
@@ -209,7 +211,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(12, 283);
+            this.label17.Location = new System.Drawing.Point(12, 309);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(44, 19);
             this.label17.TabIndex = 19;
@@ -218,7 +220,7 @@
             // lblTOdo
             // 
             this.lblTOdo.AutoSize = true;
-            this.lblTOdo.Location = new System.Drawing.Point(146, 283);
+            this.lblTOdo.Location = new System.Drawing.Point(146, 309);
             this.lblTOdo.Name = "lblTOdo";
             this.lblTOdo.Size = new System.Drawing.Size(57, 19);
             this.lblTOdo.TabIndex = 20;
@@ -227,7 +229,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 313);
+            this.label19.Location = new System.Drawing.Point(12, 339);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(85, 19);
             this.label19.TabIndex = 21;
@@ -236,17 +238,37 @@
             // lblTFuelUsed
             // 
             this.lblTFuelUsed.AutoSize = true;
-            this.lblTFuelUsed.Location = new System.Drawing.Point(146, 313);
+            this.lblTFuelUsed.Location = new System.Drawing.Point(146, 339);
             this.lblTFuelUsed.Name = "lblTFuelUsed";
             this.lblTFuelUsed.Size = new System.Drawing.Size(97, 19);
             this.lblTFuelUsed.TabIndex = 22;
             this.lblTFuelUsed.Text = "{TFuelUsed}";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 97);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 19);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Truck:";
+            // 
+            // lblTTruck
+            // 
+            this.lblTTruck.AutoSize = true;
+            this.lblTTruck.Location = new System.Drawing.Point(146, 97);
+            this.lblTTruck.Name = "lblTTruck";
+            this.lblTTruck.Size = new System.Drawing.Size(69, 19);
+            this.lblTTruck.TabIndex = 24;
+            this.lblTTruck.Text = "{TTruck}";
+            // 
             // SingleTourForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 405);
+            this.ClientSize = new System.Drawing.Size(426, 461);
+            this.Controls.Add(this.lblTTruck);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTFuelUsed);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.lblTOdo);
@@ -268,38 +290,39 @@
             this.Controls.Add(this.lblTourId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SingleTourForm";
             this.Text = "TourLogger - Single Tour";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
-        #endregion
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblTourId;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblTDriver;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblTFrom;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblTTo;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblTFreight;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lblTTourDist;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label lblTDrivenDist;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label lblTJobIncome;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label lblTOdo;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblTDrivenDist;
+        private System.Windows.Forms.Label lblTDriver;
+        private System.Windows.Forms.Label lblTFreight;
+        private System.Windows.Forms.Label lblTFrom;
         private System.Windows.Forms.Label lblTFuelUsed;
+        private System.Windows.Forms.Label lblTJobIncome;
+        private System.Windows.Forms.Label lblTOdo;
+        private System.Windows.Forms.Label lblTourId;
+        private System.Windows.Forms.Label lblTTo;
+        private System.Windows.Forms.Label lblTTourDist;
+        private System.Windows.Forms.Label lblTTruck;
+
+        #endregion
     }
 }

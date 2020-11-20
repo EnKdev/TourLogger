@@ -9,6 +9,9 @@ namespace TourLogger.Models
 
         [JsonProperty("tourDriver")]
         public string TourDriver { get; set; }
+        
+        [JsonProperty("truckUsed")]
+        public string TruckUsed { get; set; }
 
         [JsonProperty("tourFrom")]
         public string TourFrom { get; set; }

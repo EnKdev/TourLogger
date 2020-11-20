@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourLogger", "TourLogger\TourLogger.csproj", "{AC01C693-C744-4FE0-863B-B2354010F207}"
 EndProject
 Global
@@ -12,5 +15,11 @@ Global
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65F8D9A2-7398-47FC-B8A5-BCDA68F3EB84}
 	EndGlobalSection
 EndGlobal
