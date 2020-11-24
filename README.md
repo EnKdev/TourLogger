@@ -15,7 +15,7 @@ Release 6.0.0 (Initial Github Release):
 
 - Overhauled the entire UI to make it more unified
 - Added security features to prohibit unallowed access
-- Added [EnKdev.SessionPass](https://github.com/enkdev/sessionpass), a pseudo-authentication library to (somewhat) ensure session authenticy.
+- Added [EnKdev.SessionPass](https://github.com/EnKdev/EnKdev.SessionPass), a pseudo-authentication library to (somewhat) ensure session authenticy.
 
 ----
 
