@@ -4,7 +4,7 @@ namespace TourLogger.Utils
 {
     public class Versioning
     {
-        public static string AppVersion = "6.0.0";
+        public static string AppVersion = "6.0.1";
         public static string AppFileVersion = "2";
         public static string DbVersion = "3";
         public static string SecretVersion = "2";

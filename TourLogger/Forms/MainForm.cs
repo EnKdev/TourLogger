@@ -123,10 +123,42 @@ namespace TourLogger.Forms
 
         private void bSaveProgress_Click(object sender, EventArgs e) // Save Tour Progress
         {
-            _dw.WriteProgressingTourData(lDriver.Text, lTruck.Text, tBoxFrom.Text, tBoxTo.Text, tBoxFreight.Text,
-                Convert.ToInt32(tBoxTourDistance.Text), Convert.ToInt32(tBoxJobIncome.Text));
+            try
+            {
+                // --- NULL CHECK
+                // ------ If the values in tBoxTourDistance and/or tBoxJobIncome are null (either because the user hasn't entered anything or whatever reason there may be)
+                // ------ Then set vars tDist and jobInc to 0 to ensure saving.
+                // ------ Otherwise save the params values as usual.
 
-            MessageBox.Show("Tour progress saved!", "Success", MessageBoxButtons.OK);
+                int tDist;
+                int jobInc;
+
+                if (tBoxTourDistance.Text == string.Empty)
+                    tDist = 0;
+                else
+                    tDist = int.Parse(tBoxTourDistance.Text);
+
+                if (tBoxJobIncome.Text == string.Empty)
+                    jobInc = 0;
+                else
+                    jobInc = int.Parse(tBoxJobIncome.Text);
+
+                _dw.WriteProgressingTourData(
+                    lDriver.Text, lTruck.Text,
+                    tBoxFrom.Text, tBoxTo.Text,
+                    tBoxFreight.Text, tDist, jobInc
+                    );
+
+                MessageBox.Show("Tour progress saved!", "Success", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "An unknown error occured while trying saving the tour.\n" +
+                    "Please refer to the exception message:\n" +
+                    "-------------------\n" +
+                    $"{ex.Message}\nat:\n{ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
