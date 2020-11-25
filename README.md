@@ -22,3 +22,7 @@ Release 6.0.0 (Initial Github Release):
 Release 6.0.1
 
 - Fixed [Issue #1](https://github.com/EnKdev/TourLogger/issues/1) - Saving progressing tours now has a better behaviour and works if some fields in the UI are left blank.
+
+### Related projects:
+
+- [TourLogger-Backend](https://github.com/enkdev/TourLogger-Backend) - The server-backend of TourLogger, where the behind-the-scenes magic takes place.
