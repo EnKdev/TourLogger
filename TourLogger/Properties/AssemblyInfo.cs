@@ -1,35 +1,20 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
-// General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("TourLogger")]
-[assembly: AssemblyDescription("A little companion tool for players of ETS2/ATS to log their tours along with relevant data (Distance driven, Fuel that has been used, freight, etc) into one central database!")]
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TourLogger")]
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCopyright("Copyright © EnKdev 2020")]
+[assembly: AssemblyDescription("A little companion tool for players of ETS2/ATS to log their tours along with relevant data (Distance driven, Fuel that has been used, freight, etc) into one central database!")]
+[assembly: AssemblyFileVersion("6.0.2")]
+[assembly: AssemblyProduct("TourLogger")]
+[assembly: AssemblyTitle("TourLogger")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from
-// COM, set the ComVisible attribute to true on that type.
+[assembly: AssemblyVersion("6.0.2.0")]
+[assembly: CompilationRelaxations(8)]
 [assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Debuggable(DebuggableAttribute.DebuggingModes.Default | DebuggableAttribute.DebuggingModes.DisableOptimizations | DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints | DebuggableAttribute.DebuggingModes.EnableEditAndContinue)]
 [assembly: Guid("AC01C693-C744-4FE0-863B-B2354010F207")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.0.1")]
-[assembly: AssemblyFileVersion("6.0.1")]
+[assembly: RuntimeCompatibility(WrapNonExceptionThrows=true)]

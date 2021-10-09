@@ -1,99 +1,176 @@
-﻿namespace TourLogger.Models
+using System;
+
+namespace TourLogger.Models
 {
-    public class TourModel
-    {
-        private int _tId;
-        private string _tDriver;
-        private string _tTruck;
-        private string _tFrom;
-        private string _tTo;
-        private string _tFreight;
-        private int _tDistance;
-        private int _tDriven;
-        private int _tIncome;
-        private int _tTotal;
-        private int _tFuel;
+	public class TourModel
+	{
+		private int _tId;
 
-        public TourModel(int id, string driver, string truck, string from, string to, string freight, int dist, int driven,
-            int income, int total, int fuel)
-        {
-            _tId = id;
-            _tDriver = driver;
-            _tTruck = truck;
-            _tFrom = from;
-            _tTo = to;
-            _tFreight = freight;
-            _tDistance = dist;
-            _tDriven = driven;
-            _tIncome = income;
-            _tTotal = total;
-            _tFuel = fuel;
-        }
+		private string _tDriver;
 
-        public int Id
-        {
-            get => _tId;
-            set => _tId = value;
-        }
+		private string _tTruck;
 
-        public string Driver
-        {
-            get => _tDriver;
-            set => _tDriver = value;
-        }
+		private string _tFrom;
 
-        public string Truck
-        {
-            get => _tTruck;
-            set => _tTruck = value;
-        }
+		private string _tTo;
 
-        public string From
-        {
-            get => _tFrom;
-            set => _tFrom = value;
-        }
+		private string _tFreight;
 
-        public string To
-        {
-            get => _tTo;
-            set => _tTo = value;
-        }
+		private int _tDistance;
 
-        public string Freight
-        {
-            get => _tFreight;
-            set => _tFreight = value;
-        }
+		private int _tDriven;
 
-        public int Distance
-        {
-            get => _tDistance;
-            set => _tDistance = value;
-        }
+		private int _tIncome;
 
-        public int Driven
-        {
-            get => _tDriven;
-            set => _tDriven = value;
-        }
+		private int _tTotal;
 
-        public int Income
-        {
-            get => _tIncome;
-            set => _tIncome = value;
-        }
+		private int _tFuel;
 
-        public int Total
-        {
-            get => _tTotal;
-            set => _tTotal = value;
-        }
+		public int Distance
+		{
+			get
+			{
+				return this._tDistance;
+			}
+			set
+			{
+				this._tDistance = value;
+			}
+		}
 
-        public int Fuel
-        {
-            get => _tFuel;
-            set => _tFuel = value;
-        }
-    }
+		public int Driven
+		{
+			get
+			{
+				return this._tDriven;
+			}
+			set
+			{
+				this._tDriven = value;
+			}
+		}
+
+		public string Driver
+		{
+			get
+			{
+				return this._tDriver;
+			}
+			set
+			{
+				this._tDriver = value;
+			}
+		}
+
+		public string Freight
+		{
+			get
+			{
+				return this._tFreight;
+			}
+			set
+			{
+				this._tFreight = value;
+			}
+		}
+
+		public string From
+		{
+			get
+			{
+				return this._tFrom;
+			}
+			set
+			{
+				this._tFrom = value;
+			}
+		}
+
+		public int Fuel
+		{
+			get
+			{
+				return this._tFuel;
+			}
+			set
+			{
+				this._tFuel = value;
+			}
+		}
+
+		public int Id
+		{
+			get
+			{
+				return this._tId;
+			}
+			set
+			{
+				this._tId = value;
+			}
+		}
+
+		public int Income
+		{
+			get
+			{
+				return this._tIncome;
+			}
+			set
+			{
+				this._tIncome = value;
+			}
+		}
+
+		public string To
+		{
+			get
+			{
+				return this._tTo;
+			}
+			set
+			{
+				this._tTo = value;
+			}
+		}
+
+		public int Total
+		{
+			get
+			{
+				return this._tTotal;
+			}
+			set
+			{
+				this._tTotal = value;
+			}
+		}
+
+		public string Truck
+		{
+			get
+			{
+				return this._tTruck;
+			}
+			set
+			{
+				this._tTruck = value;
+			}
+		}
+
+		public TourModel(int id, string driver, string truck, string from, string to, string freight, int dist, int driven, int income, int total, int fuel)
+		{
+			this._tId = id;
+			this._tDriver = driver;
+			this._tTruck = truck;
+			this._tFrom = from;
+			this._tTo = to;
+			this._tFreight = freight;
+			this._tDistance = dist;
+			this._tDriven = driven;
+			this._tIncome = income;
+			this._tTotal = total;
+			this._tFuel = fuel;
+		}
+	}
 }
