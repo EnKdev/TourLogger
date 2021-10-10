@@ -9,7 +9,6 @@ namespace TourLogger.Utils
         private static int _day;
         private static int _revision;
         private static string _appHash;
-        private static string _appVersion;
 
         /// <summary>
         /// Sets the app version
@@ -26,7 +25,7 @@ namespace TourLogger.Utils
                 _revision = EnKVer2.Revision;
                 _appHash = EnKVer2.VerHash;
 
-                _appVersion = $"V{_year}.{_month}.{_day}.{_revision}.{_appHash}";
+                AppVersion = $"V{_year}.{_month}.{_day}.{_revision}.{_appHash}";
             }
             else
             {
@@ -36,13 +35,13 @@ namespace TourLogger.Utils
                 _day = EnKVer2.Day;
                 _appHash = EnKVer2.VerHash;
 
-                _appVersion = $"V{_year}.{_month}.{_day}.{_appHash}";
+                AppVersion = $"V{_year}.{_month}.{_day}.{_appHash}";
             }
         }
 
         /// <summary>
         /// Should only be called after <see cref="SetAppVersion"/> has been invoked
         /// </summary>
-        public string AppVersion => _appVersion;
+        public static string AppVersion { get; private set; }
     }
 }
