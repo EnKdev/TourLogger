@@ -14,6 +14,5 @@
         <Button x:Name="bt_Continue" Content="Continue" HorizontalAlignment="Left" Margin="483,146,0,0" VerticalAlignment="Top" Width="186" Height="22" FontSize="18" IsEnabled="False"/>
         <Label x:Name="lb_Code" Content="" ContentStringFormat="OTSV-{0}" HorizontalAlignment="Left" Margin="150,98,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label x:Name="lb_ValidCode" Content="" ContentStringFormat="[{0}]" HorizontalAlignment="Left" Margin="150,130,0,0" VerticalAlignment="Top" FontSize="18"/>
-
     </Grid>
 </Window>

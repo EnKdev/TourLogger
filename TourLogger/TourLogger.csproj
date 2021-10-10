@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EnKVer\ev2.ev" />
     <None Remove="Icons\invalid.png" />
     <None Remove="Icons\load.gif" />
     <None Remove="Icons\truck.ico" />
@@ -19,6 +20,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="EnKVer\ev2.ev">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EnKdev.EnKVer">
+      <HintPath>..\..\EnKSuite\EnKdev.EnKVer\bin\Debug\net5.0\EnKdev.EnKVer.dll</HintPath>
+    </Reference>
     <Reference Include="EnKdev.SessionPass.Net5">
       <HintPath>..\..\EnKPass\EnKdev.SessionPass.Net5\bin\Debug\net5.0\EnKdev.SessionPass.Net5.dll</HintPath>
     </Reference>

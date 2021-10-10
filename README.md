@@ -1,4 +1,4 @@
-# TourLogger | Current Version: 6.0.1 | Next release: 6.1.0
+# TourLogger | Current Version: 6.0.2 | Next release: 6.1.0
 
 TourLogger is a small companion tool for players of ETS2 & ATS, allowing them to log their tours into a central database.
 

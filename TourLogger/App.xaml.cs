@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+using TourLogger.Utils;
 using TourLogger.Windows;
 
 namespace TourLogger
@@ -11,6 +12,9 @@ namespace TourLogger
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            Versioning.SetAppVersion(false);
+            SecretGrabber.GrabSecret();
+
             Run(new SessionValidatorWindow());
 
             if (!Directory.Exists($"./Userdata/Legacy"))
