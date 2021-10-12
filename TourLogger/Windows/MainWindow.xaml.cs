@@ -116,6 +116,7 @@ namespace TourLogger.Windows
         private void Bt_RefreshTable_OnClick(object sender, RoutedEventArgs e)
         {
             RefreshTourTable();
+            MessageBox.Show("Tour-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
         }
 
         private void Bt_SingleTour_OnClick(object sender, RoutedEventArgs e)
