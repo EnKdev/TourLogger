@@ -15,7 +15,7 @@ namespace TourLogger
             var svw = new SessionValidatorWindow();
             var mw = new MainWindow();
 
-            Versioning.SetAppVersion(false);
+            Versioning.SetAppVersion(true);
             SecretGrabber.GrabSecret();
 
             svw.ShowDialog();
