@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EnKVer\ev2.ev" />
     <None Remove="Icons\invalid.png" />
     <None Remove="Icons\load.gif" />
     <None Remove="Icons\truck.ico" />
@@ -30,10 +31,10 @@
 
   <ItemGroup>
     <Reference Include="EnKdev.EnKVer">
-      <HintPath>Libs\EnKdev.EnKVer.dll</HintPath>
+      <HintPath>..\..\EnKSuite\EnKdev.EnKVer\bin\Debug\net5.0\EnKdev.EnKVer.dll</HintPath>
     </Reference>
     <Reference Include="EnKdev.SessionPass.Net5">
-      <HintPath>Libs\EnKdev.SessionPass.Net5.dll</HintPath>
+      <HintPath>..\..\EnKPass\EnKdev.SessionPass.Net5\bin\Debug\net5.0\EnKdev.SessionPass.Net5.dll</HintPath>
     </Reference>
   </ItemGroup>
 
