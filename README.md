@@ -27,6 +27,11 @@ Release 6.0.2
 
 - Fixed some general bugs
 
+Release 6.1.0
+
+- Migrated from Windows Forms to WPF
+- This Release is still in testing for performance issues to be sighted, expect hotfixes coming around whenever something surfaces
+
 ### Related projects:
 
 - [TourLogger-Backend](https://github.com/enkdev/TourLogger-Backend) - The server-backend of TourLogger, where the behind-the-scenes magic takes place.
