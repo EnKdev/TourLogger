@@ -1,30 +1,47 @@
-using System.Reflection;
-using System;
+﻿using EnKdev.EnKVer;
 
 namespace TourLogger.Utils
 {
     public class Versioning
     {
-        public static string AppVersion = "6.0.2";
-        public static string AppFileVersion = "2";
-        public static string DbVersion = "3";
-        public static string SecretVersion = "2";
-        private static string AppAbbreviation = "TL";
-        private static string AppVersionNumber = "602";
-        private static string BuildRevisionFull = "1203211601";
-        private static string BuildRevisionAbbr = "120321";
-        
-        private static char FullVerSep = '_';
-        private static char AbbrVerSep = ':';
-        private static char Joiner = '+';
+        private static int _year;
+        private static int _month;
+        private static int _day;
+        private static int _revision;
+        private static string _appHash;
 
-        public static string FullVersionString = AppVersion + Joiner + BuildRevisionFull + FullVerSep +
-                                                 AppAbbreviation + FullVerSep + AppVersionNumber;
+        /// <summary>
+        /// Sets the app version
+        /// </summary>
+        /// <param name="hasRevision"><see langword="true"/> if a revision exists, <see langword="false"/> if not</param>
+        public static void SetAppVersion(bool hasRevision)
+        {
+            if (hasRevision)
+            {
+                EnKVer2.ReadVersionFile($"./EnKVer/ev2.ev", true);
+                _year = EnKVer2.Year;
+                _month = EnKVer2.Month;
+                _day = EnKVer2.Day;
+                _revision = EnKVer2.Revision;
+                _appHash = EnKVer2.VerHash;
 
-        public static string AbbrVersionString = AppVersion + Joiner + BuildRevisionAbbr + AbbrVerSep +
-                                                 AppAbbreviation + AbbrVerSep + AppVersionNumber;
+                AppVersion = $"V{_year}.{_month}.{_day}.{_revision}.{_appHash}";
+            }
+            else
+            {
+                EnKVer2.ReadVersionFile($"./EnKVer/ev2.ev");
+                _year = EnKVer2.Year;
+                _month = EnKVer2.Month;
+                _day = EnKVer2.Day;
+                _appHash = EnKVer2.VerHash;
 
-        [Obfuscation]
-        public static readonly string AppSecret = ""; // Secret, even to the Repository!
+                AppVersion = $"V{_year}.{_month}.{_day}.{_appHash}";
+            }
+        }
+
+        /// <summary>
+        /// Should only be called after <see cref="SetAppVersion"/> has been invoked
+        /// </summary>
+        public static string AppVersion { get; private set; }
     }
 }

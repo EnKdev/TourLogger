@@ -1,27 +1,13 @@
-using Newtonsoft.Json;
-using System;
-using System.Runtime.CompilerServices;
+﻿using Newtonsoft.Json;
 
 namespace TourLogger.Models
 {
-	public class TruckModel
-	{
-		[JsonProperty("driver")]
-		public string Driver
-		{
-			get;
-			set;
-		}
+    public class TruckModel
+    {
+        [JsonProperty("truck")] 
+        public string Truck { get; set; }
 
-		[JsonProperty("truck")]
-		public string Truck
-		{
-			get;
-			set;
-		}
-
-		public TruckModel()
-		{
-		}
-	}
+        [JsonProperty("driver")] 
+        public string Driver { get; set; }
+    }
 }

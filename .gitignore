@@ -1,5 +1,6 @@
 ﻿TourLogger/bin/*
 TourLogger/obj/*
+TourLogger/.vs/*
 .idea/*
 .vs/*
 packages/*
