@@ -4,15 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourLogger.Windows"
+        xmlns:models="clr-namespace:TourLogger.Models"
         mc:Ignorable="d"
-        Title="TourLogger 6.1.0" Height="600" Width="1623" ResizeMode="NoResize" Icon="/Icons/truck.ico" FontFamily="Bahnschrift" FontSize="18">
+        Title="" Height="600" Width="1623" ResizeMode="NoResize" Icon="/Icons/truck.ico" FontFamily="Bahnschrift" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="17*"/>
-            <RowDefinition Height="347*"/>
-            <RowDefinition Height="37*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="143*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="344*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="136*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="380*"/>
@@ -27,7 +28,7 @@
                 </Menu>
             </StackPanel>
         </Grid>
-        <Grid Column="0" Margin="0,17,0,0" Row="1">
+        <Grid Name="g_Content" Column="0" Margin="0,17,0,0" Row="1">
             <StackPanel Orientation="Vertical">
                 <Label Name="lb_Driver" Content="" ContentStringFormat="Driver: {0}" />
                 <Label Name="lb_Truck" Content="" ContentStringFormat="Truck: {0}" />
@@ -70,31 +71,31 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid Column="0" Row="1" Margin="0,347,0,0" RowSpan="2">
+        <Grid Column="0" Grid.Row="2" Margin="0,2,0,0">
             <StackPanel Orientation="Horizontal">
                 <Button Name="bt_SaveTour" Content="Save Tour" Click="Bt_SaveTour_OnClick" Width="195"/>
                 <Button x:Name="bt_SaveProgress" Content="Save Progress" Click="Bt_SaveProgress_OnClick" Width="185"/>
             </StackPanel>
         </Grid>
-        <Grid Column="0" Grid.Row="2" Margin="0,37,0,0" Grid.RowSpan="2">
+        <Grid Column="0" Grid.Row="3" Margin="0,1,0,0">
             <Button Name="bt_RefreshTable" Content="Refresh Table" Click="Bt_RefreshTable_OnClick" Margin="98,0,104,0"></Button>
         </Grid>
-        <Grid Column="0" Row="4">
+        <Grid Column="0" Grid.Row="3" Margin="0,39,0,-9" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,103">
                 <Button Name="bt_SingleTour" Content="Show Single Tour" Click="Bt_SingleTour_OnClick" Width="193"></Button>
-                <Label Name="lb_TourId" Content="Tour-ID" />
+                <Label Name="lb_TourId" Content="Tour-ID" Height="71" />
                 <TextBox Name="tb_TourId" Text="0" Width="117"></TextBox>
             </StackPanel>
         </Grid>
-        <DataGrid Grid.Row="0" Grid.Column="1" Margin="0,17,0,0" Grid.RowSpan="5" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
+        <DataGrid Name="dg_Tours" Grid.Row="0" Grid.Column="1" Margin="0,17,0,0" Grid.RowSpan="5" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Tour-ID" Binding="{Binding TourID}" Width="*"/>
-                <DataGridTextColumn Header="Driver" Binding="{Binding Driver}" Width="*" />
+                <DataGridTextColumn Header="Tour-ID" Binding="{Binding (models:TourModel.TourID)}" Width="*"/>
+                <DataGridTextColumn Header="Driver" Binding="{Binding (models:TruckModel.Driver)}" Width="*" />
                 <DataGridTextColumn Header="Truck" Binding="{Binding TruckUsed}" Width="*" />
                 <DataGridTextColumn Header="From" Binding="{Binding From}" Width="*" />
                 <DataGridTextColumn Header="To" Binding="{Binding To}" Width="*" />
                 <DataGridTextColumn Header="Freight" Binding="{Binding Freight}" Width="*"/>
-                <DataGridTextColumn Header="Tour-Distance" Binding="{Binding TourDistance}" Width="*" />
+                <DataGridTextColumn Header="Tour-Distance" Binding="{Binding (models:TourModel.TourDistance)}" Width="*" />
                 <DataGridTextColumn Header="Distance Driven" Binding="{Binding DrivenDistance}" Width="*" />
                 <DataGridTextColumn Header="Job Income" Binding="{Binding JobIncome}" Width="*" />
                 <DataGridTextColumn Header="ODO" Binding="{Binding ODO}" Width="*" />

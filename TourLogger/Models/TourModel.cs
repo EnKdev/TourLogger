@@ -30,7 +30,7 @@
             _tFuel = fuel;
         }
 
-        public int Id
+        public int TourID
         {
             get => _tId;
             set => _tId = value;
@@ -42,7 +42,7 @@
             set => _tDriver = value;
         }
 
-        public string Truck
+        public string TruckUsed
         {
             get => _tTruck;
             set => _tTruck = value;
@@ -66,31 +66,31 @@
             set => _tFreight = value;
         }
 
-        public int Distance
+        public int TourDistance
         {
             get => _tDistance;
             set => _tDistance = value;
         }
 
-        public int Driven
+        public int DrivenDistance
         {
             get => _tDriven;
             set => _tDriven = value;
         }
 
-        public int Income
+        public int JobIncome
         {
             get => _tIncome;
             set => _tIncome = value;
         }
 
-        public int Total
+        public int ODO
         {
             get => _tTotal;
             set => _tTotal = value;
         }
 
-        public int Fuel
+        public int FuelUsed
         {
             get => _tFuel;
             set => _tFuel = value;

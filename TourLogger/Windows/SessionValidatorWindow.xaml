@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourLogger.Windows"
         mc:Ignorable="d"
-        Title="Session Validator" Height="194" Width="679" FontFamily="Bahnschrift">
+        Title="Session Validator" Height="213" Width="679" FontFamily="Bahnschrift" ResizeMode="NoResize">
     <Grid>
         <Image x:Name="img_LoadStatus" HorizontalAlignment="Left" Height="59" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Source="/Icons/load.gif"/>
         <Label x:Name="lb_Status" Content="Fetching Session-Code..." HorizontalAlignment="Left" Margin="77,24,0,0" VerticalAlignment="Top" FontSize="18"/>

@@ -12,10 +12,13 @@ namespace TourLogger
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            var svw = new SessionValidatorWindow();
+            var mw = new MainWindow();
+
             Versioning.SetAppVersion(false);
             SecretGrabber.GrabSecret();
 
-            Run(new SessionValidatorWindow());
+            svw.ShowDialog();
 
             if (!Directory.Exists($"./Userdata/Legacy"))
                 Directory.CreateDirectory($"./Userdata/Legacy");
@@ -48,7 +51,7 @@ namespace TourLogger
             }
             else
             {
-                Run(new MainWindow());
+                mw.Show();
             }
         }
     }
