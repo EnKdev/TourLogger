@@ -1,20 +1,10 @@
-using Newtonsoft.Json;
-using System;
-using System.Runtime.CompilerServices;
+﻿using Newtonsoft.Json;
 
 namespace TourLogger.Models
 {
-	public class CacheModel
-	{
-		[JsonProperty("cachedTours")]
-		public TourModel[] CachedTours
-		{
-			get;
-			set;
-		}
-
-		public CacheModel()
-		{
-		}
-	}
+    public class CacheModel
+    {
+        [JsonProperty("cachedTours")]
+        public TourModel[] CachedTours { get; set; }
+    }
 }

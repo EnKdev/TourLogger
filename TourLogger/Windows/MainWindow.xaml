@@ -1,0 +1,106 @@
+﻿<Window x:Class="TourLogger.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TourLogger.Windows"
+        xmlns:models="clr-namespace:TourLogger.Models"
+        mc:Ignorable="d"
+        Title="" Height="600" Width="1623" ResizeMode="NoResize" Icon="/Icons/truck.ico" FontFamily="Bahnschrift" FontSize="18">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="344*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="136*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380*"/>
+            <ColumnDefinition Width="1243*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Column="0" Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Menu Name="m_Misc">
+                    <MenuItem Name="m_ItemMisc" Header="_Misc">
+                        <MenuItem Name="m_ItemMisc_About" Header="_About" Click="M_ItemMisc_About_OnClick" />
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+        </Grid>
+        <Grid Name="g_Content" Column="0" Margin="0,17,0,0" Row="1">
+            <StackPanel Orientation="Vertical">
+                <Label Name="lb_Driver" Content="" ContentStringFormat="Driver: {0}" />
+                <Label Name="lb_Truck" Content="" ContentStringFormat="Truck: {0}" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_From" Content="From:"/>
+                    <TextBox Name="tb_TFrom" Text="-" Width="150" Margin="120, 0, 0, 0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_To" Content="To:"/>
+                    <TextBox Name="tb_TTo" Text="-" Width="150" Margin="146, 0, 0, 0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_Freight" Content="Freight:"/>
+                    <TextBox Name="tb_TFreight" Text="-" Width="150" Margin="106, 0, 0, 0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_TourDistance" Content="Tour-Distance:"/>
+                    <TextBox Name="tb_TDistance" Text="0" Width="150" Margin="50, 0, 0, 0" />
+                    <Label Name="lb_Km1" Content="km"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_DrivenDistance" Content="Driven Distance:"/>
+                    <TextBox Name="tb_TDriven" Text="0" Width="150" Margin="36, 0, 0, 0" />
+                    <Label Name="lb_Km2" Content="km"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_JobIncome" Content="Job Income:"/>
+                    <TextBox Name="tb_TIncome" Text="0" Width="150" Margin="71, 0, 0, 0" />
+                    <Label Name="lb_Unit" Content="€/$"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_ODO" Content="ODO:"/>
+                    <TextBox Name="tb_TOdo" Text="0" Width="150" Margin="129, 0, 0, 0" />
+                    <Label Name="lb_Km3" Content="km"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="lb_Fuel" Content="Fuel Used:"/>
+                    <TextBox Name="tb_TFuelUsed" Text="0" Width="150" Margin="83, 0, 0, 0" />
+                    <Label Name="lb_Liter" Content="l"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Column="0" Grid.Row="2" Margin="0,2,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Button Name="bt_SaveTour" Content="Save Tour" Click="Bt_SaveTour_OnClick" Width="195"/>
+                <Button x:Name="bt_SaveProgress" Content="Save Progress" Click="Bt_SaveProgress_OnClick" Width="185"/>
+            </StackPanel>
+        </Grid>
+        <Grid Column="0" Grid.Row="3" Margin="0,1,0,0">
+            <Button Name="bt_RefreshTable" Content="Refresh Table" Click="Bt_RefreshTable_OnClick" Margin="98,0,104,0"></Button>
+        </Grid>
+        <Grid Column="0" Grid.Row="3" Margin="0,39,0,-9" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,103">
+                <Button Name="bt_SingleTour" Content="Show Single Tour" Click="Bt_SingleTour_OnClick" Width="193"></Button>
+                <Label Name="lb_TourId" Content="Tour-ID" Height="71" />
+                <TextBox Name="tb_TourId" Text="0" Width="117"></TextBox>
+            </StackPanel>
+        </Grid>
+        <DataGrid Name="dg_Tours" Grid.Row="0" Grid.Column="1" Margin="0,17,0,0" Grid.RowSpan="5" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tour-ID" Binding="{Binding (models:TourModel.TourID)}" Width="*"/>
+                <DataGridTextColumn Header="Driver" Binding="{Binding (models:TruckModel.Driver)}" Width="*" />
+                <DataGridTextColumn Header="Truck" Binding="{Binding TruckUsed}" Width="*" />
+                <DataGridTextColumn Header="From" Binding="{Binding From}" Width="*" />
+                <DataGridTextColumn Header="To" Binding="{Binding To}" Width="*" />
+                <DataGridTextColumn Header="Freight" Binding="{Binding Freight}" Width="*"/>
+                <DataGridTextColumn Header="Tour-Distance" Binding="{Binding (models:TourModel.TourDistance)}" Width="*" />
+                <DataGridTextColumn Header="Distance Driven" Binding="{Binding DrivenDistance}" Width="*" />
+                <DataGridTextColumn Header="Job Income" Binding="{Binding JobIncome}" Width="*" />
+                <DataGridTextColumn Header="ODO" Binding="{Binding ODO}" Width="*" />
+                <DataGridTextColumn Header="Fuel Used" Binding="{Binding FuelUsed}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
