@@ -34,39 +34,39 @@
                 <Label Name="lb_Truck" Content="" ContentStringFormat="Truck: {0}" />
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_From" Content="From:"/>
-                    <TextBox Name="tb_TFrom" Text="-" Width="150" Margin="120, 0, 0, 0" />
+                    <TextBox Name="tb_TFrom" Width="150" Margin="120, 0, 0, 0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_To" Content="To:"/>
-                    <TextBox Name="tb_TTo" Text="-" Width="150" Margin="146, 0, 0, 0" />
+                    <TextBox Name="tb_TTo" Width="150" Margin="146, 0, 0, 0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_Freight" Content="Freight:"/>
-                    <TextBox Name="tb_TFreight" Text="-" Width="150" Margin="106, 0, 0, 0" />
+                    <TextBox Name="tb_TFreight" Width="150" Margin="106, 0, 0, 0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_TourDistance" Content="Tour-Distance:"/>
-                    <TextBox Name="tb_TDistance" Text="0" Width="150" Margin="50, 0, 0, 0" />
+                    <TextBox Name="tb_TDistance" Width="150" Margin="50, 0, 0, 0" />
                     <Label Name="lb_Km1" Content="km"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_DrivenDistance" Content="Driven Distance:"/>
-                    <TextBox Name="tb_TDriven" Text="0" Width="150" Margin="36, 0, 0, 0" />
+                    <TextBox Name="tb_TDriven" Width="150" Margin="36, 0, 0, 0" />
                     <Label Name="lb_Km2" Content="km"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_JobIncome" Content="Job Income:"/>
-                    <TextBox Name="tb_TIncome" Text="0" Width="150" Margin="71, 0, 0, 0" />
+                    <TextBox Name="tb_TIncome" Width="150" Margin="71, 0, 0, 0" />
                     <Label Name="lb_Unit" Content="€/$"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_ODO" Content="ODO:"/>
-                    <TextBox Name="tb_TOdo" Text="0" Width="150" Margin="129, 0, 0, 0" />
+                    <TextBox Name="tb_TOdo" Width="150" Margin="129, 0, 0, 0" />
                     <Label Name="lb_Km3" Content="km"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_Fuel" Content="Fuel Used:"/>
-                    <TextBox Name="tb_TFuelUsed" Text="0" Width="150" Margin="83, 0, 0, 0" />
+                    <TextBox Name="tb_TFuelUsed" Width="150" Margin="83, 0, 0, 0" />
                     <Label Name="lb_Liter" Content="l"/>
                 </StackPanel>
             </StackPanel>
