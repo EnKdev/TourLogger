@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
+
 using TourLogger.Utils;
 using TourLogger.Windows;
 
@@ -15,13 +16,15 @@ namespace TourLogger
             var svw = new SessionValidatorWindow();
             var mw = new MainWindow();
 
-            Versioning.SetAppVersion(true);
+            Versioning.SetAppVersion(false);
             SecretGrabber.GrabSecret();
 
             svw.ShowDialog();
 
             if (!Directory.Exists($"./Userdata/Legacy"))
+            {
                 Directory.CreateDirectory($"./Userdata/Legacy");
+            }
 
             if (File.Exists($"./Userdata/Truck/data.json"))
             {

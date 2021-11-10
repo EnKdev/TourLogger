@@ -98,7 +98,7 @@
                 <DataGridTextColumn Header="Tour-Distance" Binding="{Binding (models:TourModel.TourDistance)}" Width="*" />
                 <DataGridTextColumn Header="Distance Driven" Binding="{Binding DrivenDistance}" Width="*" />
                 <DataGridTextColumn Header="Job Income" Binding="{Binding JobIncome}" Width="*" />
-                <DataGridTextColumn Header="ODO" Binding="{Binding ODO}" Width="*" />
+                <DataGridTextColumn Header="ODO" Binding="{Binding Odo}" Width="*" />
                 <DataGridTextColumn Header="Fuel Used" Binding="{Binding FuelUsed}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
