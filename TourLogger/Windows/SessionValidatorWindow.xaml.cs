@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+
 using EnKdev.SessionPass;
 
 namespace TourLogger.Windows
@@ -12,7 +13,7 @@ namespace TourLogger.Windows
     public partial class SessionValidatorWindow : Window
     {
         private string _otsvCode;
-        private OtsvCode _oc;
+        private readonly OtsvCode _oc;
         private bool _isSameCode;
 
         public SessionValidatorWindow()

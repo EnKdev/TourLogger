@@ -4,11 +4,6 @@ namespace TourLogger.Utils
 {
     public class Versioning
     {
-        private static int _year;
-        private static int _month;
-        private static int _day;
-        private static int _revision;
-        private static string _appHash;
 
         /// <summary>
         /// Sets the app version
@@ -19,23 +14,23 @@ namespace TourLogger.Utils
             if (hasRevision)
             {
                 EnKVer2.ReadVersionFile($"./EnKVer/ev2.ev", true);
-                _year = EnKVer2.Year;
-                _month = EnKVer2.Month;
-                _day = EnKVer2.Day;
-                _revision = EnKVer2.Revision;
-                _appHash = EnKVer2.VerHash;
+                var year = EnKVer2.Year;
+                var month = EnKVer2.Month;
+                var day = EnKVer2.Day;
+                var revision = EnKVer2.Revision;
+                var appHash = EnKVer2.VerHash;
 
-                AppVersion = $"V{_year}.{_month}.{_day}.{_revision}.{_appHash}";
+                AppVersion = $"V{year}.{month}.{day}.{revision}.{appHash}";
             }
             else
             {
                 EnKVer2.ReadVersionFile($"./EnKVer/ev2.ev");
-                _year = EnKVer2.Year;
-                _month = EnKVer2.Month;
-                _day = EnKVer2.Day;
-                _appHash = EnKVer2.VerHash;
+                var year = EnKVer2.Year;
+                var month = EnKVer2.Month;
+                var day = EnKVer2.Day;
+                var appHash = EnKVer2.VerHash;
 
-                AppVersion = $"V{_year}.{_month}.{_day}.{_appHash}";
+                AppVersion = $"V{year}.{month}.{day}.{appHash}";
             }
         }
 

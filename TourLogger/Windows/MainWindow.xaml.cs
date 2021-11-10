@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 using Newtonsoft.Json;
 using TourLogger.Models;
 using TourLogger.Utils;
@@ -24,8 +14,8 @@ namespace TourLogger.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        private PhpHandler _ph;
-        private DataWriter _dw;
+        private readonly PhpHandler _ph;
+        private readonly DataWriter _dw;
 
         public MainWindow()
         {
@@ -42,10 +32,12 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 6.1.1 | {appVer}";
+            Title = $"TourLogger 6.1.2 | {appVer}";
 
             if (File.Exists($"./Userdata/truck.dat"))
+            {
                 LoadGeneralDetails();
+            }
             else
             {
                 lb_Driver.Content = "Driver not found!";
@@ -53,18 +45,23 @@ namespace TourLogger.Windows
             }
 
             if (File.Exists($"./Userdata/cache.dat"))
+            {
                 LoadTourData();
+            }
             else
-                RefreshTourTable();
+            { RefreshTourTable();
+            }
 
             if (File.Exists($"./Userdata/progress.dat"))
+            {
                 ReadProgressingTour();
+            }
         }
 
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 6.1.1 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 6.1.2 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
@@ -76,7 +73,9 @@ namespace TourLogger.Windows
                 Convert.ToInt32(tb_TFuelUsed.Text));
 
             if (File.Exists($"./Userdata/progress.dat"))
+            {
                 File.Delete($"./Userdata/progress.dat");
+            }
 
             MessageBox.Show("Tour saved!", "Success!", MessageBoxButton.OK);
 
@@ -137,8 +136,10 @@ namespace TourLogger.Windows
         {
             var json = JsonConvert.DeserializeObject<SingleTourModel>(File.ReadAllText($"./Userdata/progress.dat"));
 
-            if (json == null) 
+            if (json == null)
+            {
                 return;
+            }
 
             tb_TFrom.Text = json.TourFrom;
             tb_TTo.Text = json.TourTo;
@@ -155,7 +156,9 @@ namespace TourLogger.Windows
             var truck = JsonConvert.DeserializeObject<TruckModel>(File.ReadAllText($"./Userdata/truck.dat"));
 
             if (truck == null)
+            {
                 return;
+            }
 
             lb_Driver.Content = truck.Driver;
             lb_Truck.Content = truck.Truck;
@@ -166,7 +169,9 @@ namespace TourLogger.Windows
             var tours = JsonConvert.DeserializeObject<CacheModel>(File.ReadAllText($"./Userdata/cache.dat"));
 
             if (tours == null)
+            {
                 return;
+            }
 
             dg_Tours.ItemsSource = tours.CachedTours;
         }
@@ -190,7 +195,9 @@ namespace TourLogger.Windows
             var tours = JsonConvert.DeserializeObject<CacheModel>(File.ReadAllText($"./Userdata/cache.dat"));
 
             if (tours == null)
+            {
                 return;
+            }
 
             dg_Tours.ItemsSource = tours.CachedTours;
         }
