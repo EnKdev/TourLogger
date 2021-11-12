@@ -1,4 +1,4 @@
-# TourLogger | Current Version: 6.1.2 | Next minor release: None planned | Next major release: 7.0.0
+# TourLogger | Current Version: 6.1.2 | Next minor release: 6.1.3 | Next major release: 7.0.0
 
 [![Codacy Security Scan](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml)
 
