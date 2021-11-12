@@ -9,7 +9,7 @@ namespace TourLogger.Utils
         public static void GrabSecret()
         {
             using var wc = new WebClient();
-            var secret = wc.DownloadString("Lol, you thought I'd include the secret here.");
+            var secret = wc.DownloadString("https://enkdev.xyz/cdn/php/tourlogger/secretProvider.php");
             AppSecret = secret;
         }
     }

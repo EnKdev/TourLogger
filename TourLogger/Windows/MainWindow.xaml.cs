@@ -32,7 +32,7 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 6.1.2 | {appVer}";
+            Title = $"TourLogger 6.2.0 | {appVer}";
 
             if (File.Exists($"./Userdata/truck.dat"))
             {
@@ -61,7 +61,7 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 6.1.2 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 6.2.0 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
@@ -178,14 +178,14 @@ namespace TourLogger.Windows
 
         private void ClearTextboxes()
         {
-            tb_TFrom.Text = "-";
-            tb_TTo.Text = "-";
-            tb_TFreight.Text = "-";
-            tb_TDistance.Text = "0";
-            tb_TDriven.Text = "0";
-            tb_TIncome.Text = "0";
-            tb_TOdo.Text = "0";
-            tb_TFuelUsed.Text = "0";
+            tb_TFrom.Text = "";
+            tb_TTo.Text = "";
+            tb_TFreight.Text = "";
+            tb_TDistance.Text = "";
+            tb_TDriven.Text = "";
+            tb_TIncome.Text = "";
+            tb_TOdo.Text = "";
+            tb_TFuelUsed.Text = "";
         }
 
         private void RefreshTourTable()
