@@ -41,6 +41,13 @@ Release 6.1.1
 Release 6.1.2
 -  Various code improvements and fixes. Compatibility remains across Versions 6.1.0 and 6.1.1.
 
+Release 6.2.0
+- Added AutoUpdater.NET to the app
+-  This means that updates will now be automatically downloaded if there is one available.
+- Updates are downloaded into the Update directory of the app.
+
+- Cleaned up some forgotten leftover placeholders after sending in a new tour
+
 ### Related projects:
 
 -  [TourLogger-Backend](https://github.com/enkdev/TourLogger-Backend) - The server-backend of TourLogger, where the behind-the-scenes magic takes place.
