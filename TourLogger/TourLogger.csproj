@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>6.1.2</Version>
+    <Version>6.2.0</Version>
     <Authors>EnKdev</Authors>
     <ApplicationIcon>Icons\truck.ico</ApplicationIcon>
     <StartupObject></StartupObject>
@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
