@@ -26,6 +26,9 @@
                         <MenuItem Name="m_ItemMisc_About" Header="_About" Click="M_ItemMisc_About_OnClick" />
                     </MenuItem>
                 </Menu>
+                <Menu Name="m_Config">
+                        <MenuItem Name="m_ConfigItem" Header="_Config" Click="M_ConfigItem_OnClick"/>
+                </Menu>
             </StackPanel>
         </Grid>
         <Grid Name="g_Content" Column="0" Margin="0,17,0,0" Row="1">

@@ -7,7 +7,6 @@ namespace TourLogger.Utils
 {
     public class DataWriter
     {
-
         public void WriteCachedData(List<TourModel> tours)
         {
             var cm = new CacheModel
@@ -42,6 +41,34 @@ namespace TourLogger.Utils
             using StreamWriter sw = File.CreateText($"./Userdata/progress.dat");
 
             var fileText = JsonConvert.SerializeObject(stm, Formatting.Indented);
+            sw.Write(fileText);
+            sw.Dispose();
+        }
+
+        public void WriteDefaultConfigFile()
+        {
+            var config = new ConfigModel
+            {
+                UsingExperimental = false
+            };
+
+            using StreamWriter sw = File.CreateText($"./Userdata/config.dat");
+
+            var fileText = JsonConvert.SerializeObject(config, Formatting.Indented);
+            sw.Write(fileText);
+            sw.Dispose();
+        }
+
+        public void WriteConfigFile(bool? useExperimental)
+        {
+            var config = new ConfigModel
+            {
+                UsingExperimental = useExperimental
+            };
+
+            using StreamWriter sw = File.CreateText($"./Userdata/config.dat");
+
+            var fileText = JsonConvert.SerializeObject(config, Formatting.Indented);
             sw.Write(fileText);
             sw.Dispose();
         }
