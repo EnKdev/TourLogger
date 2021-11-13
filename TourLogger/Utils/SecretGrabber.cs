@@ -9,7 +9,8 @@ namespace TourLogger.Utils
         public static void GrabSecret()
         {
             using var wc = new WebClient();
-            var secret = wc.DownloadString("Lol, you thought I'd include the secret here.");
+            // Now that the backend has a second security layer, I can safely leave this in...
+            var secret = wc.DownloadString("https://enkdev.xyz/cdn/php/tourlogger/secretProvider.php");
             AppSecret = secret;
         }
     }

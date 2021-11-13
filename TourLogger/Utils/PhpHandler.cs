@@ -19,7 +19,8 @@ namespace TourLogger.Utils
             var res = HttpPostHelper.HttpPost("https://enkdev.xyz/cdn/php/tourlogger/getTours.php",
                 new NameValueCollection
                 {
-                    { "secret", SecretGrabber.AppSecret }
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "6.3.0" }
                 });
 
             jsonArray = Encoding.UTF8.GetString(res);
@@ -51,6 +52,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
+                    { "version", "6.3.0" },
                     { "tId", tourId.ToString() }
                 });
 
@@ -65,7 +67,8 @@ namespace TourLogger.Utils
             var res = HttpPostHelper.HttpPost("https://enkdev.xyz/cdn/php/tourlogger/getTourCount.php",
                 new NameValueCollection
                 {
-                    { "secret", SecretGrabber.AppSecret }
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "6.3.0" },
                 });
 
             tours = Convert.ToInt32(Encoding.UTF8.GetString(res));
@@ -79,6 +82,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
+                    { "version", "6.3.0" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
