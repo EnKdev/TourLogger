@@ -1,6 +1,9 @@
 ﻿using System.IO;
+using System.Net;
 using System.Windows;
 using AutoUpdaterDotNET;
+using Newtonsoft.Json;
+using TourLogger.Models;
 using TourLogger.Utils;
 using TourLogger.Windows;
 
@@ -11,8 +14,12 @@ namespace TourLogger
     /// </summary>
     public partial class App : Application
     {
+        private DataWriter _dw;
+        
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
+            _dw = new DataWriter();
+            
             var svw = new SessionValidatorWindow();
             var mw = new MainWindow();
 
@@ -26,8 +33,39 @@ namespace TourLogger
                 Directory.CreateDirectory(updatePath);
             }
 
+            if (!File.Exists($"./Userdata/config.dat"))
+            {
+                _dw.WriteDefaultConfigFile();
+            }
+            
             AutoUpdater.DownloadPath = updatePath;
-            AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.xml");
+
+            var config = JsonConvert.DeserializeObject<ConfigModel>(File.ReadAllText($"./Userdata/config.dat"));
+
+            if (config != null)
+            {
+                var useExperimental = config.UsingExperimental.HasValue && config.UsingExperimental.Value;
+
+                if (useExperimental)
+                {
+                    using var wc = new WebClient();
+                    var experimentalAvailable = wc.DownloadString("https://enkdev.xyz/cdn/php/tourlogger/experimentalChannel.php");
+                    wc.Dispose();
+
+                    if (experimentalAvailable == "true")
+                    {
+                        AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.experimental.xml");
+                    }
+                    else
+                    {
+                        AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.xml");
+                    }
+                }
+                else
+                {
+                    AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.xml");
+                }
+            }
 
             if (AutoUpdater.Mandatory)
             {
