@@ -32,7 +32,7 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 6.3.0 | {appVer}";
+            Title = $"TourLogger 7.0.0-beta1 | {appVer}";
 
             if (File.Exists($"./Userdata/truck.dat"))
             {
@@ -49,7 +49,8 @@ namespace TourLogger.Windows
                 LoadTourData();
             }
             else
-            { RefreshTourTable();
+            { 
+                RefreshTourTable();
             }
 
             if (File.Exists($"./Userdata/progress.dat"))
@@ -206,6 +207,12 @@ namespace TourLogger.Windows
         {
             var cw = new ConfigWindow();
             cw.Show();
+        }
+
+        private void Bt_AddRefuel_OnClick(object sender, RoutedEventArgs e)
+        {
+            var rw = new RefuelWindow();
+            rw.Show();
         }
     }
 }

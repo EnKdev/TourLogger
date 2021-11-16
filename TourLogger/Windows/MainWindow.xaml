@@ -9,25 +9,23 @@
         Title="" Height="600" Width="1623" ResizeMode="NoResize" Icon="/Icons/truck.ico" FontFamily="Bahnschrift" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="21*"/>
-            <RowDefinition Height="344*"/>
-            <RowDefinition Height="44*"/>
-            <RowDefinition Height="39*"/>
-            <RowDefinition Height="136*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="350*"/>
+            <RowDefinition Height="207*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="380*"/>
-            <ColumnDefinition Width="1243*"/>
+            <ColumnDefinition Width="422*"/>
+            <ColumnDefinition Width="1201*"/>
         </Grid.ColumnDefinitions>
-        <Grid Column="0" Row="0">
-            <StackPanel Orientation="Horizontal">
+        <Grid Column="0" Row="0" Margin="0,0,0,14">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,-11">
                 <Menu Name="m_Misc">
                     <MenuItem Name="m_ItemMisc" Header="_Misc">
                         <MenuItem Name="m_ItemMisc_About" Header="_About" Click="M_ItemMisc_About_OnClick" />
                     </MenuItem>
                 </Menu>
                 <Menu Name="m_Config">
-                        <MenuItem Name="m_ConfigItem" Header="_Config" Click="M_ConfigItem_OnClick"/>
+                    <MenuItem Name="m_ConfigItem" Header="_Config" Click="M_ConfigItem_OnClick"/>
                 </Menu>
             </StackPanel>
         </Grid>
@@ -74,23 +72,7 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid Column="0" Grid.Row="2" Margin="0,2,0,0">
-            <StackPanel Orientation="Horizontal">
-                <Button Name="bt_SaveTour" Content="Save Tour" Click="Bt_SaveTour_OnClick" Width="195"/>
-                <Button x:Name="bt_SaveProgress" Content="Save Progress" Click="Bt_SaveProgress_OnClick" Width="185"/>
-            </StackPanel>
-        </Grid>
-        <Grid Column="0" Grid.Row="3" Margin="0,1,0,0">
-            <Button Name="bt_RefreshTable" Content="Refresh Table" Click="Bt_RefreshTable_OnClick" Margin="98,0,104,0"></Button>
-        </Grid>
-        <Grid Column="0" Grid.Row="3" Margin="0,39,0,-9" Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,103">
-                <Button Name="bt_SingleTour" Content="Show Single Tour" Click="Bt_SingleTour_OnClick" Width="193"></Button>
-                <Label Name="lb_TourId" Content="Tour-ID" Height="71" />
-                <TextBox Name="tb_TourId" Text="0" Width="117"></TextBox>
-            </StackPanel>
-        </Grid>
-        <DataGrid Name="dg_Tours" Grid.Row="0" Grid.Column="1" Margin="0,17,0,0" Grid.RowSpan="5" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
+        <DataGrid Name="dg_Tours" Grid.Row="0" Grid.Column="1" Margin="0,17,0,0" Grid.RowSpan="3" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Tour-ID" Binding="{Binding (models:TourModel.TourID)}" Width="*"/>
                 <DataGridTextColumn Header="Driver" Binding="{Binding (models:TruckModel.Driver)}" Width="*" />
@@ -105,5 +87,13 @@
                 <DataGridTextColumn Header="Fuel Used" Binding="{Binding FuelUsed}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Grid.Column="0" Grid.Row="2" Margin="0,1,0,-9">
+            <Button x:Name="bt_SingleTour" Content="Show Single Tour" Click="Bt_SingleTour_OnClick" Margin="16,140,171,36"/>
+            <Label x:Name="lb_TourId" Content="Tour-ID" Margin="251,144,89,36" />
+            <TextBox x:Name="tb_TourId" Text="0" Margin="338,147,20,41"/>
+            <Button x:Name="bt_SaveProgress" Content="Save Progress" Click="Bt_SaveProgress_OnClick" Margin="16,53,171,123"/>
+            <Button x:Name="bt_SaveTour" Content="Save Tour" Click="Bt_SaveTour_OnClick" Margin="16,10,171,166"/>
+            <Button x:Name="bt_AddRefuel" Content="Add Refuel" Click="Bt_AddRefuel_OnClick" Margin="16,96,171,80"/>
+        </Grid>
     </Grid>
 </Window>
