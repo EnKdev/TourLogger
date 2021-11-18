@@ -21,7 +21,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" }
+                    { "version", "7.0.0-beta2" }
                 });
 
             jsonArray = Encoding.UTF8.GetString(res);
@@ -58,7 +58,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" },
+                    { "version", "7.0.0-beta2" },
                 });
 
             jsonArray = Encoding.UTF8.GetString(res);
@@ -87,7 +87,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" },
+                    { "version", "7.0.0-beta2" },
                     { "tId", tourId.ToString() }
                 });
 
@@ -103,7 +103,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" },
+                    { "version", "7.0.0-beta2" },
                     { "rId", refuelId.ToString() }
                 });
 
@@ -120,7 +120,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" },
+                    { "version", "7.0.0-beta2" },
                 });
 
             tours = int.Parse(Encoding.UTF8.GetString(res));
@@ -135,7 +135,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" }
+                    { "version", "7.0.0-beta2" }
                 });
 
             refuels = int.Parse(Encoding.UTF8.GetString(res));
@@ -145,12 +145,12 @@ namespace TourLogger.Utils
         public void SendTourToServer(string driver, string truck, string from, string to, string freight,
             int tourDistance, int drivenDist, int jobIncome, int odo, int fuel)
         {
-            HttpPostHelper.HttpPost(
+            var debug = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/experimental/newTour.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" },
+                    { "appVersion", "7.0.0-beta2" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -172,7 +172,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta1" },
+                    { "version", "7.0.0-beta2" },
                     { "driver", driver },
                     { "country", country },
                     { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
