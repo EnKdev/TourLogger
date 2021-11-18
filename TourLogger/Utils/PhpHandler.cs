@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Net;
+using System.Globalization;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using TourLogger.Models;
@@ -10,17 +10,18 @@ namespace TourLogger.Utils
 {
     public class PhpHandler
     {
-        public void FetchDatabaseEntries()
+        public void FetchTourDatabaseEntries()
         {
             var jsonArray = "";
             var tours = new List<TourModel>();
             var dw = new DataWriter();
 
-            var res = HttpPostHelper.HttpPost("https://enkdev.xyz/cdn/php/tourlogger/getTours.php",
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/getTours.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "6.3.0" }
+                    { "version", "7.0.0-beta1" }
                 });
 
             jsonArray = Encoding.UTF8.GetString(res);
@@ -43,16 +44,50 @@ namespace TourLogger.Utils
                 tours.Add(new TourModel(id, d, t, f, tt, ff, td, tdd, ji, tdt, fff));
             }
 
-            dw.WriteCachedData(tours);
+            dw.WriteCachedTourData(tours);
+        }
+
+        public void FetchRefuelDatabaseEntries()
+        {
+            var jsonArray = "";
+            var refuels = new List<RefuelModel>();
+            var dw = new DataWriter();
+
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/getRefuels.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta1" },
+                });
+
+            jsonArray = Encoding.UTF8.GetString(res);
+            var json = JArray.Parse(jsonArray);
+
+            for (var i = 0; i < GetTotalNumberOfRefuels(); i++)
+            {
+                var id = Convert.ToInt32(json[i]["refuelId"]);
+                var d = (string)json[i]["refuelDriver"];
+                var c = (string)json[i]["refuelCountry"];
+                var rpl = Convert.ToDouble(json[i]["refuelPrice"]);
+                var ro = Convert.ToInt32(json[i]["refuelOdo"]);
+                var ra = Convert.ToInt32(json[i]["refuelAmount"]);
+                var rtp = Convert.ToInt32(json[i]["refuelTotalPrice"]);
+
+                refuels.Add(new RefuelModel(id, d, c, rpl, ro, ra, rtp));
+            }
+
+            dw.WriteCachedRefuelData(refuels);
         }
 
         public string FetchTour(int tourId)
         {
-            var res = HttpPostHelper.HttpPost("https://enkdev.xyz/cdn/php/tourlogger/getTour.php",
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/getTour.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "6.3.0" },
+                    { "version", "7.0.0-beta1" },
                     { "tId", tourId.ToString() }
                 });
 
@@ -61,28 +96,61 @@ namespace TourLogger.Utils
             return tour;
         }
 
-        private int GetTotalNumberOfTours()
+        public string FetchRefuel(int refuelId)
         {
-            var tours = 0;
-            var res = HttpPostHelper.HttpPost("https://enkdev.xyz/cdn/php/tourlogger/getTourCount.php",
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/getRefuel.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "6.3.0" },
+                    { "version", "7.0.0-beta1" },
+                    { "rId", refuelId.ToString() }
                 });
 
-            tours = Convert.ToInt32(Encoding.UTF8.GetString(res));
+            var refuel = Encoding.UTF8.GetString(res);
+
+            return refuel;
+        }
+
+        private int GetTotalNumberOfTours()
+        {
+            var tours = 0;
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/getTourCount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta1" },
+                });
+
+            tours = int.Parse(Encoding.UTF8.GetString(res));
             return tours;
+        }
+
+        private int GetTotalNumberOfRefuels()
+        {
+            var refuels = 0;
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/getRefuelCount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta1" }
+                });
+
+            refuels = int.Parse(Encoding.UTF8.GetString(res));
+            return refuels;
         }
 
         public void SendTourToServer(string driver, string truck, string from, string to, string freight,
             int tourDistance, int drivenDist, int jobIncome, int odo, int fuel)
         {
-            HttpPostHelper.HttpPost("https://enkdev.xyz/cdn/php/tourlogger/newTour.php",
+            HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/newTour.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "6.3.0" },
+                    { "version", "7.0.0-beta1" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -93,6 +161,24 @@ namespace TourLogger.Utils
                     { "jobIncome", jobIncome.ToString() },
                     { "distanceTotal", odo.ToString() },
                     { "fuelUsed", fuel.ToString() }
+                });
+        }
+
+        public void SendRefuelToServer(string driver, string country, double literPrice, int odo, int amount,
+            int totalPrice)
+        {
+            HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/newRefuel.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta1" },
+                    { "driver", driver },
+                    { "country", country },
+                    { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
+                    { "odo", odo.ToString() },
+                    { "amount", amount.ToString() },
+                    { "totalPrice", totalPrice.ToString() }
                 });
         }
     }

@@ -7,15 +7,28 @@ namespace TourLogger.Utils
 {
     public class DataWriter
     {
-        public void WriteCachedData(List<TourModel> tours)
+        public void WriteCachedTourData(List<TourModel> tours)
         {
-            var cm = new CacheModel
+            var ctm = new CacheTourModel
             {
                 CachedTours = tours.ToArray()
             };
 
-            using StreamWriter sw = File.CreateText($"./Userdata/cache.dat");
-            var fileText = JsonConvert.SerializeObject(cm, Formatting.Indented);
+            using StreamWriter sw = File.CreateText($"./Userdata/tourCache.dat");
+            var fileText = JsonConvert.SerializeObject(ctm, Formatting.Indented);
+            sw.Write(fileText);
+            sw.Dispose();
+        }
+
+        public void WriteCachedRefuelData(List<RefuelModel> refuels)
+        {
+            var crm = new RefuelCacheModel
+            {
+                CachedRefuels = refuels.ToArray()
+            };
+
+            using StreamWriter sw = File.CreateText($"./Userdata/refuelCache.dat");
+            var fileText = JsonConvert.SerializeObject(crm, Formatting.Indented);
             sw.Write(fileText);
             sw.Dispose();
         }
