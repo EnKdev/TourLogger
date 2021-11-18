@@ -2,7 +2,7 @@
 
 namespace TourLogger.Models
 {
-    public class CacheModel
+    public class CacheTourModel
     {
         [JsonProperty("cachedTours")]
         public TourModel[] CachedTours { get; set; }

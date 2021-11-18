@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:TourLogger.Windows"
         xmlns:models="clr-namespace:TourLogger.Models"
         mc:Ignorable="d"
-        Title="" Height="600" Width="1623" ResizeMode="NoResize" Icon="/Icons/truck.ico" FontFamily="Bahnschrift" FontSize="18">
+        Title="" Height="764" Width="1925" ResizeMode="NoResize" Icon="/Icons/truck.ico" FontFamily="Bahnschrift" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="27*"/>
-            <RowDefinition Height="350*"/>
-            <RowDefinition Height="207*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="351*"/>
+            <RowDefinition Height="214*"/>
+            <RowDefinition Height="88*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="422*"/>
@@ -29,7 +31,7 @@
                 </Menu>
             </StackPanel>
         </Grid>
-        <Grid Name="g_Content" Column="0" Margin="0,17,0,0" Row="1">
+        <Grid Name="g_Content" Column="0" Margin="0,17,0,0" Row="1" Grid.RowSpan="2">
             <StackPanel Orientation="Vertical">
                 <Label Name="lb_Driver" Content="" ContentStringFormat="Driver: {0}" />
                 <Label Name="lb_Truck" Content="" ContentStringFormat="Truck: {0}" />
@@ -72,28 +74,44 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <DataGrid Name="dg_Tours" Grid.Row="0" Grid.Column="1" Margin="0,17,0,0" Grid.RowSpan="3" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
+        <DataGrid Name="dg_TourData" Grid.Row="0" Grid.Column="1" Margin="0,17,10,61" Grid.RowSpan="3" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Tour-ID" Binding="{Binding (models:TourModel.TourID)}" Width="*"/>
-                <DataGridTextColumn Header="Driver" Binding="{Binding (models:TruckModel.Driver)}" Width="*" />
-                <DataGridTextColumn Header="Truck" Binding="{Binding TruckUsed}" Width="*" />
-                <DataGridTextColumn Header="From" Binding="{Binding From}" Width="*" />
-                <DataGridTextColumn Header="To" Binding="{Binding To}" Width="*" />
-                <DataGridTextColumn Header="Freight" Binding="{Binding Freight}" Width="*"/>
-                <DataGridTextColumn Header="Tour-Distance" Binding="{Binding (models:TourModel.TourDistance)}" Width="*" />
-                <DataGridTextColumn Header="Distance Driven" Binding="{Binding DrivenDistance}" Width="*" />
-                <DataGridTextColumn Header="Job Income" Binding="{Binding JobIncome}" Width="*" />
-                <DataGridTextColumn Header="ODO" Binding="{Binding Odo}" Width="*" />
-                <DataGridTextColumn Header="Fuel Used" Binding="{Binding FuelUsed}" Width="*" />
+                <DataGridTextColumn Header="Tour-ID" Binding="{Binding (models:TourModel.TourID)}" Width="*" />
+                <DataGridTextColumn Header="Driver" Binding="{Binding (models:TruckModel.Driver)}" Width="*"/>
+                <DataGridTextColumn Header="Truck" Binding="{Binding (models:TourModel.TruckUsed)}" Width="*"/>
+                <DataGridTextColumn Header="From" Binding="{Binding (models:TourModel.From)}" Width="*"/>
+                <DataGridTextColumn Header="To" Binding="{Binding (models:TourModel.To)}" Width="*"/>
+                <DataGridTextColumn Header="Freight" Binding="{Binding (models:TourModel.Freight)}" Width="*"/>
+                <DataGridTextColumn Header="Tour-Distance" Binding="{Binding (models:TourModel.TourDistance)}" Width="*"/>
+                <DataGridTextColumn Header="Distance Driven" Binding="{Binding (models:TourModel.DrivenDistance)}" Width="*"/>
+                <DataGridTextColumn Header="Job Income" Binding="{Binding (models:TourModel.JobIncome)}" Width="*"/>
+                <DataGridTextColumn Header="ODO" Binding="{Binding (models:TourModel.Odo)}" Width="*"/>
+                <DataGridTextColumn Header="Fuel Used" Binding="{Binding (models:TourModel.FuelUsed)}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Column="0" Grid.Row="2" Margin="0,1,0,-9">
-            <Button x:Name="bt_SingleTour" Content="Show Single Tour" Click="Bt_SingleTour_OnClick" Margin="16,140,171,36"/>
-            <Label x:Name="lb_TourId" Content="Tour-ID" Margin="251,144,89,36" />
-            <TextBox x:Name="tb_TourId" Text="0" Margin="338,147,20,41"/>
-            <Button x:Name="bt_SaveProgress" Content="Save Progress" Click="Bt_SaveProgress_OnClick" Margin="16,53,171,123"/>
-            <Button x:Name="bt_SaveTour" Content="Save Tour" Click="Bt_SaveTour_OnClick" Margin="16,10,171,166"/>
-            <Button x:Name="bt_AddRefuel" Content="Add Refuel" Click="Bt_AddRefuel_OnClick" Margin="16,96,171,80"/>
+        <DataGrid Name="dg_RefuelData" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding DataSource}" AutoGenerateColumns="False" Margin="0,308,10,10" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Refuel-ID" Binding="{Binding (models:RefuelModel.RefuelId)}" Width="*"/>
+                <DataGridTextColumn Header="Driver" Binding="{Binding (models:RefuelModel.RefuelDriver)}" Width="*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding (models:RefuelModel.RefuelCountry)}" Width="*"/>
+                <DataGridTextColumn Header="Price per Liter" Binding="{Binding (models:RefuelModel.RefuelLiterPrice)}" Width="*"/>
+                <DataGridTextColumn Header="ODO" Binding="{Binding (models:RefuelModel.RefuelOdo)}" Width="*"/>
+                <DataGridTextColumn Header="Amount refueled" Binding="{Binding (models:RefuelModel.RefuelAmount)}" Width="*"/>
+                <DataGridTextColumn Header="Total price" Binding="{Binding (models:RefuelModel.RefuelTotalPrice)}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="0" Grid.Row="3" Margin="0,0,1424,-9" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button x:Name="bt_ShowSingleTour" Content="Show Single Tour" Click="Bt_ShowSingleTour_OnClick" Margin="16,182,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+            <Label x:Name="lb_TourId" Content="Tour-ID" Margin="256,180,105,0" Height="33" VerticalAlignment="Top" />
+            <TextBox x:Name="tb_TourId" Text="0" Margin="401,181,15,0" Height="30" VerticalAlignment="Top"/>
+            <Button x:Name="bt_SaveProgress" Content="Save Progress" Click="Bt_SaveProgress_OnClick" Margin="16,45,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+            <Button x:Name="bt_SaveTour" Content="Save Tour" Click="Bt_SaveTour_OnClick" Margin="16,10,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+            <Button x:Name="bt_AddRefuel" Content="Add Refuel" Click="Bt_AddRefuel_OnClick" Margin="16,79,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+            <Button x:Name="bt_RefreshTourTable" Content="Refresh Tour Table" Click="Bt_RefreshTourTable_OnClick" Margin="16,114,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+            <Button x:Name="bt_ShowSingleRefuel" Content="Show Single Refuel" Click="Bt_ShowSingleRefuel_OnClick" Margin="16,215,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
+            <Label x:Name="lb_RefuelId" Content="Refuel-ID" Margin="256,212,105,0" Height="34" VerticalAlignment="Top" />
+            <TextBox x:Name="tb_RefuelId" Text="0" Margin="401,214,15,0" Height="30" VerticalAlignment="Top"/>
+            <Button x:Name="bt_RefreshRefuelTable" Content="Refresh Refuel Table" Click="Bt_RefreshRefuelTable_OnClick" Margin="16,148,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="234"/>
         </Grid>
     </Grid>
 </Window>

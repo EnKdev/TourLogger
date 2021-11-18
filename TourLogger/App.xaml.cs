@@ -37,6 +37,13 @@ namespace TourLogger
             {
                 _dw.WriteDefaultConfigFile();
             }
+
+            // Cache Migration
+            if (File.Exists($"./Userdata/cache.dat"))
+            {
+                File.Copy($"./Userdata/cache.dat", $"./Userdata/tourCache.dat");
+                File.Delete($"./Userdata/cache.dat");
+            }
             
             AutoUpdater.DownloadPath = updatePath;
 

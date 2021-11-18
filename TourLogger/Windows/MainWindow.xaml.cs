@@ -2,7 +2,8 @@
 using System.IO;
 using System.Threading;
 using System.Windows;
-
+using System.Windows.Controls;
+using System.Windows.Data;
 using Newtonsoft.Json;
 using TourLogger.Models;
 using TourLogger.Utils;
@@ -44,13 +45,22 @@ namespace TourLogger.Windows
                 lb_Truck.Content = "Truck not found!";
             }
 
-            if (File.Exists($"./Userdata/cache.dat"))
+            if (File.Exists($"./Userdata/tourCache.dat"))
             {
                 LoadTourData();
             }
             else
             { 
                 RefreshTourTable();
+            }
+
+            if (File.Exists($"./Userdata/refuelCache.dat"))
+            {
+                LoadRefuelData();
+            }
+            else
+            {
+                RefreshRefuelTable();
             }
 
             if (File.Exists($"./Userdata/progress.dat"))
@@ -113,13 +123,13 @@ namespace TourLogger.Windows
             }
         }
 
-        private void Bt_RefreshTable_OnClick(object sender, RoutedEventArgs e)
+        private void Bt_RefreshTourTable_OnClick(object sender, RoutedEventArgs e)
         {
             RefreshTourTable();
             MessageBox.Show("Tour-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
         }
 
-        private void Bt_SingleTour_OnClick(object sender, RoutedEventArgs e)
+        private void Bt_ShowSingleTour_OnClick(object sender, RoutedEventArgs e)
         {
             var stw = new SingleTourWindow();
             var tour = _ph.FetchTour(Convert.ToInt32(tb_TourId.Text));
@@ -167,14 +177,26 @@ namespace TourLogger.Windows
 
         private void LoadTourData()
         {
-            var tours = JsonConvert.DeserializeObject<CacheModel>(File.ReadAllText($"./Userdata/cache.dat"));
+            var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
 
             if (tours == null)
             {
                 return;
             }
 
-            dg_Tours.ItemsSource = tours.CachedTours;
+            dg_TourData.ItemsSource = tours.CachedTours;
+        }
+
+        private void LoadRefuelData()
+        {
+            var refuels = JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
+
+            if (refuels == null)
+            {
+                return;
+            }
+
+            dg_RefuelData.ItemsSource = refuels.CachedRefuels;
         }
 
         private void ClearTextboxes()
@@ -191,17 +213,33 @@ namespace TourLogger.Windows
 
         private void RefreshTourTable()
         {
-            _ph.FetchDatabaseEntries();
+            _ph.FetchTourDatabaseEntries();
 
-            var tours = JsonConvert.DeserializeObject<CacheModel>(File.ReadAllText($"./Userdata/cache.dat"));
+            var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
 
             if (tours == null)
             {
                 return;
             }
 
-            dg_Tours.ItemsSource = tours.CachedTours;
+            dg_TourData.ItemsSource = tours.CachedTours;
         }
+
+        public void RefreshRefuelTable()
+        {
+            _ph.FetchRefuelDatabaseEntries();
+
+            var refuels = JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
+
+            if (refuels == null)
+            {
+                return;
+            }
+
+            dg_RefuelData.ItemsSource = refuels.CachedRefuels;
+        }
+
+        // ----
 
         private void M_ConfigItem_OnClick(object sender, RoutedEventArgs e)
         {
@@ -213,6 +251,25 @@ namespace TourLogger.Windows
         {
             var rw = new RefuelWindow();
             rw.Show();
+        }
+
+        // ----
+
+        private void Bt_RefreshRefuelTable_OnClick(object sender, RoutedEventArgs e)
+        {
+            RefreshRefuelTable();
+            MessageBox.Show("Refuel-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
+        }
+
+        private void Bt_ShowSingleRefuel_OnClick(object sender, RoutedEventArgs e)
+        {
+            var srw = new SingleRefuelWindow();
+            var tour = _ph.FetchRefuel(Convert.ToInt32(tb_RefuelId.Text));
+            char[] sep = { '|' };
+            string[] tString = tour.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            srw.CarryValuesOverToWindow(tString);
+            Thread.Sleep(500);
+            srw.Show();
         }
     }
 }

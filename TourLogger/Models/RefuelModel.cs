@@ -4,9 +4,10 @@ namespace TourLogger.Models
 {
     public class RefuelModel
     {
-        public RefuelModel(int id, string country, double literPrice, int odo, int amount, int totalPrice)
+        public RefuelModel(int id, string driver, string country, double literPrice, int odo, int amount, int totalPrice)
         {
             RefuelId = id;
+            RefuelDriver = driver;
             RefuelCountry = country;
             RefuelLiterPrice = literPrice;
             RefuelOdo = odo;
@@ -15,6 +16,8 @@ namespace TourLogger.Models
         }
         
         public int RefuelId { get; set; }
+
+        public string RefuelDriver { get; set; }
         
         public string RefuelCountry { get; set; }
         

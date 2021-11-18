@@ -5,31 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourLogger.Windows"
         mc:Ignorable="d"
-        Title="TourLogger - New Refuel" Height="272" Width="318" FontFamily="Bahnschrift" ResizeMode="NoResize" FontSize="18">
+        Title="TourLogger - New Refuel" Height="272" Width="466" FontFamily="Bahnschrift" ResizeMode="NoResize" FontSize="18">
     <Grid Margin="0, 10, 0, 0">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <Label Name="lb_RCountry" Content="Country:" />
-                <TextBox Name="tb_RCountry" Width="70" Margin="99, 0, 0, 0"/>
+                <TextBox Name="tb_RCountry" Width="130" Margin="99, 0, 0, 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Name="lb_RPrice" Content="Price per liter:" />
-                <TextBox Name="tb_RPrice" Width="70" Margin="51, 0, 0, 0"/>
-                <Label Name="lb_Sign1" Content="€/$"></Label>
+                <TextBox Name="tb_RPrice" Width="130" Margin="51, 0, 0, 0"/>
+                <Label x:Name="lb_Sign1" Content="€/$"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Name="lb_ROdo" Content="ODO:" />
-                <TextBox Name="tb_ROdo" Width="70" Margin="127, 0, 0, 0"/>
+                <TextBox Name="tb_ROdo" Width="130" Margin="127, 0, 0, 0"/>
                 <Label Name="lb_Sign2" Content="km"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Name="lb_RAmount" Content="Refueled amount:" />
-                <TextBox Name="tb_RAmount" Width="70" Margin="25, 0, 0, 0"/>
-                <Label Name="lb_Sign3" Content="€/$" />
+                <TextBox Name="tb_RAmount" Width="130" Margin="25, 0, 0, 0"/>
+                <Label Name="lb_Sign3" Content="l" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Name="lb_RPriceTotal" Content="Total price:" />
-                <TextBox Name="tb_RPriceTotal" Width="70" Margin="78, 0, 0, 0"/>
+                <TextBox Name="tb_RPriceTotal" Width="130" Margin="78, 0, 0, 0"/>
                 <Label Name="lb_Sign4" Content="€/$" />
             </StackPanel>
             <Button Name="Bt_Save" Content="Save Refuel" Click="Bt_Save_OnClick" Width="105" Margin="0, 30, 0, 0"/>
