@@ -35,7 +35,7 @@ namespace TourLogger.Utils
             }
             else
             {
-                jsonArray = Encoding.UTF8.GetString(res);
+                jsonArray = resString;
             }
             
             var json = JArray.Parse(jsonArray);
@@ -85,7 +85,7 @@ namespace TourLogger.Utils
             }
             else
             {
-                jsonArray = Encoding.UTF8.GetString(res);
+                jsonArray = resString;
             }
             
             var json = JArray.Parse(jsonArray);
