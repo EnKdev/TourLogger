@@ -33,7 +33,7 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 7.0.0-beta1 | {appVer}";
+            Title = $"TourLogger 7.0.0-beta3 | {appVer}";
 
             if (File.Exists($"./Userdata/truck.dat"))
             {
@@ -72,27 +72,35 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 6.3.0 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 7.0.0-beta3 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
         private void Bt_SaveTour_OnClick(object sender, RoutedEventArgs e)
         {
-            _ph.SendTourToServer(lb_Driver.Content.ToString(), lb_Truck.Content.ToString(), tb_TFrom.Text,
-                tb_TTo.Text, tb_TFreight.Text, Convert.ToInt32(tb_TDistance.Text),
-                Convert.ToInt32(tb_TDriven.Text), Convert.ToInt32(tb_TIncome.Text), Convert.ToInt32(tb_TOdo.Text),
-                Convert.ToInt32(tb_TFuelUsed.Text));
-
-            if (File.Exists($"./Userdata/progress.dat"))
+            try
             {
-                File.Delete($"./Userdata/progress.dat");
+                _ph.SendTourToServer(lb_Driver.Content.ToString(), lb_Truck.Content.ToString(), tb_TFrom.Text,
+                    tb_TTo.Text, tb_TFreight.Text, Convert.ToInt32(tb_TDistance.Text),
+                    Convert.ToInt32(tb_TDriven.Text), Convert.ToInt32(tb_TIncome.Text), Convert.ToInt32(tb_TOdo.Text),
+                    Convert.ToInt32(tb_TFuelUsed.Text));
+
+                if (File.Exists($"./Userdata/progress.dat"))
+                {
+                    File.Delete($"./Userdata/progress.dat");
+                }
+
+                MessageBox.Show("Tour saved!", "Success!", MessageBoxButton.OK);
+
+                ClearTextboxes();
+                Thread.Sleep(500);
+                RefreshTourTable();
             }
-
-            MessageBox.Show("Tour saved!", "Success!", MessageBoxButton.OK);
-
-            ClearTextboxes();
-            Thread.Sleep(500);
-            RefreshTourTable();
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                                $"{tex.ToString()}", "Error saving tour.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Bt_SaveProgress_OnClick(object sender, RoutedEventArgs e)
@@ -213,30 +221,47 @@ namespace TourLogger.Windows
 
         private void RefreshTourTable()
         {
-            _ph.FetchTourDatabaseEntries();
-
-            var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
-
-            if (tours == null)
+            try
             {
-                return;
-            }
+                _ph.FetchTourDatabaseEntries();
 
-            dg_TourData.ItemsSource = tours.CachedTours;
+                var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
+
+                if (tours == null)
+                {
+                    return;
+                }
+
+                dg_TourData.ItemsSource = tours.CachedTours;
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                               $"{tex.ToString()}", "Error refreshing tours.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void RefreshRefuelTable()
         {
-            _ph.FetchRefuelDatabaseEntries();
-
-            var refuels = JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
-
-            if (refuels == null)
+            try
             {
-                return;
-            }
+                _ph.FetchRefuelDatabaseEntries();
 
-            dg_RefuelData.ItemsSource = refuels.CachedRefuels;
+                var refuels =
+                    JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
+
+                if (refuels == null)
+                {
+                    return;
+                }
+
+                dg_RefuelData.ItemsSource = refuels.CachedRefuels;
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                               $"{tex.ToString()}", "Error refreshing refuels.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // ----

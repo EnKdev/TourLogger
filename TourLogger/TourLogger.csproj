@@ -4,12 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Version>7.0.0-beta2</Version>
+    <Version>7.0.0-beta3</Version>
     <Authors>EnKdev</Authors>
     <ApplicationIcon>Icons\truck.ico</ApplicationIcon>
     <StartupObject></StartupObject>
-    <AssemblyVersion>7.0.0.1</AssemblyVersion>
-    <FileVersion>7.0.0.1</FileVersion>
+    <AssemblyVersion>7.0.0.2</AssemblyVersion>
+    <FileVersion>7.0.0.2</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

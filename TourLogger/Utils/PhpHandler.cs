@@ -21,10 +21,23 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" }
+                    { "version", "7.0.0-beta3" }
                 });
+            var resString = Encoding.UTF8.GetString(res);
 
-            jsonArray = Encoding.UTF8.GetString(res);
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot fetch entries. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot fetch entries. Seems like you're using an outdated app.");
+            }
+            else
+            {
+                jsonArray = Encoding.UTF8.GetString(res);
+            }
+            
             var json = JArray.Parse(jsonArray);
 
             for (var i = 0; i < GetTotalNumberOfTours(); i++)
@@ -58,10 +71,23 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" },
+                    { "version", "7.0.0-beta3" },
                 });
+            var resString = Encoding.UTF8.GetString(res);
 
-            jsonArray = Encoding.UTF8.GetString(res);
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot fetch entries. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot fetch entries. Seems like you're using an outdated app.");
+            }
+            else
+            {
+                jsonArray = Encoding.UTF8.GetString(res);
+            }
+            
             var json = JArray.Parse(jsonArray);
 
             for (var i = 0; i < GetTotalNumberOfRefuels(); i++)
@@ -87,13 +113,24 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" },
+                    { "version", "7.0.0-beta3" },
                     { "tId", tourId.ToString() }
                 });
+            var resString = Encoding.UTF8.GetString(res);
 
-            var tour = Encoding.UTF8.GetString(res);
-
-            return tour;
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot fetch tour. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot fetch tour. Seems like you're using an outdated app.");
+            }
+            else
+            {
+                var tour = Encoding.UTF8.GetString(res);
+                return tour;
+            }
         }
 
         public string FetchRefuel(int refuelId)
@@ -103,13 +140,24 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" },
+                    { "version", "7.0.0-beta3" },
                     { "rId", refuelId.ToString() }
                 });
+            var resString = Encoding.UTF8.GetString(res);
 
-            var refuel = Encoding.UTF8.GetString(res);
-
-            return refuel;
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot fetch refuel. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot fetch refuel. Seems like you're using an outdated app.");
+            }
+            else
+            {
+                var refuel = Encoding.UTF8.GetString(res);
+                return refuel;
+            }
         }
 
         private int GetTotalNumberOfTours()
@@ -120,11 +168,25 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" },
+                    { "version", "7.0.0-beta3" },
                 });
+            var resString = Encoding.UTF8.GetString(res);
 
-            tours = int.Parse(Encoding.UTF8.GetString(res));
-            return tours;
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot fetch tour-count. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot fetch tour-count. Seems like you're using an outdated app.");
+            }
+            else
+            {
+                tours = int.Parse(Encoding.UTF8.GetString(res));
+                return tours;
+            }
+
+            
         }
 
         private int GetTotalNumberOfRefuels()
@@ -135,22 +197,35 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" }
+                    { "version", "7.0.0-beta3" }
                 });
+            var resString = Encoding.UTF8.GetString(res);
 
-            refuels = int.Parse(Encoding.UTF8.GetString(res));
-            return refuels;
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot fetch refuel-count. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot fetch refuel-count. Seems like you're using an outdated app.");
+            }
+            else
+            {
+                refuels = int.Parse(Encoding.UTF8.GetString(res));
+                return refuels;
+            }
+            
         }
 
         public void SendTourToServer(string driver, string truck, string from, string to, string freight,
             int tourDistance, int drivenDist, int jobIncome, int odo, int fuel)
         {
-            var debug = HttpPostHelper.HttpPost(
+            var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/experimental/newTour.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "appVersion", "7.0.0-beta2" },
+                    { "appVersion", "7.0.0-beta3" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -162,17 +237,27 @@ namespace TourLogger.Utils
                     { "distanceTotal", odo.ToString() },
                     { "fuelUsed", fuel.ToString() }
                 });
+            var resString = Encoding.UTF8.GetString(res);
+
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot send tour to server. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot send tour to server.. Seems like you're using an outdated app.");
+            }
         }
 
         public void SendRefuelToServer(string driver, string country, double literPrice, int odo, int amount,
             int totalPrice)
         {
-            HttpPostHelper.HttpPost(
+            var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/newRefuel.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta2" },
+                    { "version", "7.0.0-beta3" },
                     { "driver", driver },
                     { "country", country },
                     { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
@@ -180,6 +265,16 @@ namespace TourLogger.Utils
                     { "amount", amount.ToString() },
                     { "totalPrice", totalPrice.ToString() }
                 });
+            var resString = Encoding.UTF8.GetString(res);
+
+            if (resString == "Access denied")
+            {
+                throw new TourLoggerException("Cannot send refuel to server. Secret was wrong.");
+            }
+            else if (resString == "Outdated/Unsupported Version!")
+            {
+                throw new TourLoggerException("Cannot send refuel to server.. Seems like you're using an outdated app.");
+            }
         }
     }
 }

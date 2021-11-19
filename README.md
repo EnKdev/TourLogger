@@ -4,7 +4,7 @@
 6.3.0
 
 ## Current experimental version:
-7.0.0-beta1
+7.0.0-beta3
 
 ## Next minor version:
 None planned
@@ -74,3 +74,12 @@ Beta-Build 7.0.0-beta1
 -	Lots and lots of Code Tweaks and shit.
 -	Cache file is now split into two:
 -		tourCache.dat and refuelCache.dat
+
+Beta-Build 7.0.0-beta2
+
+-	Various code fixes
+
+Beta-Build 7.0.0-beta3
+
+-	Code reinforcements
+-	App now throws you an error if something went wrong on the backend side.
