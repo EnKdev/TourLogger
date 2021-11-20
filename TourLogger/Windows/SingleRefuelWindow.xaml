@@ -14,6 +14,6 @@
         <Label Name="lb_Odo" Content="" ContentStringFormat="Odo: {0}" HorizontalAlignment="Left" Margin="10, 138, 0, 0" VerticalAlignment="Top" />
         <Label Name="lb_LiterAmount" Content="" ContentStringFormat="Refueled liters: {0}" HorizontalAlignment="Left" Margin="10, 170, 0, 0" VerticalAlignment="Top" />
         <Label Name="lb_TotalPrice" Content="" ContentStringFormat="Total price: {0}" HorizontalAlignment="Left" Margin="10, 202, 0, 0" VerticalAlignment="Top" />
-        <Button Name="bt_Ok" Content="OK" HorizontalAlignment="Center" Margin="0,234,0,24" Click="Bt_Ok_OnClick"></Button>
+        <Button Name="bt_Ok" Content="OK" HorizontalAlignment="Center" Margin="0,234,0,0" Click="Bt_Ok_OnClick" Height="30" VerticalAlignment="Top" Width="60" />
     </Grid>
 </Window>

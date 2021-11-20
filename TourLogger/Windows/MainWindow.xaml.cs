@@ -99,7 +99,7 @@ namespace TourLogger.Windows
             catch (TourLoggerException tex)
             {
                 MessageBox.Show("An exception occured!\n" +
-                                $"{tex.ToString()}", "Error saving tour.", MessageBoxButton.OK, MessageBoxImage.Error);
+                                $"{tex.Message}", "Error saving tour.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -133,20 +133,36 @@ namespace TourLogger.Windows
 
         private void Bt_RefreshTourTable_OnClick(object sender, RoutedEventArgs e)
         {
-            RefreshTourTable();
-            MessageBox.Show("Tour-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
+            try
+            {
+                RefreshTourTable();
+                MessageBox.Show("Tour-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                                $"{tex.Message}", "Error refreshing tour table.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Bt_ShowSingleTour_OnClick(object sender, RoutedEventArgs e)
         {
-            var stw = new SingleTourWindow();
-            var tour = _ph.FetchTour(Convert.ToInt32(tb_TourId.Text));
-            char[] sep = { '|' };
-            tour = tour.Replace(" -> ", "|");
-            string[] tString = tour.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-            stw.CarryValuesOverToWindow(tString);
-            Thread.Sleep(500);
-            stw.Show();
+            try
+            {
+                var stw = new SingleTourWindow();
+                var tour = _ph.FetchTour(Convert.ToInt32(tb_TourId.Text));
+                char[] sep = { '|' };
+                tour = tour.Replace(" -> ", "|");
+                string[] tString = tour.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+                stw.CarryValuesOverToWindow(tString);
+                Thread.Sleep(500);
+                stw.Show();
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                                $"{tex.Message}", "Error fetching single tour.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // ----
@@ -221,47 +237,31 @@ namespace TourLogger.Windows
 
         private void RefreshTourTable()
         {
-            try
+            _ph.FetchTourDatabaseEntries();
+
+            var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
+
+            if (tours == null)
             {
-                _ph.FetchTourDatabaseEntries();
-
-                var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
-
-                if (tours == null)
-                {
-                    return;
-                }
-
-                dg_TourData.ItemsSource = tours.CachedTours;
+                return;
             }
-            catch (TourLoggerException tex)
-            {
-                MessageBox.Show("An exception occured!\n" +
-                               $"{tex.ToString()}", "Error refreshing tours.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+
+            dg_TourData.ItemsSource = tours.CachedTours;
         }
 
         public void RefreshRefuelTable()
         {
-            try
+            _ph.FetchRefuelDatabaseEntries();
+
+            var refuels =
+                JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
+
+            if (refuels == null)
             {
-                _ph.FetchRefuelDatabaseEntries();
-
-                var refuels =
-                    JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
-
-                if (refuels == null)
-                {
-                    return;
-                }
-
-                dg_RefuelData.ItemsSource = refuels.CachedRefuels;
+                return;
             }
-            catch (TourLoggerException tex)
-            {
-                MessageBox.Show("An exception occured!\n" +
-                               $"{tex.ToString()}", "Error refreshing refuels.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+
+            dg_RefuelData.ItemsSource = refuels.CachedRefuels;
         }
 
         // ----
@@ -282,19 +282,35 @@ namespace TourLogger.Windows
 
         private void Bt_RefreshRefuelTable_OnClick(object sender, RoutedEventArgs e)
         {
-            RefreshRefuelTable();
-            MessageBox.Show("Refuel-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
+            try
+            {
+                RefreshRefuelTable();
+                MessageBox.Show("Refuel-Table refreshed!", "Refreshed!", MessageBoxButton.OK);
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                               $"{tex.Message}", "Error refreshing refuels.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Bt_ShowSingleRefuel_OnClick(object sender, RoutedEventArgs e)
         {
-            var srw = new SingleRefuelWindow();
-            var tour = _ph.FetchRefuel(Convert.ToInt32(tb_RefuelId.Text));
-            char[] sep = { '|' };
-            string[] tString = tour.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-            srw.CarryValuesOverToWindow(tString);
-            Thread.Sleep(500);
-            srw.Show();
+            try
+            {
+                var srw = new SingleRefuelWindow();
+                var tour = _ph.FetchRefuel(Convert.ToInt32(tb_RefuelId.Text));
+                char[] sep = { '|' };
+                string[] tString = tour.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+                srw.CarryValuesOverToWindow(tString);
+                Thread.Sleep(500);
+                srw.Show();
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                              $"{tex.Message}", "Error fetching single refuel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
