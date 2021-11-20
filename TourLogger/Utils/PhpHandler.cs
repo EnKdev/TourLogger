@@ -25,19 +25,14 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            jsonArray = resString switch
             {
-                throw new TourLoggerException("Cannot fetch entries. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot fetch entries. Seems like you're using an outdated app.");
-            }
-            else
-            {
-                jsonArray = resString;
-            }
-            
+                "Access denied" => throw new TourLoggerException("Cannot fetch entries. Secret was wrong."),
+                "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                    "Cannot fetch entries. Seems like you're using an outdated app."),
+                _ => resString
+            };
+
             var json = JArray.Parse(jsonArray);
 
             for (var i = 0; i < GetTotalNumberOfTours(); i++)
@@ -75,19 +70,14 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            jsonArray = resString switch
             {
-                throw new TourLoggerException("Cannot fetch entries. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot fetch entries. Seems like you're using an outdated app.");
-            }
-            else
-            {
-                jsonArray = resString;
-            }
-            
+                "Access denied" => throw new TourLoggerException("Cannot fetch entries. Secret was wrong."),
+                "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                    "Cannot fetch entries. Seems like you're using an outdated app."),
+                _ => resString
+            };
+
             var json = JArray.Parse(jsonArray);
 
             for (var i = 0; i < GetTotalNumberOfRefuels(); i++)
@@ -118,18 +108,17 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            switch (resString)
             {
-                throw new TourLoggerException("Cannot fetch tour. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot fetch tour. Seems like you're using an outdated app.");
-            }
-            else
-            {
-                var tour = Encoding.UTF8.GetString(res);
-                return tour;
+                case "Access denied":
+                    throw new TourLoggerException("Cannot fetch tour. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot fetch tour. Seems like you're using an outdated app.");
+                default:
+                {
+                    var tour = Encoding.UTF8.GetString(res);
+                    return tour;
+                }
             }
         }
 
@@ -145,18 +134,17 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            switch (resString)
             {
-                throw new TourLoggerException("Cannot fetch refuel. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot fetch refuel. Seems like you're using an outdated app.");
-            }
-            else
-            {
-                var refuel = Encoding.UTF8.GetString(res);
-                return refuel;
+                case "Access denied":
+                    throw new TourLoggerException("Cannot fetch refuel. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot fetch refuel. Seems like you're using an outdated app.");
+                default:
+                {
+                    var refuel = Encoding.UTF8.GetString(res);
+                    return refuel;
+                }
             }
         }
 
@@ -172,18 +160,15 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            switch (resString)
             {
-                throw new TourLoggerException("Cannot fetch tour-count. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot fetch tour-count. Seems like you're using an outdated app.");
-            }
-            else
-            {
-                tours = int.Parse(Encoding.UTF8.GetString(res));
-                return tours;
+                case "Access denied":
+                    throw new TourLoggerException("Cannot fetch tour-count. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot fetch tour-count. Seems like you're using an outdated app.");
+                default:
+                    tours = int.Parse(Encoding.UTF8.GetString(res));
+                    return tours;
             }
 
             
@@ -201,18 +186,15 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            switch (resString)
             {
-                throw new TourLoggerException("Cannot fetch refuel-count. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot fetch refuel-count. Seems like you're using an outdated app.");
-            }
-            else
-            {
-                refuels = int.Parse(Encoding.UTF8.GetString(res));
-                return refuels;
+                case "Access denied":
+                    throw new TourLoggerException("Cannot fetch refuel-count. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot fetch refuel-count. Seems like you're using an outdated app.");
+                default:
+                    refuels = int.Parse(Encoding.UTF8.GetString(res));
+                    return refuels;
             }
             
         }
@@ -239,13 +221,12 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            switch (resString)
             {
-                throw new TourLoggerException("Cannot send tour to server. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot send tour to server.. Seems like you're using an outdated app.");
+                case "Access denied":
+                    throw new TourLoggerException("Cannot send tour to server. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot send tour to server. Seems like you're using an outdated app.");
             }
         }
 
@@ -267,13 +248,12 @@ namespace TourLogger.Utils
                 });
             var resString = Encoding.UTF8.GetString(res);
 
-            if (resString == "Access denied")
+            switch (resString)
             {
-                throw new TourLoggerException("Cannot send refuel to server. Secret was wrong.");
-            }
-            else if (resString == "Outdated/Unsupported Version!")
-            {
-                throw new TourLoggerException("Cannot send refuel to server.. Seems like you're using an outdated app.");
+                case "Access denied":
+                    throw new TourLoggerException("Cannot send refuel to server. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot send refuel to server. Seems like you're using an outdated app.");
             }
         }
     }

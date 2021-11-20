@@ -36,16 +36,17 @@ namespace TourLogger.Windows
 
         private void Bt_Save_OnClick(object sender, RoutedEventArgs e)
         {
+            var literPrice = tb_RPrice.Text;
+
+            if (literPrice.Contains('.'))
+            {
+                // Floating point conversion, using dots for commas breaks things in the backend with the database.
+                // It'll be stored with a point thanks to an internal database conversion anyways.
+                literPrice = literPrice.Replace('.', ',');
+            }
+
             try
             {
-                var literPrice = tb_RPrice.Text;
-
-                if (literPrice.Contains('.'))
-                {
-                    // Floating point conversion, using dots for commas breaks things in the backend with the database.
-                    // It'll be stored with a point thanks to an internal database conversion anyways.
-                    literPrice = literPrice.Replace('.', ',');
-                }
 
                 _ph.SendRefuelToServer(_refuelDriver, tb_RCountry.Text, double.Parse(literPrice),
                     int.Parse(tb_ROdo.Text), int.Parse(tb_RAmount.Text), int.Parse(tb_RPriceTotal.Text));
@@ -58,7 +59,7 @@ namespace TourLogger.Windows
             catch (TourLoggerException tex)
             {
                 MessageBox.Show("An exception occured!\n" +
-                                $"{tex.ToString()}", "Error saving refuel.", MessageBoxButton.OK, MessageBoxImage.Error);
+                                $"{tex.Message}", "Error saving refuel.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
