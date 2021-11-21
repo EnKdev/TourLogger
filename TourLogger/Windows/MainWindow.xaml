@@ -32,9 +32,13 @@
             </StackPanel>
         </Grid>
         <Grid Name="g_Content" Column="0" Margin="0,17,0,0" Row="1" Grid.RowSpan="2">
-            <StackPanel Orientation="Vertical">
-                <Label Name="lb_Driver" Content="" ContentStringFormat="Driver: {0}" />
-                <Label Name="lb_Truck" Content="" ContentStringFormat="Truck: {0}" />
+            <StackPanel Orientation="Vertical" Height="357" VerticalAlignment="Top" Margin="0,25,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="bt_AccountPage" Content="My Account" Click="Bt_AccountPage_OnClick"/>
+                    <Button Name="bt_OtherAccount" Content="Check other account" Click="Bt_OtherAccount_OnClick" />
+                    <Label Name="lb_AccountName" Content="Account-Name:" />
+                    <TextBox Name="tb_AccountName" Width="100"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Name="lb_From" Content="From:"/>
                     <TextBox Name="tb_TFrom" Width="150" Margin="120, 0, 0, 0" />

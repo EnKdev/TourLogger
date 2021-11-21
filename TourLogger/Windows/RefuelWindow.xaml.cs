@@ -15,22 +15,20 @@ namespace TourLogger.Windows
     /// </summary>
     public partial class RefuelWindow : Window
     {
-        private string _refuelDriver;
         private readonly PhpHandler _ph;
+        private AccountModel _am;
 
         private MainWindow _mw;
 
-        public RefuelWindow()
+        public RefuelWindow(AccountModel account)
         {
             InitializeComponent();
 
             _ph = new PhpHandler();
 
-            var truckInfo = JsonConvert.DeserializeObject<TruckModel>(File.ReadAllText($"./Userdata/truck.dat"));
-
-            if (truckInfo != null)
+            if (account != null)
             {
-                _refuelDriver = truckInfo.Driver;
+                _am = account;
             }
         }
 
@@ -47,18 +45,62 @@ namespace TourLogger.Windows
                     literPrice = literPrice.Replace('.', ',');
                 }
 
-                _ph.SendRefuelToServer(_refuelDriver, tb_RCountry.Text, double.Parse(literPrice),
+                _ph.SendRefuelToServer(_am.AccountName, tb_RCountry.Text, double.Parse(literPrice),
                     int.Parse(tb_ROdo.Text), int.Parse(tb_RAmount.Text), int.Parse(tb_RPriceTotal.Text));
 
                 MessageBox.Show("Refuel saved! Refresh the refuel table in the main window!", "Success!",
                     MessageBoxButton.OK);
                 Thread.Sleep(500);
+                _ph.UpdateAccountRefuels(_am.AccountName);
+                Thread.Sleep(250);
+                ReloadAccount(_am.AccountName);
                 Close();
             }
             catch (TourLoggerException tex)
             {
                 MessageBox.Show("An exception occured!\n" +
                                 $"{tex.ToString()}", "Error saving refuel.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        // ----
+
+        private void ReloadAccount(string accountName)
+        {
+            try
+            {
+                var account = _ph.GetAccount(accountName);
+
+                if (account != null)
+                {
+                    string[] accountDetails = account.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                    var am = new AccountModel
+                    {
+                        AccountId = int.Parse(accountDetails[0]),
+                        AccountName = accountDetails[1],
+                        AccountTruck = accountDetails[2],
+                        TotalTours = accountDetails[3],
+                        TotalKilometers = accountDetails[4],
+                        TotalIncome = accountDetails[5],
+                        TotalRefuels = accountDetails[6],
+                        TotalLiters = accountDetails[7],
+                        TotalFuelPrice = accountDetails[8]
+                    };
+
+                    _am = am;
+
+                    var accountJson = JsonConvert.SerializeObject(am, Formatting.Indented);
+                    using var file = File.CreateText($"./Userdata/account.dat");
+                    file.Write(accountJson);
+                    file.Dispose();
+                }
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                                $"{tex.Message}", "Error reloading account.", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
     }

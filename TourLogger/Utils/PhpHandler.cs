@@ -10,6 +10,8 @@ namespace TourLogger.Utils
 {
     public class PhpHandler
     {
+        #region Fetch database stuff
+
         public void FetchTourDatabaseEntries()
         {
             var jsonArray = "";
@@ -21,7 +23,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" }
+                    { "version", "7.0.0-beta4" }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -71,7 +73,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" },
+                    { "version", "7.0.0-beta4" },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -106,6 +108,10 @@ namespace TourLogger.Utils
             dw.WriteCachedRefuelData(refuels);
         }
 
+        #endregion
+
+        #region Fetch single stuff
+
         public string FetchTour(int tourId)
         {
             var res = HttpPostHelper.HttpPost(
@@ -113,7 +119,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" },
+                    { "version", "7.0.0-beta4" },
                     { "tId", tourId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -140,7 +146,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" },
+                    { "version", "7.0.0-beta4" },
                     { "rId", refuelId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -160,6 +166,9 @@ namespace TourLogger.Utils
             }
         }
 
+        #endregion
+
+        #region Total number of x Stuff
         private int GetTotalNumberOfTours()
         {
             var tours = 0;
@@ -168,7 +177,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" },
+                    { "version", "7.0.0-beta4" },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -197,7 +206,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" }
+                    { "version", "7.0.0-beta4" }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -214,8 +223,11 @@ namespace TourLogger.Utils
                 refuels = int.Parse(Encoding.UTF8.GetString(res));
                 return refuels;
             }
-            
         }
+
+        #endregion
+
+        #region Send stuff to server
 
         public void SendTourToServer(string driver, string truck, string from, string to, string freight,
             int tourDistance, int drivenDist, int jobIncome, int odo, int fuel)
@@ -225,7 +237,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "appVersion", "7.0.0-beta3" },
+                    { "appVersion", "7.0.0-beta4" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -257,7 +269,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta3" },
+                    { "version", "7.0.0-beta4" },
                     { "driver", driver },
                     { "country", country },
                     { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
@@ -276,5 +288,145 @@ namespace TourLogger.Utils
                 throw new TourLoggerException("Cannot send refuel to server.. Seems like you're using an outdated app.");
             }
         }
+
+        #endregion
+
+        #region Accounts
+
+        public void MigrateProfile(string profileName, string profileTruck)
+        {
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/migrateProfile.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta4" },
+                    { "profile", profileName },
+                    { "truck", profileTruck }
+                });
+            var resString = Encoding.UTF8.GetString(res);
+
+            switch (resString)
+            {
+                case "Access denied":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
+            }
+        }
+
+        public void CreateAccount(string accountName, string accountTruck)
+        {
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/newAccount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta4" },
+                    { "profile", accountName },
+                    { "truck", accountTruck }
+                });
+            var resString = Encoding.UTF8.GetString(res);
+
+            switch (resString)
+            {
+                case "Access denied":
+                    throw new TourLoggerException("Cannot create a new account. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot create a new account. Seems like you're using an outdated app.");
+            }
+        }
+
+        public string GetAccount(string accountName)
+        {
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/getAccount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta4" },
+                    { "name", accountName }
+                });
+            var resString = Encoding.UTF8.GetString(res);
+
+            switch (resString)
+            {
+                case "Access denied":
+                    throw new TourLoggerException("Cannot get specified account. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot get specified account. Seems like you're using an outdated app.");
+                default:
+                {
+                    var account = Encoding.UTF8.GetString(res);
+                    return account;
+                }
+            }
+        }
+
+        public void UpdateAccountTours(string accountName)
+        {
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/updateProfileTours.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta4" },
+                    { "profile", accountName }
+                });
+            var resString = Encoding.UTF8.GetString(res);
+
+            switch (resString)
+            {
+                case "Access denied":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
+            }
+        }
+
+        public void UpdateAccountRefuels(string accountName)
+        {
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/updateProfileRefuels.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta4" },
+                    { "profile", accountName }
+                });
+            var resString = Encoding.UTF8.GetString(res);
+
+            switch (resString)
+            {
+                case "Access denied":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
+            }
+        }
+
+        public void UpdateAccountTruck(string accountName, string newTruck)
+        {
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/updateProfileTruck.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", "7.0.0-beta4" },
+                    { "profile", accountName },
+                    { "truck", newTruck }
+                });
+            var resString = Encoding.UTF8.GetString(res);
+
+            switch (resString)
+            {
+                case "Access denied":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
+            }
+        }
+
+        #endregion
     }
 }
