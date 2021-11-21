@@ -17,6 +17,7 @@ namespace TourLogger.Windows
     {
         private readonly PhpHandler _ph;
         private readonly DataWriter _dw;
+        private AccountModel _am;
 
         public MainWindow()
         {
@@ -33,16 +34,19 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 7.0.0-beta3 | {appVer}";
+            Title = $"TourLogger 7.0.0-beta4 | {appVer}";
 
-            if (File.Exists($"./Userdata/truck.dat"))
+            if (File.Exists($"./Userdata/oldProfile.dat"))
+            {
+                LoadAccountDetails();
+            }
+            else if (File.Exists($"./Userdata/account.dat"))
             {
                 LoadGeneralDetails();
             }
             else
             {
-                lb_Driver.Content = "Driver not found!";
-                lb_Truck.Content = "Truck not found!";
+                MessageBox.Show("No previous profile detected. You might want to create a new account first.", "Error", MessageBoxButton.OK);
             }
 
             if (File.Exists($"./Userdata/tourCache.dat"))
@@ -72,7 +76,7 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 7.0.0-beta3 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 7.0.0-beta4 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
@@ -80,7 +84,8 @@ namespace TourLogger.Windows
         {
             try
             {
-                _ph.SendTourToServer(lb_Driver.Content.ToString(), lb_Truck.Content.ToString(), tb_TFrom.Text,
+                ReloadAccount(_am.AccountName);
+                _ph.SendTourToServer(_am.AccountName, _am.AccountTruck, tb_TFrom.Text,
                     tb_TTo.Text, tb_TFreight.Text, Convert.ToInt32(tb_TDistance.Text),
                     Convert.ToInt32(tb_TDriven.Text), Convert.ToInt32(tb_TIncome.Text), Convert.ToInt32(tb_TOdo.Text),
                     Convert.ToInt32(tb_TFuelUsed.Text));
@@ -95,6 +100,10 @@ namespace TourLogger.Windows
                 ClearTextboxes();
                 Thread.Sleep(500);
                 RefreshTourTable();
+                Thread.Sleep(250);
+                _ph.UpdateAccountTours(_am.AccountName);
+                Thread.Sleep(250);
+                ReloadAccount(_am.AccountName);
             }
             catch (TourLoggerException tex)
             {
@@ -115,8 +124,10 @@ namespace TourLogger.Windows
                 tDist = tb_TDistance.Text == string.Empty ? 0 : int.Parse(tb_TDistance.Text);
                 jobInc = tb_TIncome.Text == string.Empty ? 0 : int.Parse(tb_TIncome.Text);
 
+                ReloadAccount(_am.AccountName);
+
                 _dw.WriteProgressingTourData(
-                    lb_Driver.Content.ToString(), lb_Truck.Content.ToString(), tb_TFrom.Text,
+                    _am.AccountName, _am.AccountTruck, tb_TFrom.Text,
                     tb_TTo.Text, tb_TFreight.Text, tDist, jobInc);
 
                 MessageBox.Show("Tour progress saved!", "Success!", MessageBoxButton.OK);
@@ -186,17 +197,64 @@ namespace TourLogger.Windows
             tb_TFuelUsed.Text = "0";
         }
 
-        private void LoadGeneralDetails()
+        private void LoadAccountDetails()
         {
-            var truck = JsonConvert.DeserializeObject<TruckModel>(File.ReadAllText($"./Userdata/truck.dat"));
+            var profile = JsonConvert.DeserializeObject<TruckModel>(File.ReadAllText($"./Userdata/oldProfile.dat"));
 
-            if (truck == null)
+            if (profile == null)
             {
                 return;
             }
 
-            lb_Driver.Content = truck.Driver;
-            lb_Truck.Content = truck.Truck;
+            try
+            {
+                var account = _ph.GetAccount(profile.Driver);
+
+                if (account != null)
+                {
+                    string[] accountDetails = account.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                    var am = new AccountModel
+                    {
+                        AccountId = int.Parse(accountDetails[0]),
+                        AccountName = accountDetails[1],
+                        AccountTruck = accountDetails[2],
+                        TotalTours = accountDetails[3],
+                        TotalKilometers = accountDetails[4],
+                        TotalIncome = accountDetails[5],
+                        TotalRefuels = accountDetails[6],
+                        TotalLiters = accountDetails[7],
+                        TotalFuelPrice = accountDetails[8]
+                    };
+
+                    _am = am;
+
+                    var accountJson = JsonConvert.SerializeObject(am, Formatting.Indented);
+                    using var file = File.CreateText($"./Userdata/account.dat");
+                    file.Write(accountJson);
+                    file.Dispose();
+                    File.Delete($"./Userdata/oldProfile.dat");
+                }
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                                $"{tex.Message}", "Error loading account.", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private void LoadGeneralDetails()
+        {
+            var account = JsonConvert.DeserializeObject<AccountModel>(File.ReadAllText($"./Userdata/account.dat"));
+
+            if (account == null)
+            {
+                return;
+            }
+
+            _am = account;
+            ReloadAccount(account.AccountName);
         }
 
         private void LoadTourData()
@@ -243,7 +301,8 @@ namespace TourLogger.Windows
 
             if (tours == null)
             {
-                return;
+                MessageBox.Show("An exception occured!\n" +
+                               $"{tex.Message}", "Error refreshing tours.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             dg_TourData.ItemsSource = tours.CachedTours;
@@ -258,7 +317,47 @@ namespace TourLogger.Windows
 
             if (refuels == null)
             {
-                return;
+                MessageBox.Show("An exception occured!\n" +
+                               $"{tex.Message}", "Error refreshing refuels.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ReloadAccount(string accountName)
+        {
+            try
+            {
+                var account = _ph.GetAccount(accountName);
+
+                if (account != null)
+                {
+                    string[] accountDetails = account.Split('|', StringSplitOptions.RemoveEmptyEntries);
+
+                    var am = new AccountModel
+                    {
+                        AccountId = int.Parse(accountDetails[0]),
+                        AccountName = accountDetails[1],
+                        AccountTruck = accountDetails[2],
+                        TotalTours = accountDetails[3],
+                        TotalKilometers = accountDetails[4],
+                        TotalIncome = accountDetails[5],
+                        TotalRefuels = accountDetails[6],
+                        TotalLiters = accountDetails[7],
+                        TotalFuelPrice = accountDetails[8]
+                    };
+
+                    _am = am;
+
+                    var accountJson = JsonConvert.SerializeObject(am, Formatting.Indented);
+                    using var file = File.CreateText($"./Userdata/account.dat");
+                    file.Write(accountJson);
+                    file.Dispose();
+                }
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                                $"{tex.Message}", "Error reloading account.", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
 
             dg_RefuelData.ItemsSource = refuels.CachedRefuels;
@@ -274,7 +373,7 @@ namespace TourLogger.Windows
 
         private void Bt_AddRefuel_OnClick(object sender, RoutedEventArgs e)
         {
-            var rw = new RefuelWindow();
+            var rw = new RefuelWindow(_am);
             rw.Show();
         }
 
@@ -310,6 +409,28 @@ namespace TourLogger.Windows
             {
                 MessageBox.Show("An exception occured!\n" +
                               $"{tex.Message}", "Error fetching single refuel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Bt_AccountPage_OnClick(object sender, RoutedEventArgs e)
+        {
+            ReloadAccount(_am.AccountName);
+            var aw = new AccountWindow(_am);
+            aw.Show();
+        }
+
+        private void Bt_OtherAccount_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var account = _ph.GetAccount(tb_AccountName.Text);
+                var aw = new AccountWindow(account);
+                aw.Show();
+            }
+            catch (TourLoggerException tex)
+            {
+                MessageBox.Show("An exception occured!\n" +
+                              $"{tex.Message}", "Error fetching foreign account.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
