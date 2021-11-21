@@ -27,4 +27,5 @@ Current features of TourLogger include:
 
 ## Changelogs
 [Stable Channel](https://github.com/EnKdev/TourLogger/blob/develop-beta/CHANGELOG_STABLE.md)
+
 [Experimental Channel](https://github.com/EnKdev/TourLogger/blob/develop-beta/CHANGELOG_EXPERIMENTAL.md)
