@@ -24,3 +24,7 @@ Current features of TourLogger include:
 -	Viewing a single tour inside a special window to have information packed into one package
 -	Logging tours to a database, Refreshing the table directly afterwards
 -	Saving an already on-going tour so drivers can pick up where they left in case they needed to take a break.
+
+## Changelogs
+[Stable Channel](https://github.com/EnKdev/TourLogger/blob/develop-beta/CHANGELOG_STABLE.md)
+[Experimental Channel](https://github.com/EnKdev/TourLogger/blob/develop-beta/CHANGELOG_EXPERIMENTAL.md)
