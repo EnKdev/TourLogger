@@ -1,10 +1,10 @@
 # TourLogger
 
 ## Current stable version:
-6.3.0
+7.0.0
 
 ## Current experimental version:
-7.0.0-beta4
+None existing
 
 ## Next minor version:
 None planned
