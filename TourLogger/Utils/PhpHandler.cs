@@ -30,7 +30,7 @@ namespace TourLogger.Utils
             jsonArray = resString switch
             {
                 "Access denied" => throw new TourLoggerException("Cannot fetch entries. Secret was wrong."),
-                "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                "Outdated/Unsupported version!" => throw new TourLoggerException(
                     "Cannot fetch entries. Seems like you're using an outdated app."),
                 _ => resString
             };
@@ -173,7 +173,7 @@ namespace TourLogger.Utils
             {
                 case "Access denied":
                     throw new TourLoggerException("Cannot fetch tour-count. Secret was wrong.");
-                case "Outdated/Unsupported Version!":
+                case "Outdated/Unsupported version!":
                     throw new TourLoggerException("Cannot fetch tour-count. Seems like you're using an outdated app.");
                 default:
                     tours = int.Parse(Encoding.UTF8.GetString(res));
@@ -219,7 +219,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "appVersion", "7.0.0" },
+                    { "version", "7.0.0" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -402,7 +402,7 @@ namespace TourLogger.Utils
             {
                 case "Access denied":
                     throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
-                case "Outdated/Unsupported Version!":
+                case "Outdated/Unsupported version!":
                     throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
             }
         }
