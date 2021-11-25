@@ -34,7 +34,7 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 7.0.0 | {appVer}";
+            Title = $"TourLogger 7.0.1 | {appVer}";
 
             if (File.Exists($"./Userdata/oldProfile.dat"))
             {
@@ -76,7 +76,7 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 7.0.0-beta4 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 7.0.1 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
