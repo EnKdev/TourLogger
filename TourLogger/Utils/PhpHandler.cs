@@ -187,7 +187,7 @@ namespace TourLogger.Utils
         {
             var refuels = 0;
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuelCountl.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuelCount.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
