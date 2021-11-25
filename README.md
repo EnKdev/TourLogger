@@ -1,4 +1,18 @@
-# TourLogger | Current Version: 6.3.0 | Next major release: 7.0.0 | Next minor release: None planned | Next Hotfix: None planned
+# TourLogger
+
+## Current stable version:
+7.0.0
+
+## Current experimental version:
+None existing
+
+## Next minor version:
+None planned
+
+## Next hotfix:
+None planned
+
+## About TourLogger:
 
 [![Codacy Security Scan](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml)
 
@@ -6,53 +20,14 @@ TourLogger is a small companion tool for players of ETS2 & ATS, allowing them to
 
 Current features of TourLogger include:
 
--  Displaying all tours into a single table
--  Viewing a single tour inside a special window to have information packed into one package
--  Logging tours to a database, Refreshing the table directly afterwards
--  Saving an already on-going tour so drivers can pick up where they left in case they needed to take a break.
+-	Displaying all tours into a single table
+-	Viewing a single tour inside a special window to have information packed into one package
+-	Logging tours to a database, Refreshing the table directly afterwards
+-	Saving an already on-going tour so drivers can pick up where they left in case they needed to take a break.
+
+And much more! (Trust me, I been working on this for nearly 2 years already, and new shit still comes. Quite remarkable actually.)
 
 ## Changelogs
+[Stable Channel](https://github.com/EnKdev/TourLogger/blob/develop-beta/CHANGELOG_STABLE.md)
 
-Release 6.0.0 (Initial Github Release):
-
--  Overhauled the entire UI to make it more unified
--  Added security features to prohibit unallowed access
--  Added [EnKdev.SessionPass](https://github.com/EnKdev/EnKdev.SessionPass), a pseudo-authentication library to (somewhat) ensure session authenticy.
-
-----
-
-Release 6.0.1
-
--  Fixed [Issue #1](https://github.com/EnKdev/TourLogger/issues/1) - Saving progressing tours now has a better behaviour and works if some fields in the UI are left blank.
-
-Release 6.0.2
-
--  Fixed some general bugs
-
-Release 6.1.0
-
--  Migrated from Windows Forms to WPF
--  This Release is still in testing for performance issues to be sighted, expect hotfixes coming around whenever something surfaces
-
-Release 6.1.1
-
--  UI Cleanup, removed confusing placeholders
-
-Release 6.1.2
--  Various code improvements and fixes. Compatibility remains across Versions 6.1.0 and 6.1.1.
-
-Release 6.2.0
--  Added AutoUpdater.NET to the app
--   This means that updates will now be automatically downloaded if there is one available.
--  Updates are downloaded into the Update directory of the app.
-
--  Cleaned up some forgotten leftover placeholders after sending in a new tour
-
-Release 6.3.0
--  Added the ability to switch onto an experimental channel of the App whenever one is open.
-### NOTE:
--  Older Versions (6.1.0 - 6.2.0) are not supported with this change anymore due to changes to the server backend!
-
-### Related projects:
-
--  [TourLogger-Backend](https://github.com/enkdev/TourLogger-Backend) - The server-backend of TourLogger, where the behind-the-scenes magic takes place.
+[Experimental Channel](https://github.com/EnKdev/TourLogger/blob/develop-beta/CHANGELOG_EXPERIMENTAL.md)

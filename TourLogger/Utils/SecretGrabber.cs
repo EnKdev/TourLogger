@@ -9,8 +9,7 @@ namespace TourLogger.Utils
         public static void GrabSecret()
         {
             using var wc = new WebClient();
-            // Now that the backend has a second security layer, I can safely leave this in...
-            var secret = wc.DownloadString("Actually no.");
+            var secret = wc.DownloadString("EEEEEEEEEEE");
             AppSecret = secret;
         }
     }
