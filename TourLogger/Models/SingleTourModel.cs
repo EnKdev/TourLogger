@@ -5,7 +5,7 @@ namespace TourLogger.Models
     public class SingleTourModel
     {
         [JsonProperty("tourId")]
-        public long TourId { get; set; }
+        public int TourId { get; set; }
 
         [JsonProperty("tourDriver")]
         public string TourDriver { get; set; }

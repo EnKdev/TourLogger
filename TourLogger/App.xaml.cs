@@ -15,10 +15,12 @@ namespace TourLogger
     public partial class App : Application
     {
         private DataWriter _dw;
-        
+        private PhpHandler _ph;
+
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             _dw = new DataWriter();
+            _ph = new PhpHandler();
             
             var svw = new SessionValidatorWindow();
             var mw = new MainWindow();
@@ -36,6 +38,13 @@ namespace TourLogger
             if (!File.Exists($"./Userdata/config.dat"))
             {
                 _dw.WriteDefaultConfigFile();
+            }
+
+            // Cache Migration
+            if (File.Exists($"./Userdata/cache.dat"))
+            {
+                File.Copy($"./Userdata/cache.dat", $"./Userdata/tourCache.dat");
+                File.Delete($"./Userdata/cache.dat");
             }
             
             AutoUpdater.DownloadPath = updatePath;
@@ -99,13 +108,28 @@ namespace TourLogger
                     Directory.Delete($"./Userdata/Tour/");
                 }
 
-                if (!File.Exists($"./Userdata/truck.dat"))
+                if (File.Exists($"./Userdata/truck.dat"))
                 {
-                    MessageBox.Show("It seems that you have no profile yet.\n" +
-                                    "Before using TourLogger, please create your profile over at:\n" +
-                                    "https://enkdev.xyz/cdn/php/tourlogger/profile/gen.html.\n" +
-                                    "Once you downloaded your profile, save it in the Userdata folder of the app",
-                        "Error", MessageBoxButton.OK);
+                    try
+                    {
+                        // Read profile
+                        var profile =
+                            JsonConvert.DeserializeObject<TruckModel>(File.ReadAllText($"./Userdata/truck.dat"));
+
+                        if (profile != null)
+                        {
+                            _ph.MigrateProfile(profile.Driver, profile.Truck);
+                            File.Copy($"./Userdata/truck.dat", $"./Userdata/oldProfile.dat");
+                            File.Move($"./Userdata/truck.dat", $"./Userdata/Legacy/truck.dat");
+                            mw.Show();
+                        }
+                    }
+                    catch (TourLoggerException tex)
+                    {
+                        MessageBox.Show("An exception occured!\n" +
+                                        $"{tex.Message}", "Error migrating profile.", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
                 }
                 else
                 {

@@ -1,4 +1,6 @@
-﻿namespace TourLogger.Models
+﻿using System.Collections.Generic;
+
+namespace TourLogger.Models
 {
     public class TourModel
     {
