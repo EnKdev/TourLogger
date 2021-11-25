@@ -131,6 +131,11 @@ namespace TourLogger
                             MessageBoxImage.Error);
                     }
                 }
+                else if (!File.Exists($"./Userdata/account.dat"))
+                {
+                    var naw = new NewAccountWindow();
+                    naw.Show();
+                }
                 else
                 {
                     mw.Show();

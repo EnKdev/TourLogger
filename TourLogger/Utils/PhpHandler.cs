@@ -19,11 +19,11 @@ namespace TourLogger.Utils
             var dw = new DataWriter();
 
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/getTours.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/getTours.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" }
+                    { "version", "7.0.0" }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -64,11 +64,11 @@ namespace TourLogger.Utils
             var dw = new DataWriter();
 
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/getRefuels.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuels.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -105,11 +105,11 @@ namespace TourLogger.Utils
         public string FetchTour(int tourId)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/getTour.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/getTour.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "tId", tourId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -131,7 +131,7 @@ namespace TourLogger.Utils
         public string FetchRefuel(int refuelId)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/getRefuel.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuel.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
@@ -161,11 +161,11 @@ namespace TourLogger.Utils
         {
             var tours = 0;
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/getTourCount.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/getTourCount.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -187,11 +187,11 @@ namespace TourLogger.Utils
         {
             var refuels = 0;
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/getRefuelCount.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuelCountl.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" }
+                    { "version", "7.0.0" }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -215,11 +215,11 @@ namespace TourLogger.Utils
             int tourDistance, int drivenDist, int jobIncome, int odo, int fuel)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/newTour.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/newTour.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "appVersion", "7.0.0-beta4" },
+                    { "appVersion", "7.0.0" },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -246,11 +246,11 @@ namespace TourLogger.Utils
             int totalPrice)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/refuels/newRefuel.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/refuels/newRefuel.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "driver", driver },
                     { "country", country },
                     { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
@@ -276,11 +276,11 @@ namespace TourLogger.Utils
         public void MigrateProfile(string profileName, string profileTruck)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/migrateProfile.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/accounts/migrateProfile.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "profile", profileName },
                     { "truck", profileTruck }
                 });
@@ -298,11 +298,11 @@ namespace TourLogger.Utils
         public void CreateAccount(string accountName, string accountTruck)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/newAccount.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/accounts/newAccount.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "profile", accountName },
                     { "truck", accountTruck }
                 });
@@ -320,11 +320,11 @@ namespace TourLogger.Utils
         public string GetAccount(string accountName)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/getAccount.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/accounts/getAccount.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "name", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -346,11 +346,11 @@ namespace TourLogger.Utils
         public void UpdateAccountTours(string accountName)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/updateProfileTours.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTours.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "profile", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -367,11 +367,11 @@ namespace TourLogger.Utils
         public void UpdateAccountRefuels(string accountName)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/updateProfileRefuels.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileRefuels.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "profile", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -388,11 +388,11 @@ namespace TourLogger.Utils
         public void UpdateAccountTruck(string accountName, string newTruck)
         {
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/experimental/accounts/updateProfileTruck.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTruck.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", "7.0.0" },
                     { "profile", accountName },
                     { "truck", newTruck }
                 });
