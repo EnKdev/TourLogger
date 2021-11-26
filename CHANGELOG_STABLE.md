@@ -48,3 +48,10 @@ Release 7.0.0
 -	Accounts are synchronized whenever you access your personal account, save a tour or make a new refuel.
 -	You can check others accounts by searching for their driver name. (No, you can't change their truck!)
 -	Your old, local profile is now being moved into a legacy folder once you start the app. (Unless you've been on the experimental branch before)
+
+Release 7.0.1
+-	Hotfixed a bug where exceptions wouldn't be thrown on the tour side of the backend
+-	Hotfixed a bug where saving tours didn't work correctly.
+-	Hotfixed a bug where fetching a single refuel wouldn't work correctly.
+### NOTE:
+-	Version 7.0.0 won't work with this hotfix anymore.

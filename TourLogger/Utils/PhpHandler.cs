@@ -23,14 +23,14 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" }
+                    { "version", InternalVersion.AppVersion }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
             jsonArray = resString switch
             {
                 "Access denied" => throw new TourLoggerException("Cannot fetch entries. Secret was wrong."),
-                "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                "Outdated/Unsupported version!" => throw new TourLoggerException(
                     "Cannot fetch entries. Seems like you're using an outdated app."),
                 _ => resString
             };
@@ -68,7 +68,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -109,7 +109,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "tId", tourId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -135,7 +135,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0-beta4" },
+                    { "version", InternalVersion.AppVersion },
                     { "rId", refuelId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -165,7 +165,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -173,7 +173,7 @@ namespace TourLogger.Utils
             {
                 case "Access denied":
                     throw new TourLoggerException("Cannot fetch tour-count. Secret was wrong.");
-                case "Outdated/Unsupported Version!":
+                case "Outdated/Unsupported version!":
                     throw new TourLoggerException("Cannot fetch tour-count. Seems like you're using an outdated app.");
                 default:
                     tours = int.Parse(Encoding.UTF8.GetString(res));
@@ -191,7 +191,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" }
+                    { "version", InternalVersion.AppVersion }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -219,7 +219,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "appVersion", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -250,7 +250,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "driver", driver },
                     { "country", country },
                     { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
@@ -280,7 +280,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "profile", profileName },
                     { "truck", profileTruck }
                 });
@@ -302,7 +302,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "profile", accountName },
                     { "truck", accountTruck }
                 });
@@ -324,7 +324,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "name", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -350,7 +350,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "profile", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -371,7 +371,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "profile", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -392,7 +392,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", "7.0.0" },
+                    { "version", InternalVersion.AppVersion },
                     { "profile", accountName },
                     { "truck", newTruck }
                 });
@@ -402,7 +402,7 @@ namespace TourLogger.Utils
             {
                 case "Access denied":
                     throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
-                case "Outdated/Unsupported Version!":
+                case "Outdated/Unsupported version!":
                     throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
             }
         }
