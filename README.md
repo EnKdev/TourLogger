@@ -1,22 +1,16 @@
 # TourLogger
 
 ## Current stable version:
-6.3.0
+7.0.1
 
 ## Current experimental version:
-7.0.0-beta4
-
-## Next minor version:
-None planned
-
-## Next hotfix:
-None planned
+None existing
 
 ## About TourLogger:
 
 [![Codacy Security Scan](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml)
 
-TourLogger is a small companion tool for players of ETS2 & ATS, allowing them to log their tours into a central database.
+TourLogger is a (small) companion tool for players of ETS2 & ATS, allowing them to log their tours into a central database.
 
 Current features of TourLogger include:
 
