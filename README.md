@@ -10,7 +10,7 @@ None existing
 
 [![Codacy Security Scan](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/EnKdev/TourLogger/actions/workflows/codacy-analysis.yml)
 
-TourLogger is a small companion tool for players of ETS2 & ATS, allowing them to log their tours into a central database.
+TourLogger is a (small) companion tool for players of ETS2 & ATS, allowing them to log their tours into a central database.
 
 Current features of TourLogger include:
 
