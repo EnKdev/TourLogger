@@ -23,7 +23,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion }
+                    { "version", InternalValues.AppVersion }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -68,7 +68,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -109,7 +109,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "tId", tourId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -135,7 +135,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "rId", refuelId.ToString() }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -165,7 +165,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -191,7 +191,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion }
+                    { "version", InternalValues.AppVersion }
                 });
             var resString = Encoding.UTF8.GetString(res);
 
@@ -219,7 +219,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "tourDriver", driver },
                     { "tourTruck", truck },
                     { "tourFrom", from },
@@ -250,7 +250,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "driver", driver },
                     { "country", country },
                     { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
@@ -280,7 +280,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "profile", profileName },
                     { "truck", profileTruck }
                 });
@@ -302,7 +302,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "profile", accountName },
                     { "truck", accountTruck }
                 });
@@ -324,7 +324,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "name", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -350,7 +350,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "profile", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -371,7 +371,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "profile", accountName }
                 });
             var resString = Encoding.UTF8.GetString(res);
@@ -392,7 +392,7 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalVersion.AppVersion },
+                    { "version", InternalValues.AppVersion },
                     { "profile", accountName },
                     { "truck", newTruck }
                 });

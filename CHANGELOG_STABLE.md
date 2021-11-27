@@ -55,3 +55,8 @@ Release 7.0.1
 -	Hotfixed a bug where fetching a single refuel wouldn't work correctly.
 ### NOTE:
 -	Version 7.0.0 won't work with this hotfix anymore.
+
+Release 7.0.2
+-	Changed the way the app secret is handled by the server and the app
+### NOTE:
+-	Version 7.0.1 won't work with this update anymore.

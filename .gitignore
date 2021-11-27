@@ -4,5 +4,5 @@ TourLogger/.vs/*
 .idea/*
 .vs/*
 packages/*
-TourLogger/Utils/InternalVersion.cs
+TourLogger/Utils/InternalValues.cs
 TourLogger/Utils/SecretGrabber.cs
