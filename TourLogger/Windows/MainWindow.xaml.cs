@@ -34,7 +34,7 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 7.0.2 | {appVer}";
+            Title = $"TourLogger 7.0.3 | {appVer}";
 
             if (File.Exists($"./Userdata/oldProfile.dat"))
             {
@@ -76,7 +76,7 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 7.0.2 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 7.0.3 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
@@ -451,15 +451,36 @@ namespace TourLogger.Windows
         {
             try
             {
-                var account = _ph.GetAccount(tb_AccountName.Text);
-                var aw = new AccountWindow(account);
-                aw.Show();
+                if (!string.IsNullOrEmpty(tb_AccountName.Text) && !string.IsNullOrWhiteSpace(tb_AccountName.Text))
+                {
+                    var account = _ph.GetAccount(tb_AccountName.Text);
+                    var aw = new AccountWindow(account);
+                    aw.Show();
+                }
+                else
+                {
+                    throw new TourLoggerException("It seems that the account text field was left empty. Maybe you should enter someones account name!");
+                }
             }
             catch (TourLoggerException tex)
             {
                 MessageBox.Show("An exception occured!\n" +
                               $"{tex.Message}", "Error fetching foreign account.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void M_ItemMisc_Kofi_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "Thanks for using the app!\n" +
+                            "If you want, you can support development over at my Ko-Fi page at\n" +
+                            "https://ko-fi.com/enkdev \n" +
+                            "\n" +
+                            "You don't have to do it, but I'd be very grateful to anyone who decides to leave a coffee for my work!\n" +
+                            "Sincerely\n" +
+                            "-EnKdev", 
+                "Thanks for using the app!", 
+                MessageBoxButton.OK);
         }
     }
 }
