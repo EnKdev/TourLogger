@@ -24,6 +24,7 @@
                 <Menu Name="m_Misc">
                     <MenuItem Name="m_ItemMisc" Header="_Misc">
                         <MenuItem Name="m_ItemMisc_About" Header="_About" Click="M_ItemMisc_About_OnClick" />
+                        <MenuItem Name="m_ItemMisc_Kofi" Header="_Ko-Fi" Click="M_ItemMisc_Kofi_OnClick" />
                     </MenuItem>
                 </Menu>
                 <Menu Name="m_Config">

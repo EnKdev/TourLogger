@@ -60,3 +60,7 @@ Release 7.0.2
 -	Changed the way the app secret is handled by the server and the app
 ### NOTE:
 -	Version 7.0.1 won't work with this update anymore.
+
+Release 7.0.3
+-	Fixed an app-crash when trying to search for an account with an empty input.
+-	Added a Link where you can support the app's development.
