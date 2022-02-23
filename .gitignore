@@ -1,6 +1,11 @@
 ﻿TourLogger/bin/*
 TourLogger/obj/*
 TourLogger/.vs/*
+
+TourLauncher/.vs/*
+TourLauncher/bin/*
+TourLauncher/obj/*
+
 .idea/*
 .vs/*
 packages/*
