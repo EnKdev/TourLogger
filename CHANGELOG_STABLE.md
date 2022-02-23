@@ -64,3 +64,7 @@ Release 7.0.2
 Release 7.0.3
 -	Fixed an app-crash when trying to search for an account with an empty input.
 -	Added a Link where you can support the app's development.
+
+Release 7.1.0
+-	Reworked some of the internal code and how the app is going to be launched.
+-	Added TourLauncher to the repository - This is the dedicated launcher for TourLogger which allows the user to freely choose between stable and beta.

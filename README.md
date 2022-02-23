@@ -1,7 +1,7 @@
 # TourLogger
 
 ## Current stable version:
-7.0.3
+7.1.0
 
 ## Current experimental version:
 None existing
