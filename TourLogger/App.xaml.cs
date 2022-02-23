@@ -39,11 +39,6 @@ namespace TourLogger
                         Directory.CreateDirectory(updatePath);
                     }
 
-                    if (!File.Exists($"./Userdata/config.dat"))
-                    {
-                        _dw.WriteDefaultConfigFile();
-                    }
-
                     // Cache Migration
                     if (File.Exists($"./Userdata/cache.dat"))
                     {
@@ -56,7 +51,7 @@ namespace TourLogger
 #if STABLE
                     AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.xml");
 #elif EXPERIMENTAL
-                AutoUpdater.Start("https://enkdev.xyz/cdn/tourlogger/update/update.experimental.xml");
+                    AutoUpdater.Start("https://enkdev.xyz/cdn/tourlogger/update/update.experimental.xml");
 #endif
 
 

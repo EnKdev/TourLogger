@@ -76,7 +76,7 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 7.0.3 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 7.1.0 [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
@@ -392,12 +392,6 @@ namespace TourLogger.Windows
         }
 
         // ----
-
-        private void M_ConfigItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            var cw = new ConfigWindow();
-            cw.Show();
-        }
 
         private void Bt_AddRefuel_OnClick(object sender, RoutedEventArgs e)
         {

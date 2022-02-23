@@ -27,9 +27,6 @@
                         <MenuItem Name="m_ItemMisc_Kofi" Header="_Ko-Fi" Click="M_ItemMisc_Kofi_OnClick" />
                     </MenuItem>
                 </Menu>
-                <Menu Name="m_Config">
-                    <MenuItem Name="m_ConfigItem" Header="_Config" Click="M_ConfigItem_OnClick"/>
-                </Menu>
             </StackPanel>
         </Grid>
         <Grid Name="g_Content" Column="0" Margin="0,0,1424,0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Height="380" VerticalAlignment="Bottom">
