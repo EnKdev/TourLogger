@@ -34,7 +34,7 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 7.0.3 | {appVer}";
+            Title = $"TourLogger 7.1.0 | {appVer}";
 
             if (File.Exists($"./Userdata/oldProfile.dat"))
             {

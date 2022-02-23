@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+using System.IO;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using AutoUpdaterDotNET;
 using Process = System.Diagnostics.Process;
 
@@ -41,7 +30,15 @@ namespace TourLauncher
         {
             try
             {
-                Process.Start($"./stable/TourLogger.exe", "-fromLauncher");
+                var programPath = $"./stable/TourLogger.exe";
+                var proc = new Process();
+
+                proc.StartInfo.FileName = programPath;
+                proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(programPath);
+                proc.StartInfo.Arguments = "-fromLauncher";
+                proc.Start();
+
+                Environment.Exit(1);
             }
             catch (Exception ex)
             {
@@ -53,7 +50,16 @@ namespace TourLauncher
         {
             try
             {
-                Process.Start($"./beta/TourLogger.exe", "-fromLauncher");
+
+                var programPath = $"./beta/TourLogger.exe";
+                var proc = new Process();
+
+                proc.StartInfo.FileName = programPath;
+                proc.StartInfo.WorkingDirectory = Path.GetDirectoryName(programPath);
+                proc.StartInfo.Arguments = "-fromLauncher";
+                proc.Start();
+
+                Environment.Exit(1);
             }
             catch (Exception ex)
             {
