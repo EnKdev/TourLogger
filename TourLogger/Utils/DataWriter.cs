@@ -57,33 +57,5 @@ namespace TourLogger.Utils
             sw.Write(fileText);
             sw.Dispose();
         }
-
-        public void WriteDefaultConfigFile()
-        {
-            var config = new ConfigModel
-            {
-                UsingExperimental = false
-            };
-
-            using StreamWriter sw = File.CreateText($"./Userdata/config.dat");
-
-            var fileText = JsonConvert.SerializeObject(config, Formatting.Indented);
-            sw.Write(fileText);
-            sw.Dispose();
-        }
-
-        public void WriteConfigFile(bool? useExperimental)
-        {
-            var config = new ConfigModel
-            {
-                UsingExperimental = useExperimental
-            };
-
-            using StreamWriter sw = File.CreateText($"./Userdata/config.dat");
-
-            var fileText = JsonConvert.SerializeObject(config, Formatting.Indented);
-            sw.Write(fileText);
-            sw.Dispose();
-        }
     }
 }
