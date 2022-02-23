@@ -18,6 +18,7 @@ namespace TourLogger.Utils
             var tours = new List<TourModel>();
             var dw = new DataWriter();
 
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/getTours.php",
                 new NameValueCollection
@@ -25,6 +26,15 @@ namespace TourLogger.Utils
                     { "secret", SecretGrabber.AppSecret },
                     { "version", InternalValues.AppVersion }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTours.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             jsonArray = resString switch
@@ -63,6 +73,7 @@ namespace TourLogger.Utils
             var refuels = new List<RefuelModel>();
             var dw = new DataWriter();
 
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuels.php",
                 new NameValueCollection
@@ -70,6 +81,15 @@ namespace TourLogger.Utils
                     { "secret", SecretGrabber.AppSecret },
                     { "version", InternalValues.AppVersion },
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/refuels/getRefuels.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             jsonArray = resString switch
@@ -104,6 +124,7 @@ namespace TourLogger.Utils
 
         public string FetchTour(int tourId)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/getTour.php",
                 new NameValueCollection
@@ -112,6 +133,16 @@ namespace TourLogger.Utils
                     { "version", InternalValues.AppVersion },
                     { "tId", tourId.ToString() }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTour.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "tId", tourId.ToString() }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -130,6 +161,7 @@ namespace TourLogger.Utils
 
         public string FetchRefuel(int refuelId)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuel.php",
                 new NameValueCollection
@@ -138,6 +170,16 @@ namespace TourLogger.Utils
                     { "version", InternalValues.AppVersion },
                     { "rId", refuelId.ToString() }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/refuels/getRefuel.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "rId", refuelId.ToString() }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -160,6 +202,8 @@ namespace TourLogger.Utils
         private int GetTotalNumberOfTours()
         {
             var tours = 0;
+
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/getTourCount.php",
                 new NameValueCollection
@@ -167,6 +211,15 @@ namespace TourLogger.Utils
                     { "secret", SecretGrabber.AppSecret },
                     { "version", InternalValues.AppVersion },
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTourCount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -186,6 +239,8 @@ namespace TourLogger.Utils
         private int GetTotalNumberOfRefuels()
         {
             var refuels = 0;
+
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuelCount.php",
                 new NameValueCollection
@@ -193,6 +248,15 @@ namespace TourLogger.Utils
                     { "secret", SecretGrabber.AppSecret },
                     { "version", InternalValues.AppVersion }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/refuels/getRefuelCount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -214,6 +278,7 @@ namespace TourLogger.Utils
         public void SendTourToServer(string driver, string truck, string from, string to, string freight,
             int tourDistance, int drivenDist, int jobIncome, int odo, int fuel)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/newTour.php",
                 new NameValueCollection
@@ -231,6 +296,25 @@ namespace TourLogger.Utils
                     { "distanceTotal", odo.ToString() },
                     { "fuelUsed", fuel.ToString() }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/newTour.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "tourDriver", driver },
+                    { "tourTruck", truck },
+                    { "tourFrom", from },
+                    { "tourTo", to },
+                    { "tourFreight", freight },
+                    { "tourDistance", tourDistance.ToString() },
+                    { "distanceDriven", drivenDist.ToString() },
+                    { "jobIncome", jobIncome.ToString() },
+                    { "distanceTotal", odo.ToString() },
+                    { "fuelUsed", fuel.ToString() }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -245,6 +329,7 @@ namespace TourLogger.Utils
         public void SendRefuelToServer(string driver, string country, double literPrice, int odo, int amount,
             int totalPrice)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/refuels/newRefuel.php",
                 new NameValueCollection
@@ -258,6 +343,21 @@ namespace TourLogger.Utils
                     { "amount", amount.ToString() },
                     { "totalPrice", totalPrice.ToString() }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourlogger/refuels/newRefuel.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "driver", driver },
+                    { "country", country },
+                    { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
+                    { "odo", odo.ToString() },
+                    { "amount", amount.ToString() },
+                    { "totalPrice", totalPrice.ToString() }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -275,6 +375,7 @@ namespace TourLogger.Utils
 
         public void MigrateProfile(string profileName, string profileTruck)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/accounts/migrateProfile.php",
                 new NameValueCollection
@@ -284,6 +385,18 @@ namespace TourLogger.Utils
                     { "profile", profileName },
                     { "truck", profileTruck }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/migrateProfile.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "profile", profileName },
+                    { "truck", profileTruck }
+                });
+            #endif
+
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -297,6 +410,7 @@ namespace TourLogger.Utils
 
         public void CreateAccount(string accountName, string accountTruck)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/accounts/newAccount.php",
                 new NameValueCollection
@@ -306,6 +420,18 @@ namespace TourLogger.Utils
                     { "profile", accountName },
                     { "truck", accountTruck }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/newAccount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "profile", accountName },
+                    { "truck", accountTruck }
+                });
+            #endif
+
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -319,6 +445,7 @@ namespace TourLogger.Utils
 
         public string GetAccount(string accountName)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/accounts/getAccount.php",
                 new NameValueCollection
@@ -327,6 +454,17 @@ namespace TourLogger.Utils
                     { "version", InternalValues.AppVersion },
                     { "name", accountName }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/getAccount.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "name", accountName }
+                }); 
+            #endif
+
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -345,6 +483,7 @@ namespace TourLogger.Utils
 
         public void UpdateAccountTours(string accountName)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTours.php",
                 new NameValueCollection
@@ -353,6 +492,17 @@ namespace TourLogger.Utils
                     { "version", InternalValues.AppVersion },
                     { "profile", accountName }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileTours.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "profile", accountName }
+                });
+            #endif
+
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -366,6 +516,7 @@ namespace TourLogger.Utils
 
         public void UpdateAccountRefuels(string accountName)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileRefuels.php",
                 new NameValueCollection
@@ -374,6 +525,16 @@ namespace TourLogger.Utils
                     { "version", InternalValues.AppVersion },
                     { "profile", accountName }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileRefuels.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "profile", accountName }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
@@ -387,6 +548,7 @@ namespace TourLogger.Utils
 
         public void UpdateAccountTruck(string accountName, string newTruck)
         {
+            #if STABLE
             var res = HttpPostHelper.HttpPost(
                 "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTruck.php",
                 new NameValueCollection
@@ -396,6 +558,17 @@ namespace TourLogger.Utils
                     { "profile", accountName },
                     { "truck", newTruck }
                 });
+            #elif EXPERIMENTAL
+            var res = HttpPostHelper.HttpPost(
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileTruck.experimental.php",
+                new NameValueCollection
+                {
+                    { "secret", SecretGrabber.AppSecret },
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "profile", accountName },
+                    { "truck", newTruck }
+                });
+            #endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)

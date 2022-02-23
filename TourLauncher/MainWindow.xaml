@@ -1,0 +1,38 @@
+﻿<Window x:Class="TourLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TourLauncher"
+        mc:Ignorable="d"
+        Title="TourLauncher" Height="450" Width="503"
+        FontFamily="Bahnschrift" FontSize="18">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="205*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+            <Button Name="bt_Stable" Click="Bt_Stable_OnClick" HorizontalAlignment="Left" Width="252">
+                <Grid>
+                    <Image Source="/stable.png" Stretch="Fill" />
+                    <Label Content="TourLogger 7.1.0 [Stable]" Foreground="White" Margin="22,179,0,0" HorizontalAlignment="Left" Width="206" Height="32" VerticalAlignment="Top"/>
+                </Grid>
+            </Button>
+            <Button Name="bt_Unstable" Click="Bt_Unstable_OnClick" HorizontalAlignment="Right" Width="251">
+                <Grid>
+                    <Image Source="/unstable.png" Stretch="Fill" />
+                    <Label Content="TourLogger 7.1.0 [Unstable]" Margin="11,178,0,0" HorizontalAlignment="Left" Width="225" Height="32" VerticalAlignment="Top" Background="#00000000">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="#FFFF00C7"/>
+                        </Label.Foreground>
+                    </Label>
+                    <Label Name="lb_expStatus" ContentStringFormat="Status: {0}" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White" Margin="0,215,0,0"></Label>
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid Row="1">
+            <Button Name="bt_Quit" Click="Bt_Quit_OnClick" Content="Exit Launcher"/>
+        </Grid>
+    </Grid>
+</Window>
