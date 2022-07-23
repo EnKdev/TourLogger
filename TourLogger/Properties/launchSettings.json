@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TourLogger": {
+      "commandName": "Project",
+      "commandLineArgs": "-fromLauncher"
+    }
+  }
+}

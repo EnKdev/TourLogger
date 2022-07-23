@@ -13,8 +13,6 @@ namespace TourLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool _isExperimentalOpen = false;
-
         public MainWindow()
         {
             InitializeComponent();

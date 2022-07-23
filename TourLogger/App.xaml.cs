@@ -51,7 +51,7 @@ namespace TourLogger
 #if STABLE
                     AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.xml");
 #elif EXPERIMENTAL
-                    AutoUpdater.Start("https://enkdev.xyz/cdn/tourlogger/update/update.experimental.xml");
+                    AutoUpdater.Start("https://enkdev.xyz/cdn/software/tourlogger/update/update.experimental.xml");
 #endif
 
 
