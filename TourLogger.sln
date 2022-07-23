@@ -23,8 +23,8 @@ Global
 		Stable|Any CPU = Stable|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC01C693-C744-4FE0-863B-B2354010F207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC01C693-C744-4FE0-863B-B2354010F207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC01C693-C744-4FE0-863B-B2354010F207}.Debug|Any CPU.ActiveCfg = Experimental|Any CPU
+		{AC01C693-C744-4FE0-863B-B2354010F207}.Debug|Any CPU.Build.0 = Experimental|Any CPU
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Experimental|Any CPU.ActiveCfg = Experimental|Any CPU
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Experimental|Any CPU.Build.0 = Experimental|Any CPU
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,8 +33,8 @@ Global
 		{AC01C693-C744-4FE0-863B-B2354010F207}.Stable|Any CPU.Build.0 = Stable|Any CPU
 		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Experimental|Any CPU.ActiveCfg = Release|Any CPU
-		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Experimental|Any CPU.Build.0 = Release|Any CPU
+		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Experimental|Any CPU.ActiveCfg = Debug|Any CPU
+		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Experimental|Any CPU.Build.0 = Debug|Any CPU
 		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B297C151-DCC5-4853-BBFC-DD09C5BEA954}.Stable|Any CPU.ActiveCfg = Debug|Any CPU

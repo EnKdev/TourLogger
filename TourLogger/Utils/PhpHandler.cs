@@ -12,7 +12,7 @@ namespace TourLogger.Utils
     {
         #region Fetch database stuff
 
-        public void FetchTourDatabaseEntries()
+        public void FetchTourDatabaseEntries(int pageNum, int entries = 30)
         {
             var jsonArray = "";
             var tours = new List<TourModel>();
@@ -32,7 +32,9 @@ namespace TourLogger.Utils
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalValues.AppVersionExperimental }
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "pageNum", pageNum.ToString() },
+                    { "entryNum", entries.ToString() }
                 });
             #endif
             var resString = Encoding.UTF8.GetString(res);
@@ -47,7 +49,7 @@ namespace TourLogger.Utils
 
             var json = JArray.Parse(jsonArray);
 
-            for (var i = 0; i < GetTotalNumberOfTours(); i++)
+            for (var i = 0; i < json.Count; i++)
             {
                 var id = Convert.ToInt32(json[i]["tourId"]);
                 var d = (string)json[i]["tourDriver"];
@@ -67,7 +69,7 @@ namespace TourLogger.Utils
             dw.WriteCachedTourData(tours);
         }
 
-        public void FetchRefuelDatabaseEntries()
+        public void FetchRefuelDatabaseEntries(int pageNum, int entries = 20)
         {
             var jsonArray = "";
             var refuels = new List<RefuelModel>();
@@ -88,6 +90,8 @@ namespace TourLogger.Utils
                 {
                     { "secret", SecretGrabber.AppSecret },
                     { "version", InternalValues.AppVersionExperimental },
+                    { "pageNum", pageNum.ToString() },
+                    { "entryNum", entries.ToString() }
                 });
             #endif
             var resString = Encoding.UTF8.GetString(res);
@@ -102,7 +106,7 @@ namespace TourLogger.Utils
 
             var json = JArray.Parse(jsonArray);
 
-            for (var i = 0; i < GetTotalNumberOfRefuels(); i++)
+            for (var i = 0; i < json.Count; i++)
             {
                 var id = Convert.ToInt32(json[i]["refuelId"]);
                 var d = (string)json[i]["refuelDriver"];
@@ -199,75 +203,66 @@ namespace TourLogger.Utils
         #endregion
 
         #region Total number of x Stuff
-        private int GetTotalNumberOfTours()
-        {
-            var tours = 0;
 
-            #if STABLE
+        public int GetNumberOfTourPages(int entries = 30)
+        {
+            var tourPages = 0;
+
+#if STABLE
+            // TODO: Implement code for stable release after beta testing
+#elif EXPERIMENTAL
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/getTourCount.php",
-                new NameValueCollection
-                {
-                    { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalValues.AppVersion },
-                });
-            #elif EXPERIMENTAL
-            var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTourCount.experimental.php",
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/paging/getTourPages.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
                     { "version", InternalValues.AppVersionExperimental },
+                    { "entryNum", entries.ToString() }
                 });
-            #endif
+#endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
             {
                 case "Access denied":
-                    throw new TourLoggerException("Cannot fetch tour-count. Secret was wrong.");
-                case "Outdated/Unsupported version!":
-                    throw new TourLoggerException("Cannot fetch tour-count. Seems like you're using an outdated app.");
+                    throw new TourLoggerException("Cannot fetch page-count for tours. Secret was wrong.");
+                case "Outdated/Unsupported Version!":
+                    throw new TourLoggerException(
+                        "Cannot fetch page-count for tours. Seems like you're using an outdated app.");
                 default:
-                    tours = int.Parse(Encoding.UTF8.GetString(res));
-                    return tours;
+                    tourPages = int.Parse(Encoding.UTF8.GetString(res));
+                    return tourPages;
             }
-
-            
         }
 
-        private int GetTotalNumberOfRefuels()
+        public int GetNumberOfRefuelPages(int entries = 20)
         {
-            var refuels = 0;
+            var refuelPages = 0;
 
-            #if STABLE
+#if STABLE
+            // TODO: Implement code for stable release after beta testing
+#elif EXPERIMENTAL
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/refuels/getRefuelCount.php",
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/paging/getRefuelPages.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalValues.AppVersion }
+                    { "version", InternalValues.AppVersionExperimental },
+                    { "entryNum", entries.ToString() }
                 });
-            #elif EXPERIMENTAL
-            var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourloggerExperimental/refuels/getRefuelCount.experimental.php",
-                new NameValueCollection
-                {
-                    { "secret", SecretGrabber.AppSecret },
-                    { "version", InternalValues.AppVersionExperimental }
-                });
-            #endif
+#endif
             var resString = Encoding.UTF8.GetString(res);
 
             switch (resString)
             {
                 case "Access denied":
-                    throw new TourLoggerException("Cannot fetch refuel-count. Secret was wrong.");
+                    throw new TourLoggerException("Cannot fetch page-count for tours. Secret was wrong.");
                 case "Outdated/Unsupported Version!":
-                    throw new TourLoggerException("Cannot fetch refuel-count. Seems like you're using an outdated app.");
+                    throw new TourLoggerException(
+                        "Cannot fetch page-count for tours. Seems like you're using an outdated app.");
                 default:
-                    refuels = int.Parse(Encoding.UTF8.GetString(res));
-                    return refuels;
+                    refuelPages = int.Parse(Encoding.UTF8.GetString(res));
+                    return refuelPages;
             }
         }
 
@@ -345,7 +340,7 @@ namespace TourLogger.Utils
                 });
             #elif EXPERIMENTAL
             var res = HttpPostHelper.HttpPost(
-                "https://enkdev.xyz/cdn/php/tourlogger/refuels/newRefuel.php",
+                "https://enkdev.xyz/cdn/php/tourloggerExperimental/refuels/newRefuel.experimental.php",
                 new NameValueCollection
                 {
                     { "secret", SecretGrabber.AppSecret },

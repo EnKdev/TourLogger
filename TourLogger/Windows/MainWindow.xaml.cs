@@ -19,6 +19,12 @@ namespace TourLogger.Windows
         private readonly DataWriter _dw;
         private AccountModel _am;
 
+        private int _currentTourPage = 1;
+        private int _currentRefuelPage = 1;
+
+        private int _maxTourPages;
+        private int _maxRefuelPages;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +40,13 @@ namespace TourLogger.Windows
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             var appVer = Versioning.AppVersion;
-            Title = $"TourLogger 7.1.0 | {appVer}";
+            Title = $"TourLogger 8.0.0-beta | {appVer}";
+
+            _maxRefuelPages = _ph.GetNumberOfRefuelPages();
+            _maxTourPages = _ph.GetNumberOfTourPages();
+
+            lb_TourPage.Content = $"Page (Tour) {_currentTourPage}/{_maxTourPages}";
+            lb_RefuelPage.Content = $"Page (Refuel) {_currentRefuelPage}/{_maxRefuelPages}";
 
             if (File.Exists($"./Userdata/oldProfile.dat"))
             {
@@ -76,7 +88,7 @@ namespace TourLogger.Windows
         private void M_ItemMisc_About_OnClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
-                "TourLogger 7.1.0 [" + Versioning.AppVersion + "]\n" +
+                "TourLogger 8.0.0-beta [" + Versioning.AppVersion + "]\n" +
                 "Developed by EnKdev\n", "About", MessageBoxButton.OK);
         }
 
@@ -335,7 +347,7 @@ namespace TourLogger.Windows
 
         private void RefreshTourTable()
         {
-            _ph.FetchTourDatabaseEntries();
+            _ph.FetchTourDatabaseEntries(_currentTourPage);
 
             var tours = JsonConvert.DeserializeObject<CacheTourModel>(File.ReadAllText($"./Userdata/tourCache.dat"));
 
@@ -344,7 +356,7 @@ namespace TourLogger.Windows
 
         public void RefreshRefuelTable()
         {
-            _ph.FetchRefuelDatabaseEntries();
+            _ph.FetchRefuelDatabaseEntries(_currentRefuelPage);
 
             var refuels =
                 JsonConvert.DeserializeObject<RefuelCacheModel>(File.ReadAllText($"./Userdata/refuelCache.dat"));
@@ -475,6 +487,70 @@ namespace TourLogger.Windows
                             "-EnKdev", 
                 "Thanks for using the app!", 
                 MessageBoxButton.OK);
+        }
+
+        private void bt_PrevTourPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentTourPage == 1)
+            {
+                _currentTourPage = 1;
+            }
+            else
+            {
+                _currentTourPage--;
+                RefreshTourTable();
+            }
+
+            _maxTourPages = _ph.GetNumberOfTourPages();
+            lb_TourPage.Content = $"Page (Tour) {_currentTourPage}/{_maxTourPages}";
+        }
+
+        private void bt_NextTourPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentTourPage == _maxTourPages)
+            {
+                _currentTourPage = _maxTourPages;
+            }
+            else
+            {
+                _currentTourPage++;
+                RefreshTourTable();
+            }
+
+            _maxTourPages = _ph.GetNumberOfTourPages();
+            lb_TourPage.Content = $"Page (Tour) {_currentTourPage}/{_maxTourPages}";
+        }
+
+        private void bt_PreviousRefuelPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentRefuelPage == 1)
+            {
+                _currentRefuelPage = 1;
+            }
+            else
+            {
+                _currentRefuelPage--;
+                RefreshRefuelTable();
+            }
+
+            _maxRefuelPages = _ph.GetNumberOfRefuelPages();
+            lb_RefuelPage.Content = $"Page (Refuel) {_currentRefuelPage}/{_maxRefuelPages}";
+        }
+
+        private void bt_NextRefuelPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentRefuelPage == _maxRefuelPages)
+            {
+                _currentRefuelPage = _maxRefuelPages;
+            }
+            else
+            {
+                _currentRefuelPage++;
+                RefreshRefuelTable();
+            }
+
+            _maxRefuelPages = _ph.GetNumberOfRefuelPages();
+            lb_RefuelPage.Content = $"Page (Refuel) {_currentRefuelPage}/{_maxRefuelPages}";
         }
     }
 }

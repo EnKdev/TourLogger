@@ -22,7 +22,7 @@
             <Button Name="bt_Unstable" Click="Bt_Unstable_OnClick" HorizontalAlignment="Right" Width="251">
                 <Grid>
                     <Image Source="/unstable.png" Stretch="Fill" />
-                    <Label Content="TourLogger 7.1.0 [Unstable]" Margin="11,178,0,0" HorizontalAlignment="Left" Width="225" Height="32" VerticalAlignment="Top" Background="#00000000">
+                    <Label Content="TourLogger 8.0.0 [Unstable]" Margin="11,178,0,0" HorizontalAlignment="Left" Width="225" Height="32" VerticalAlignment="Top" Background="#00000000">
                         <Label.Foreground>
                             <SolidColorBrush Color="#FFFF00C7"/>
                         </Label.Foreground>

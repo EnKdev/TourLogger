@@ -23,3 +23,8 @@ Beta-Build 7.0.0-beta4
 -	You can also check others accounts (but not update their truck!)
 -	Again, lots and lots of code tweaks
 -		truck.dat-File (The old profile) is now moved into the Legacy Folder of the App upon startup.
+
+Beta-Build 8.0.0-beta
+
+- Added paging to tour and refuel data to decrease overall load times.
+- UI XAML Cleanup and restructuring
