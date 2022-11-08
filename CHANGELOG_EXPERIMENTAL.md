@@ -24,7 +24,11 @@ Beta-Build 7.0.0-beta4
 -	Again, lots and lots of code tweaks
 -		truck.dat-File (The old profile) is now moved into the Legacy Folder of the App upon startup.
 
-Beta-Build 8.0.0-beta
+Beta-Build 8.0.0-beta1
 
-- Added paging to tour and refuel data to decrease overall load times.
-- UI XAML Cleanup and restructuring
+-	Added paging to tour and refuel data to decrease overall load times.
+-	UI XAML Cleanup and restructuring
+
+Beta-Build 8.0.0-beta2
+
+-	MVVM Rewrite of TourLogger, therefore no new features.

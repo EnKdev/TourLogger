@@ -6,8 +6,18 @@ TourLauncher/.vs/*
 TourLauncher/bin/*
 TourLauncher/obj/*
 
+TourLogger.Mvvm/bin/*
+TourLogger.Mvvm/obj/*
+TourLogger.Mvvm/.vs/*
+
 .idea/*
 .vs/*
 packages/*
+
 TourLogger/Utils/InternalValues.cs
 TourLogger/Utils/SecretGrabber.cs
+
+TourLogger.Mvvm/Constants.cs
+TourLogger.Mvvm/Interfaces/ISecretService.cs
+TourLogger.Mvvm/Services/SecretService.cs
+TourLogger.Mvvm/TourLogger.Mvvm.csproj.user
