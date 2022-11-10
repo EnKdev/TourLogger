@@ -1,4 +1,6 @@
-﻿namespace TourLogger.Mvvm.Interfaces;
+﻿using System.Threading.Tasks;
+
+namespace TourLogger.Mvvm.Interfaces;
 
 /// <summary>
 /// Base implementation for handling server requests and responses.
@@ -6,26 +8,30 @@
 public interface IPhpService
 {
     /// <summary>
-    /// Fetches all tours and writes them into a cache.
+    /// Fetches tours as a page and writes them into a cache.
     /// </summary>
-    public void FetchTourEntries();
+    /// <param name="pageNum">The page number.</param>
+    /// <param name="entries">The entries per page. Default = 30</param>
+    public void FetchTourEntriesAsync(int pageNum, int entries = 30);
 
     /// <summary>
-    /// Fetches all refuels and writes them into a cache.
+    /// Fetches refuels as a page and writes them into a cache.
     /// </summary>
-    public void FetchRefuelEntries();
+    /// <param name="pageNum">The page number.</param>
+    /// <param name="entries">The entries per page. Default = 20</param>
+    public void FetchRefuelEntriesAsync(int pageNum, int entries = 20);
 
     /// <summary>
     /// Fetches a tour with a given Id.
     /// </summary>
     /// <param name="tourId">The Id of the tour.</param>
-    public void FetchTour(int tourId);
+    public Task<string> FetchTourAsync(int tourId);
 
     /// <summary>
     /// Fetches a refuel with a given Id.
     /// </summary>
     /// <param name="refuelId">The Id of the refuel.</param>
-    public void FetchRefuel(int refuelId);
+    public Task<string> FetchRefuelAsync(int refuelId);
 
     /// <summary>
     /// Sends a tour to the server.
@@ -40,7 +46,7 @@ public interface IPhpService
     /// <param name="income">The income of the tour.</param>
     /// <param name="odo">The total driven distance the driver has driven with their truck.</param>
     /// <param name="fuel">The total amount of fuel burnt in this tour.</param>
-    public void SendTour(
+    public void SendTourAsync(
         string? driver, string? truck, string? startLocation,
         string? destination, string? freight, int distance,
         int driven, int income, int odo,
@@ -55,7 +61,7 @@ public interface IPhpService
     /// <param name="odo">The total driven distance the driver has driven with their truck.</param>
     /// <param name="amount"></param>
     /// <param name="totalPrice"></param>
-    public void SendRefuel(
+    public void SendRefuelAsync(
         string? driver, string? country, double literPrice,
         int odo, int amount, int totalPrice);
 
@@ -64,37 +70,38 @@ public interface IPhpService
     /// </summary>
     /// <param name="name">The name of the old profile.</param>
     /// <param name="truck">The truck of the old profile.</param>
-    public void MigrateProfile(string? name, string? truck);
+    public void MigrateProfileAsync(string? name, string? truck);
 
     /// <summary>
     /// Creates a new account with a given truck and name.
     /// </summary>
     /// <param name="name">The name of the new account.</param>
     /// <param name="truck">The truck of the new account.</param>
-    public void CreateAccount(string? name, string? truck);
+    public void CreateAccountAsync(string? name, string? truck);
 
     /// <summary>
     /// Gets an account by name.
     /// </summary>
     /// <param name="name">The name of the account.</param>
     /// <returns></returns>
-    public string GetAccount(string? name);
+    public Task<string> GetAccountAsync(string? name);
 
     /// <summary>
     /// Updates the amount of tours someone has driven.
     /// </summary>
     /// <param name="name">The name of the account to update.</param>
-    public void UpdateToursOfAccount(string? name);
+    public void UpdateToursOfAccountAsync(string? name);
 
     /// <summary>
     /// Updates the amount of refuels someone has made.
     /// </summary>
     /// <param name="name">The name of the account to update.</param>
-    public void UpdateRefuelsOfAccount(string? name);
+    public void UpdateRefuelsOfAccountAsync(string? name);
 
     /// <summary>
     /// Updates the Truck of someone.
     /// </summary>
     /// <param name="name">The name of the account to update.</param>
-    public void UpdateTruckOfAccount(string? name);
+    /// <param name="newTruck">The new truck of the account.</param>
+    public void UpdateTruckOfAccountAsync(string? name, string? newTruck);
 }

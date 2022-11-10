@@ -17,6 +17,7 @@ public static class ServiceExtensions
         services.AddSingleton<IVersioningService, VersioningService>();
         services.AddSingleton<IPhpService, PhpService>();
         services.AddSingleton<IDataService, DataService>();
+        services.AddSingleton<ISecretService, SecretService>();
     }
 
     /// <summary>

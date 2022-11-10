@@ -1,6 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using TourLogger.Mvvm.Exceptions;
 using TourLogger.Mvvm.Interfaces;
 using TourLogger.Mvvm.Models;
+using TourLogger.Mvvm.Util;
 
 namespace TourLogger.Mvvm.Services;
 
@@ -10,100 +17,482 @@ namespace TourLogger.Mvvm.Services;
 public class PhpService : IPhpService
 {
     private readonly IDataService _dataService;
+    private readonly ISecretService _secretService;
 
     /// <summary>
     /// Standard constructor
     /// </summary>
-    /// <param name="service">The data service.</param>
-    public PhpService(IDataService dataService)
+    /// <param name="dataService">The data service.</param>
+    /// <param name="secretService">The secret service.</param>
+    public PhpService(IDataService dataService, ISecretService secretService)
     {
         _dataService = dataService;
+        _secretService = secretService;
     }
 
-    public void FetchTourEntries()
+    /// <inheritdoc />
+    public async void FetchTourEntriesAsync(int pageNum, int entries = 30)
     {
         var jsonArray = "";
-        var tours = new List<TourModel>();
-        
-        #if STABLE
-        var res = HttpPost.SendPost(
+
+#if STABLE
+        var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourlogger/getTours.php",
-            new NameValueCollection
+            new Dictionary<string, string>
             {
                 { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion }
+                { "version", Constants.AppVersion },
+                { "pageNum", pageNum.ToString() },
+                { "entryNum", entries.ToString() }
             });
-        #elif EXPERIMENTAL
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTours.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "pageNum", pageNum.ToString() },
+                { "entryNum", entries.ToString() }
+            });
+#endif
+
+        jsonArray = res switch
+        {
+            "Access denied" => throw new TourLoggerException("Cannot fetch entries. Secret was wrong."),
+            "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                "Cannot fetch entries. Seems like you're using an outdated app."),
+            _ => res
+        };
+
+        var json = JArray.Parse(jsonArray);
+
+        var tours = (
+            from t1 in json
+            let id = Convert.ToInt32(t1["tourId"])
+            let d = (string)t1["tourDriver"]!
+            let t = (string)t1["truckUsed"]!
+            let f = (string)t1["from"]!
+            let tt = (string)t1["to"]!
+            let ff = (string)t1["freight"]!
+            let td = Convert.ToInt32(t1["tourDistance"])
+            let tdd = Convert.ToInt32(t1["distDriven"])
+            let ji = Convert.ToInt32(t1["jobIncome"])
+            let tdt = Convert.ToInt32(t1["distanceTotal"])
+            let fff = Convert.ToInt32(t1["fuelUsed"])
+            select new TourModel(id, d, t, f, tt, ff, td, tdd, ji, tdt, fff)
+        ).ToList();
+
+        _dataService.WriteCachedTourData(tours);
+    }
+
+    /// <inheritdoc />
+    public async void FetchRefuelEntriesAsync(int pageNum, int entries = 20)
+    {
+        var jsonArray = "";
+
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/getRefuels.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "pageNum", pageNum.ToString() },
+                { "entryNum", entries.ToString() }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getRefuels.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "pageNum", pageNum.ToString() },
+                { "entryNum", entries.ToString() }
+            });
+#endif
+
+        jsonArray = res switch
+        {
+            "Access denied" => throw new TourLoggerException("Cannot fetch entries. Secret was wrong."),
+            "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                "Cannot fetch entries. Seems like you're using an outdated app."),
+            _ => res
+        };
+
+        var json = JArray.Parse(jsonArray);
+
+        var refuels = (
+            from t in json
+            let id = Convert.ToInt32(t["refuelId"])
+            let d = (string)t["refuelDriver"]!
+            let c = (string)t["refuelCountry"]!
+            let rpl = Convert.ToDouble(t["refuelPrice"])
+            let ro = Convert.ToInt32(t["refuelOdo"])
+            let ra = Convert.ToInt32(t["refuelAmount"])
+            let rtp = Convert.ToInt32(t["refuelTotalPrice"])
+            select new RefuelModel(id, d, c, rpl, ro, ra, rtp)
+        ).ToList();
+
+        _dataService.WriteCachedRefuelData(refuels);
+    }
+
+    /// <inheritdoc />
+    public async Task<string> FetchTourAsync(int tourId)
+    {
+        #if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/getTour.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "tId", tourId.ToString() }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTour.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "tId", tourId.ToString() }
+            });
         #endif
+
+        return res switch
+        {
+            "Access denied" => throw new TourLoggerException("Cannot fetch tour. Secret was wrong."),
+            "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                "Cannot fetch tour. Seems like you're using an outdated app."),
+            _ => res
+        };
     }
 
-    public void FetchRefuelEntries()
+    /// <inheritdoc />
+    public async Task<string> FetchRefuelAsync(int refuelId)
     {
-        throw new System.NotImplementedException();
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/getRefuel.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "rId", refuelId.ToString() }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getRefuel.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "rId", refuelId.ToString() }
+            });
+#endif
+
+        return res switch
+        {
+            "Access denied" => throw new TourLoggerException("Cannot fetch refuel. Secret was wrong."),
+            "Outdated/Unsupported Version!" => throw new TourLoggerException(
+                "Cannot fetch refuel. Seems like you're using an outdated app."),
+            _ => res
+        };
     }
 
-    public void FetchTour(int tourId)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void FetchRefuel(int refuelId)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void SendTour(
+    /// <inheritdoc />
+    public async void SendTourAsync(
         string? driver, string? truck, string? startLocation, 
         string? destination, string? freight, int distance,
         int driven, int income, int odo, int fuel)
     {
-        throw new System.NotImplementedException();
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/newTour.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "tourDriver", driver },
+                { "tourTruck", truck },
+                { "tourFrom", startLocation },
+                { "tourTo", destination },
+                { "tourFreight", freight },
+                { "tourDistance", distance.ToString() },
+                { "distanceDriven", driven.ToString() },
+                { "jobIncome", income.ToString() },
+                { "distanceTotal", odo.ToString() },
+                { "fuelUsed", fuel.ToString() }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/newTour.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "tourDriver", driver },
+                { "tourTruck", truck },
+                { "tourFrom", startLocation },
+                { "tourTo", destination },
+                { "tourFreight", freight },
+                { "tourDistance", distance.ToString() },
+                { "distanceDriven", driven.ToString() },
+                { "jobIncome", income.ToString() },
+                { "distanceTotal", odo.ToString() },
+                { "fuelUsed", fuel.ToString() }
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot send tour to server. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot send tour to server. Seems like you're using an outdated app.");
+        }
     }
 
-    public void SendRefuel(
+    /// <inheritdoc />
+    public async void SendRefuelAsync(
         string? driver, string? country, double literPrice, 
         int odo, int amount, int totalPrice)
     {
-        throw new System.NotImplementedException();
+
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/newRefuel.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "driver", driver },
+                { "country", country},
+                { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
+                { "odo", odo.ToString() },
+                { "amount", amount.ToString() },
+                { "totalPrice", totalPrice.ToString() }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/newRefuel.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "driver", driver },
+                { "country", country},
+                { "literPrice", literPrice.ToString(CultureInfo.InvariantCulture) },
+                { "odo", odo.ToString() },
+                { "amount", amount.ToString() },
+                { "totalPrice", totalPrice.ToString() }
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot send refuel to server. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot send refuel to server. Seems like you're using an outdated app.");
+        }
     }
 
-    public void MigrateProfile(string? name, string? truck)
+    /// <inheritdoc />
+    public async void MigrateProfileAsync(string? name, string? truck)
     {
-        throw new System.NotImplementedException();
+        #if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/accounts/migrateProfile.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name },
+                { "truck", truck }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/migrateProfile.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name },
+                { "truck", truck }
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
+        }
     }
 
-    public void CreateAccount(string? name, string? truck)
+    /// <inheritdoc />
+    public async void CreateAccountAsync(string? name, string? truck)
     {
-        throw new System.NotImplementedException();
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/accounts/newAccount.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name },
+                { "truck", truck }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/newAccount.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name },
+                { "truck", truck }
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot create a new account. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot create a new account. Seems like you're using an outdated app.");
+        }
     }
 
-    public string GetAccount(string? name)
+    /// <inheritdoc />
+    public async Task<string> GetAccountAsync(string? name)
     {
-        throw new System.NotImplementedException();
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/accounts/getAccount.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.Appversion },
+                { "name", name }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/account/getAccount.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "name", name }
+            });
+        #endif
+
+        return res switch
+        {
+            "Access denied" => throw new TourLoggerException("Cannot get specified account. Secret was wrong."),
+            "Outdated/Unsupported Version!" => throw new TourLoggerException("Cannot get specified account. Seems like you're using an outdated app."),
+            _ => res
+        };
     }
 
-    public void UpdateToursOfAccount(string? name)
+    /// <inheritdoc />
+    public async void UpdateToursOfAccountAsync(string? name)
     {
-        throw new System.NotImplementedException();
+        #if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTours.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileTours.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name }
+            });
+        #endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot update tours of your account. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot update tours of your account. Seems like you're using an outdated app.");
+        }
     }
 
-    public void UpdateRefuelsOfAccount(string? name)
+    /// <inheritdoc />
+    public async void UpdateRefuelsOfAccountAsync(string? name)
     {
-        throw new System.NotImplementedException();
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileRefuels.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name }
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileRefuels.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name }
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot update refuels of your account. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot update refuels of your account. Seems like you're using an outdated app.");
+        }
     }
 
-    public void UpdateTruckOfAccount(string? name)
+    /// <inheritdoc />
+    public async void UpdateTruckOfAccountAsync(string? name, string? newTruck)
     {
-        throw new System.NotImplementedException();
-    }
+#if STABLE
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTruck.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name },
+            });
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileTruck.experimental.php",
+            new Dictionary<string, string>
+            {
+                { "secret", _secretService.AppSecret },
+                { "version", Constants.AppVersion },
+                { "profile", name },
+                { "truck", newTruck }
+            });
+#endif
 
-    private int GetTotalNumberOfTours()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private int GetTotalNumberOfRefuels()
-    {
-        throw new System.NotImplementedException();
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot update truck of your account. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException("Cannot update truck of your account. Seems like you're using an outdated app.");
+        }
     }
 }

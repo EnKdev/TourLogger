@@ -51,8 +51,8 @@ Global
 		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Experimental|Any CPU.Build.0 = Experimental|Any CPU
 		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Stable|Any CPU.ActiveCfg = Experimental|Any CPU
-		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Stable|Any CPU.Build.0 = Experimental|Any CPU
+		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Stable|Any CPU.ActiveCfg = Stable|Any CPU
+		{B0AC74F9-A190-4928-AEB0-E741F262A7D2}.Stable|Any CPU.Build.0 = Stable|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
