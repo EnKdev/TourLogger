@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TourLogger.Mvvm.Interfaces;
 using TourLogger.Mvvm.Services;
+using TourLogger.Mvvm.ViewModels;
 
 namespace TourLogger.Mvvm;
 
@@ -25,5 +26,6 @@ public static class ServiceExtensions
     /// </summary>
     public static void AddViewModels(this IServiceCollection services)
     {
+        services.AddTransient<MainViewModel>();
     }
 }

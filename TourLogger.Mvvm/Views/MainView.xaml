@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="TourLogger.Mvvm.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TourLogger.Mvvm.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Row="0" Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="120"/>
+            </Grid.RowDefinitions>
+            <Grid Row="0">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Name: "/>
+                        <Label Content="{Binding AccountName}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Truck: "/>
+                        <Label Content="{Binding TruckName}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tour-Count: "/>
+                        <Label Content="{Binding TourCount}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Total Income: "/>
+                        <Label Content="{Binding AccountIncome}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Separator Grid.Row="1"/>
+            <Grid Row="2">
+                <StackPanel Orientation="Vertical">
+                    <Button Content="View Account" Width="150" Margin="0, 5, 0, 0" Command="{Binding ViewAccountCommand}"/>
+                    <Button Content="Create Tour" Width="150" Margin="0, 5, 0, 0" Command="{Binding CreateTourCommand}"/>
+                    <Button Content="Pre-Save Tour" Width="150" Margin="0, 5, 0, 0" Command="{Binding PreSaveTourCommand}"/>
+                    <Button Content="Create Refuel" Width="150" Margin="0, 5, 0, 0" Command="{Binding CreateRefuelCommand}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0, 50, 0, 0">
+                        <Button Content="&lt;" Margin="25, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Tour"/>
+                        <Label Content="Tour-Page: "/>
+                        <Label Content="{Binding CurrentTourPage}"/>
+                        <Label Content="/"/>
+                        <Label Content="{Binding TotalTourPages}"/>
+                        <Button Content="&gt;" Margin="25, 0, 0, 0" Command="{Binding NextTablePage}" CommandParameter="Tour"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                        <Button Content="&lt;" Margin="25, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Refuel"/>
+                        <Label Content="Refuel-Page: "/>
+                        <Label Content="{Binding CurrentTourPage}"/>
+                        <Label Content="/"/>
+                        <Label Content="{Binding TotalTourPages}"/>
+                        <Button Content="&gt;" Margin="15, 0, 0, 0" Command="{Binding NextTablePage}" CommandParameter="Refuel"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Separator Grid.Row="3"/>
+            <Grid Row="4">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="TourLogger V"/>
+                        <Label Content="{Binding AppVersion}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Compiled on: "/>
+                        <Label Content="{Binding CompilationDate}"/>
+                    </StackPanel>
+                    <Label Content="Developed by EnKdev"/>
+                    <Button Content="Support me on Ko-Fi!" Width="150" Command="{Binding OpenKoFiPageCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Row="0" Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Row="0" Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="245"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="245"/>
+            </Grid.RowDefinitions>
+            <Grid Row="0">
+                <DataGrid ItemsSource="{Binding TourData}" AutoGenerateColumns="True"/>
+            </Grid>
+            <Separator Grid.Row="1"/>
+            <Grid Row="2">
+                <DataGrid ItemsSource="{Binding RefuelData}" AutoGenerateColumns="True"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

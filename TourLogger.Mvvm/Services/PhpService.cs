@@ -377,7 +377,7 @@ public class PhpService : IPhpService
             new Dictionary<string, string>
             {
                 { "secret", _secretService.AppSecret },
-                { "version", Constants.Appversion },
+                { "version", Constants.AppVersion },
                 { "name", name }
             });
 #elif EXPERIMENTAL

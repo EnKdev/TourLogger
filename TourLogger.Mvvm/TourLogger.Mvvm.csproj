@@ -38,7 +38,6 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Util\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
@@ -49,6 +48,10 @@
     <Reference Include="EnKdev.SessionPass.Net6">
       <HintPath>Dependencies\EnKdev.SessionPass.Net6.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Dictionary.xaml" />
   </ItemGroup>
 
 </Project>
