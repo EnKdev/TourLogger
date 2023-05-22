@@ -16,7 +16,7 @@ public static class HttpPost
     /// <param name="uri">The target uri of the request</param>
     /// <param name="values">The values of the post request</param>
     /// <returns>A result string of the said post request</returns>
-    public static async Task<string> PostAsync(string uri, Dictionary<string, string> values)
+    public static async Task<string> PostAsync(string uri, Dictionary<string, string?> values)
     {
         using var httpClient = new HttpClient();
         var res = await httpClient.SendAsync(new HttpRequestMessage

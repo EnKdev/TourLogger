@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using TourLogger.Mvvm.Interfaces;
@@ -21,6 +22,9 @@ public sealed partial class App : Application
     public App()
     {
         Services = ConfigureServices();
+
+        Current.Services.GetService<ISecretService>()?.GrabSecretAsync();
+        Current.Services.GetService<ISecretService>()?.GrabCompilationKeyAsync();
 
         InitializeComponent();
     }

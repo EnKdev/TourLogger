@@ -40,7 +40,7 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/getTours.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "pageNum", pageNum.ToString() },
                 { "entryNum", entries.ToString() }
@@ -48,9 +48,9 @@ public class PhpService : IPhpService
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTours.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "pageNum", pageNum.ToString() },
                 { "entryNum", entries.ToString() }
@@ -96,7 +96,7 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/getRefuels.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "pageNum", pageNum.ToString() },
                 { "entryNum", entries.ToString() }
@@ -104,9 +104,9 @@ public class PhpService : IPhpService
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/getRefuels.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "pageNum", pageNum.ToString() },
                 { "entryNum", entries.ToString() }
@@ -139,70 +139,6 @@ public class PhpService : IPhpService
     }
 
     /// <inheritdoc />
-    public async Task<string> FetchTourAsync(int tourId)
-    {
-        #if STABLE
-        var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourlogger/getTour.php",
-            new Dictionary<string, string>
-            {
-                { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion },
-                { "tId", tourId.ToString() }
-            });
-#elif EXPERIMENTAL
-        var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getTour.experimental.php",
-            new Dictionary<string, string>
-            {
-                { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion },
-                { "tId", tourId.ToString() }
-            });
-        #endif
-
-        return res switch
-        {
-            "Access denied" => throw new TourLoggerException("Cannot fetch tour. Secret was wrong."),
-            "Outdated/Unsupported Version!" => throw new TourLoggerException(
-                "Cannot fetch tour. Seems like you're using an outdated app."),
-            _ => res
-        };
-    }
-
-    /// <inheritdoc />
-    public async Task<string> FetchRefuelAsync(int refuelId)
-    {
-#if STABLE
-        var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourlogger/getRefuel.php",
-            new Dictionary<string, string>
-            {
-                { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion },
-                { "rId", refuelId.ToString() }
-            });
-#elif EXPERIMENTAL
-        var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getRefuel.experimental.php",
-            new Dictionary<string, string>
-            {
-                { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion },
-                { "rId", refuelId.ToString() }
-            });
-#endif
-
-        return res switch
-        {
-            "Access denied" => throw new TourLoggerException("Cannot fetch refuel. Secret was wrong."),
-            "Outdated/Unsupported Version!" => throw new TourLoggerException(
-                "Cannot fetch refuel. Seems like you're using an outdated app."),
-            _ => res
-        };
-    }
-
-    /// <inheritdoc />
     public async void SendTourAsync(
         string? driver, string? truck, string? startLocation, 
         string? destination, string? freight, int distance,
@@ -213,7 +149,7 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/newTour.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "tourDriver", driver },
                 { "tourTruck", truck },
@@ -229,9 +165,9 @@ public class PhpService : IPhpService
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/newTour.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "tourDriver", driver },
                 { "tourTruck", truck },
@@ -266,7 +202,7 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/newRefuel.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "driver", driver },
                 { "country", country},
@@ -278,9 +214,9 @@ public class PhpService : IPhpService
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/newRefuel.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "driver", driver },
                 { "country", country},
@@ -301,40 +237,6 @@ public class PhpService : IPhpService
     }
 
     /// <inheritdoc />
-    public async void MigrateProfileAsync(string? name, string? truck)
-    {
-        #if STABLE
-        var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourlogger/accounts/migrateProfile.php",
-            new Dictionary<string, string>
-            {
-                { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion },
-                { "profile", name },
-                { "truck", truck }
-            });
-#elif EXPERIMENTAL
-        var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/migrateProfile.experimental.php",
-            new Dictionary<string, string>
-            {
-                { "secret", _secretService.AppSecret },
-                { "version", Constants.AppVersion },
-                { "profile", name },
-                { "truck", truck }
-            });
-#endif
-
-        switch (res)
-        {
-            case "Access denied":
-                throw new TourLoggerException("Cannot migrate profile to an account. Secret was wrong.");
-            case "Outdated/Unsupported Version!":
-                throw new TourLoggerException("Cannot migrate profile to an account. Seems like you're using an outdated app.");
-        }
-    }
-
-    /// <inheritdoc />
     public async void CreateAccountAsync(string? name, string? truck)
     {
 #if STABLE
@@ -342,7 +244,7 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/accounts/newAccount.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name },
                 { "truck", truck }
@@ -350,9 +252,9 @@ public class PhpService : IPhpService
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/newAccount.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name },
                 { "truck", truck }
@@ -376,16 +278,16 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/accounts/getAccount.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "name", name }
             });
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/account/getAccount.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "name", name }
             });
@@ -407,16 +309,16 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTours.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name }
             });
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileTours.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name }
             });
@@ -439,16 +341,16 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileRefuels.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name }
             });
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileRefuels.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name }
             });
@@ -471,16 +373,16 @@ public class PhpService : IPhpService
             "https://enkdev.xyz/cdn/php/tourlogger/accounts/updateProfileTruck.php",
             new Dictionary<string, string>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name },
             });
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
             "https://enkdev.xyz/cdn/php/tourloggerExperimental/accounts/updateProfileTruck.experimental.php",
-            new Dictionary<string, string>
+            new Dictionary<string, string?>
             {
-                { "secret", _secretService.AppSecret },
+                { "secret", ValueHolder.AppSecret },
                 { "version", Constants.AppVersion },
                 { "profile", name },
                 { "truck", newTruck }

@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Row="0" Column="0">
@@ -36,7 +36,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Total Income: "/>
-                        <Label Content="{Binding AccountIncome}"/>
+                        <Label Content="{Binding AccountIncomeString}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -69,11 +69,9 @@
             <Grid Row="4">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="TourLogger V"/>
                         <Label Content="{Binding AppVersion}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Compiled on: "/>
                         <Label Content="{Binding CompilationDate}"/>
                     </StackPanel>
                     <Label Content="Developed by EnKdev"/>
@@ -83,22 +81,18 @@
         </Grid>
         <Grid Row="0" Column="1">
             <StackPanel Orientation="Horizontal">
-                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0"/>
             </StackPanel>
         </Grid>
         <Grid Row="0" Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="245"/>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="245"/>
-            </Grid.RowDefinitions>
-            <Grid Row="0">
-                <DataGrid ItemsSource="{Binding TourData}" AutoGenerateColumns="True"/>
-            </Grid>
-            <Separator Grid.Row="1"/>
-            <Grid Row="2">
-                <DataGrid ItemsSource="{Binding RefuelData}" AutoGenerateColumns="True"/>
-            </Grid>
+            <TabControl>
+                <TabItem Header="Tour">
+                    <DataGrid ItemsSource="{Binding TourData}" AutoGenerateColumns="True"/>
+                </TabItem>
+                <TabItem Header="Refuel">
+                    <DataGrid ItemsSource="{Binding RefuelData}" AutoGenerateColumns="True"/>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using EnKdev.EnKVer;
 using TourLogger.Mvvm.Interfaces;
+using TourLogger.Mvvm.Util;
 
 namespace TourLogger.Mvvm.Services;
 
@@ -21,7 +22,7 @@ public class VersioningService : IVersioningService
             var r = EnKVer2.Revision;
             var h = EnKVer2.VerHash;
 
-            AppVersion = $"V{y}.{m}.{d}.{r}.{h}";
+            ValueHolder.AppVersion = $"V{y}.{m}.{d}.{r}.{h}";
         }
         else
         {
@@ -32,10 +33,7 @@ public class VersioningService : IVersioningService
             var d = EnKVer2.Day;
             var h = EnKVer2.VerHash;
 
-            AppVersion = $"V{y}.{m}.{d}.{h}";
+            ValueHolder.AppVersion = $"V{y}.{m}.{d}.{h}";
         }
     }
-
-    /// <inheritdoc />
-    public string? AppVersion { get; set; }
 }

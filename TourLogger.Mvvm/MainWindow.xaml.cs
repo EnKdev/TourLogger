@@ -12,17 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
+using TourLogger.Mvvm.ViewModels;
 
 namespace TourLogger.Mvvm
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Initialize MVVM logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = App.Current.Services.GetService<MainWindowViewModel>();
         }
     }
 }

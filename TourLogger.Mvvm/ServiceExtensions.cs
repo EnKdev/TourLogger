@@ -26,6 +26,7 @@ public static class ServiceExtensions
     /// </summary>
     public static void AddViewModels(this IServiceCollection services)
     {
+        services.AddTransient<MainWindowViewModel>();
         services.AddTransient<MainViewModel>();
     }
 }

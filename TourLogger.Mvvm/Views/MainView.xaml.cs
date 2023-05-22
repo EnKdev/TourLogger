@@ -9,6 +9,7 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
-        DataContext = App.Current.Services.GetServices<MainViewModel>();
+        DataContext = App.Current.Services.GetService<MainViewModel>();
+        ((MainViewModel)DataContext!).InitDefaultValues();
     }
 }

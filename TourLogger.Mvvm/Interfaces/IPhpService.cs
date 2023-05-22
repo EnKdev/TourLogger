@@ -22,18 +22,6 @@ public interface IPhpService
     public void FetchRefuelEntriesAsync(int pageNum, int entries = 20);
 
     /// <summary>
-    /// Fetches a tour with a given Id.
-    /// </summary>
-    /// <param name="tourId">The Id of the tour.</param>
-    public Task<string> FetchTourAsync(int tourId);
-
-    /// <summary>
-    /// Fetches a refuel with a given Id.
-    /// </summary>
-    /// <param name="refuelId">The Id of the refuel.</param>
-    public Task<string> FetchRefuelAsync(int refuelId);
-
-    /// <summary>
     /// Sends a tour to the server.
     /// </summary>
     /// <param name="driver">The driver of the tour.</param>
@@ -64,13 +52,6 @@ public interface IPhpService
     public void SendRefuelAsync(
         string? driver, string? country, double literPrice,
         int odo, int amount, int totalPrice);
-
-    /// <summary>
-    /// Migrates an old profile to an account.
-    /// </summary>
-    /// <param name="name">The name of the old profile.</param>
-    /// <param name="truck">The truck of the old profile.</param>
-    public void MigrateProfileAsync(string? name, string? truck);
 
     /// <summary>
     /// Creates a new account with a given truck and name.

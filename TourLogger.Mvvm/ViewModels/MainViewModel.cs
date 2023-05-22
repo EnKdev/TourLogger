@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using TourLogger.Mvvm.Interfaces;
+using TourLogger.Mvvm.Util;
 
 namespace TourLogger.Mvvm.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public partial class MainViewModel : ObservableObject, ITemplatedViewModel
 {
     [ObservableProperty]
     private string _accountName;
@@ -14,13 +16,22 @@ public partial class MainViewModel : ObservableObject
     private int _tourCount;
 
     [ObservableProperty]
-    private decimal _accountIncome;
+    private string _accountIncomeString;
 
-    public MainViewModel()
+    [ObservableProperty]
+    private long _rawIncome;
+
+    [ObservableProperty]
+    private string _appVersion;
+
+    [ObservableProperty]
+    private string _compilationDate;
+
+    public void InitDefaultValues()
     {
-        AccountName = "Frank Rosin";
-        TruckName = "Iveco Stralis";
-        TourCount = 30;
-        AccountIncome = 1329200;
+        // TODO: Set Account Name, Truck, Tour-Count and Total Income once we can do so.
+
+        AppVersion = "TourLogger V" + Constants.AppVersion + " | " + ValueHolder.AppVersion;
+        CompilationDate = "Compiled on: " + ValueHolder.CompilationDate;
     }
 }
