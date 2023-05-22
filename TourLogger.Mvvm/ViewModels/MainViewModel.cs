@@ -48,8 +48,6 @@ public partial class MainViewModel : ObservableObject, ITemplatedViewModel
 
     public void InitDefaultValues()
     {
-        // TODO: Set Account Name, Truck, Tour-Count and Total Income once we can do so.
-
         AccountName = ValueHolder.AccountName!;
         TruckName = ValueHolder.TruckUsed!;
         TourCount = ValueHolder.ToursDriven;
