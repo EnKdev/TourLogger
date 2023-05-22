@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using TourLogger.Mvvm.Exceptions;
@@ -395,6 +396,68 @@ public class PhpService : IPhpService
                 throw new TourLoggerException("Cannot update truck of your account. Secret was wrong.");
             case "Outdated/Unsupported Version!":
                 throw new TourLoggerException("Cannot update truck of your account. Seems like you're using an outdated app.");
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task<int> GetNumberOfTourPages(int entries = 30)
+    {
+        var tourPages = 0;
+        
+#if STABLE
+        // TODO: Stable implementation
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/paging/getTourPages.experimental.php",
+            new Dictionary<string, string?>
+            {
+                {"secret", ValueHolder.AppSecret},
+                {"version", Constants.AppVersion},
+                {"entryNum", entries.ToString()}
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot fetch page-count for tours. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException(
+                    "Cannot fetch page-count for tours. Seems like you're using an outdated app.");
+            default:
+                tourPages = int.Parse(res);
+                return tourPages;
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task<int> GetNumberOfRefuelPages(int entries = 20)
+    {
+        var refuelPages = 0;
+        
+#if STABLE
+        // TODO: Stable implementation
+#elif EXPERIMENTAL
+        var res = await HttpPost.PostAsync(
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/paging/getRefuelPages.experimental.php",
+            new Dictionary<string, string?>
+            {
+                {"secret", ValueHolder.AppSecret},
+                {"version", Constants.AppVersion},
+                {"entryNum", entries.ToString()}
+            });
+#endif
+
+        switch (res)
+        {
+            case "Access denied":
+                throw new TourLoggerException("Cannot fetch page-count for tours. Secret was wrong.");
+            case "Outdated/Unsupported Version!":
+                throw new TourLoggerException(
+                    "Cannot fetch page-count for tours. Seems like you're using an outdated app.");
+            default:
+                refuelPages = int.Parse(res);
+                return refuelPages;
         }
     }
 }

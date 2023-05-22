@@ -8,7 +8,7 @@
              d:DesignHeight="500" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="270"/>
             <ColumnDefinition Width="1"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                     <Button Content="Pre-Save Tour" Width="150" Margin="0, 5, 0, 0" Command="{Binding PreSaveTourCommand}"/>
                     <Button Content="Create Refuel" Width="150" Margin="0, 5, 0, 0" Command="{Binding CreateRefuelCommand}"/>
                     <StackPanel Orientation="Horizontal" Margin="0, 50, 0, 0">
-                        <Button Content="&lt;" Margin="25, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Tour"/>
+                        <Button Content="&lt;" Margin="60, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Tour"/>
                         <Label Content="Tour-Page: "/>
                         <Label Content="{Binding CurrentTourPage}"/>
                         <Label Content="/"/>
@@ -56,11 +56,11 @@
                         <Button Content="&gt;" Margin="25, 0, 0, 0" Command="{Binding NextTablePage}" CommandParameter="Tour"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
-                        <Button Content="&lt;" Margin="25, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Refuel"/>
+                        <Button Content="&lt;" Margin="60, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Refuel"/>
                         <Label Content="Refuel-Page: "/>
-                        <Label Content="{Binding CurrentTourPage}"/>
+                        <Label Content="{Binding CurrentRefuelPage}"/>
                         <Label Content="/"/>
-                        <Label Content="{Binding TotalTourPages}"/>
+                        <Label Content="{Binding TotalRefuelPages}"/>
                         <Button Content="&gt;" Margin="15, 0, 0, 0" Command="{Binding NextTablePage}" CommandParameter="Refuel"/>
                     </StackPanel>
                 </StackPanel>
@@ -74,7 +74,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Label Content="{Binding CompilationDate}"/>
                     </StackPanel>
-                    <Label Content="Developed by EnKdev"/>
+                    <Label Content="Developed by EnKdev" HorizontalAlignment="Center"/>
                     <Button Content="Support me on Ko-Fi!" Width="150" Command="{Binding OpenKoFiPageCommand}"/>
                 </StackPanel>
             </Grid>

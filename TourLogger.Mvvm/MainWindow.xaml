@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TourLogger.Mvvm"
         xmlns:util="clr-namespace:TourLogger.Mvvm.Util"
         mc:Ignorable="d"
-        Title="MainWindow" Height="525" Width="1025">
+        Title="{Binding Title}" Height="525" Width="1025">
     <Window.Resources>
         <util:TemplateSelector x:Key="ViewTemplateSelector"/>
     </Window.Resources>

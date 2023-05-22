@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using TourLogger.Mvvm.Interfaces;
 using TourLogger.Mvvm.Messages;
+using TourLogger.Mvvm.Util;
 
 namespace TourLogger.Mvvm.ViewModels;
 
@@ -20,6 +21,12 @@ public partial class MainWindowViewModel : ObservableRecipient, IRecipient<Switc
     private ITemplatedViewModel? _currentView;
 
     /// <summary>
+    /// The apps title.
+    /// </summary>
+    [ObservableProperty]
+    private string? _title;
+
+    /// <summary>
     /// Standard parameterized constructor.
     /// </summary>
     public MainWindowViewModel(MainViewModel currentView, IVersioningService versioningService)
@@ -29,6 +36,8 @@ public partial class MainWindowViewModel : ObservableRecipient, IRecipient<Switc
         WeakReferenceMessenger.Default.Register(this);
 
         _versioningService.SetAppVersion(true);
+        
+        Title = "TourLogger V" + Constants.AppVersion + " | " + ValueHolder.AppVersion;
     }
 
     /// <summary>

@@ -27,6 +27,8 @@ public sealed partial class App : Application
         Current.Services.GetService<ISecretService>()?.GrabCompilationKeyAsync();
 
         InitializeComponent();
+
+        StartupHandler.InitApp();
     }
 
     /// <summary>

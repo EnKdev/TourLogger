@@ -85,4 +85,20 @@ public interface IPhpService
     /// <param name="name">The name of the account to update.</param>
     /// <param name="newTruck">The new truck of the account.</param>
     public void UpdateTruckOfAccountAsync(string? name, string? newTruck);
+
+    /// <summary>
+    /// Gets the total number of pages from the server based on how many entries
+    /// per page there are.
+    /// </summary>
+    /// <param name="entries">The number of entries per page.</param>
+    /// <returns>A number showing how many pages there are.</returns>
+    public Task<int> GetNumberOfTourPages(int entries = 30);
+
+    /// <summary>
+    /// Gets the total number of pages from the server based on how many entries
+    /// per page there are.
+    /// </summary>
+    /// <param name="entries">The number of entries per page.</param>
+    /// <returns>A number showing how many pages there are.</returns>
+    public Task<int> GetNumberOfRefuelPages(int entries = 20);
 }
