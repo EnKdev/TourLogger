@@ -48,20 +48,20 @@
                     <Button Content="Pre-Save Tour" Width="150" Margin="0, 5, 0, 0" Command="{Binding PreSaveTourCommand}"/>
                     <Button Content="Create Refuel" Width="150" Margin="0, 5, 0, 0" Command="{Binding CreateRefuelCommand}"/>
                     <StackPanel Orientation="Horizontal" Margin="0, 50, 0, 0">
-                        <Button Content="&lt;" Margin="60, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Tour"/>
+                        <Button Content="&lt;" Margin="60, 0, 0, 0" Command="{Binding PreviousTablePageCommand}" CommandParameter="Tour"/>
                         <Label Content="Tour-Page: "/>
                         <Label Content="{Binding CurrentTourPage}"/>
                         <Label Content="/"/>
                         <Label Content="{Binding TotalTourPages}"/>
-                        <Button Content="&gt;" Margin="25, 0, 0, 0" Command="{Binding NextTablePage}" CommandParameter="Tour"/>
+                        <Button Content="&gt;" Margin="25, 0, 0, 0" Command="{Binding NextTablePageCommand}" CommandParameter="Tour"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
-                        <Button Content="&lt;" Margin="60, 0, 0, 0" Command="{Binding PreviousTablePage}" CommandParameter="Refuel"/>
+                        <Button Content="&lt;" Margin="60, 0, 0, 0" Command="{Binding PreviousTablePageCommand}" CommandParameter="Refuel"/>
                         <Label Content="Refuel-Page: "/>
                         <Label Content="{Binding CurrentRefuelPage}"/>
                         <Label Content="/"/>
                         <Label Content="{Binding TotalRefuelPages}"/>
-                        <Button Content="&gt;" Margin="15, 0, 0, 0" Command="{Binding NextTablePage}" CommandParameter="Refuel"/>
+                        <Button Content="&gt;" Margin="15, 0, 0, 0" Command="{Binding NextTablePageCommand}" CommandParameter="Refuel"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

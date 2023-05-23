@@ -104,7 +104,7 @@ public class PhpService : IPhpService
             });
 #elif EXPERIMENTAL
         var res = await HttpPost.PostAsync(
-            "https://enkdev.xyz/cdn/php/tourloggerExperimental/getRefuels.experimental.php",
+            "https://enkdev.xyz/cdn/php/tourloggerExperimental/refuels/getRefuels.experimental.php",
             new Dictionary<string, string?>
             {
                 { "secret", ValueHolder.AppSecret },

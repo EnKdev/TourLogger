@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TourLogger.Mvvm.Interfaces;
 using TourLogger.Mvvm.Util;
 
@@ -60,12 +62,81 @@ public partial class MainViewModel : ObservableObject, ITemplatedViewModel
         CurrentRefuelPage = 1;
 
         FetchCurrentPageNumbers();
-
     }
 
     private async void FetchCurrentPageNumbers()
     {
         TotalTourPages = await _phpService.GetNumberOfTourPages();
         TotalRefuelPages = await _phpService.GetNumberOfRefuelPages();
+    }
+
+    [RelayCommand]
+    public void NextTablePage(object table)
+    {
+        var tbl = (string) table;
+
+        switch (tbl)
+        {
+            case "Tour":
+            {
+                if (CurrentTourPage > TotalTourPages)
+                {
+                    CurrentTourPage = TotalTourPages; // Clamp to prevent boundary overflow.
+                }
+                else
+                {
+                    CurrentTourPage++;
+                }
+                
+                _phpService.FetchTourEntriesAsync(CurrentTourPage);
+            }
+                break;
+            case "Refuel":
+            {
+                if (CurrentRefuelPage > TotalRefuelPages)
+                {
+                    CurrentRefuelPage = TotalRefuelPages; // Clamp to prevent boundary overflow.
+                }
+
+                CurrentRefuelPage++;
+                _phpService.FetchRefuelEntriesAsync(CurrentRefuelPage);
+            }
+                break;
+        }
+    }
+
+    [RelayCommand]
+    public void PreviousTablePage(object table)
+    {
+        var tbl = (string) table;
+        
+        switch (tbl)
+        {
+            case "Tour":
+            {
+                if (CurrentTourPage < 1)
+                {
+                    CurrentTourPage = 1; // Clamp to prevent boundary underflow.
+                }
+                else
+                {
+                    CurrentTourPage--;   
+                }
+                
+                _phpService.FetchTourEntriesAsync(CurrentTourPage);
+            }
+                break;
+            case "Refuel":
+            {
+                if (CurrentRefuelPage < 1)
+                {
+                    CurrentRefuelPage = 1; // Clamp to prevent boundary overflow.
+                }
+
+                CurrentRefuelPage--;
+                _phpService.FetchRefuelEntriesAsync(CurrentRefuelPage);
+            }
+                break;
+        }
     }
 }

@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Icons\" />
     <Folder Include="Models\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Services\" />
@@ -47,6 +48,25 @@
     <Reference Include="EnKdev.SessionPass.Net6">
       <HintPath>Dependencies\EnKdev.SessionPass.Net6.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\Icon.ico" />
+    <Resource Include="Icons\Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Icons\Invalid.png" />
+    <Resource Include="Icons\Invalid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Icons\Loading.png" />
+    <Resource Include="Icons\Loading.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Icons\Valid.png" />
+    <Resource Include="Icons\Valid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

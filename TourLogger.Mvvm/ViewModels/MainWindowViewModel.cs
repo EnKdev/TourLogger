@@ -35,7 +35,7 @@ public partial class MainWindowViewModel : ObservableRecipient, IRecipient<Switc
         CurrentView = currentView;
         WeakReferenceMessenger.Default.Register(this);
 
-        _versioningService.SetAppVersion(true);
+        _versioningService.SetAppVersion(false);
         
         Title = "TourLogger V" + Constants.AppVersion + " | " + ValueHolder.AppVersion;
     }
