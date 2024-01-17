@@ -1,3 +1,9 @@
+# AS OF JANUARY 18TH 2024, THE PROJECT HAS BEEN PUT INTO SUNDOWN AND A REPLACEMENT APPLICATION WILL BE MADE.
+Please note that I will be doing this in my spare time. Updates and the start of the new App are depending on how my mood is going to be.
+Furthermore, this will also include an entire backend rewrite.
+
+---
+
 # TourLogger
 
 ## Current stable version:
